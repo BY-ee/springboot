@@ -4,17 +4,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class Board {
+public class Post {
     @Id
     private Long id;
     private String title;
     private String content;
 
-    public Board() {
+    public Post() {
 
     }
 
-    public Board(Long id, String title, String content) {
+    public Post(Long id, String title, String content) {
         this.id = id;
         this.title = title;
         this.content = content;
