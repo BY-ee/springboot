@@ -2,20 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>New Post</title>
+    <title>Home</title>
 </head>
 <body>
-    <h1>New Post</h1>
-    <form th:action="@{/}" method="post">
-        <div>
-            <label for="content">Title:</label>
-            <textarea id="title" name="title"></textarea>
-        </div>
-        <div>
-            <label for="content">Content:</label>
-            <textarea id="content" name="content"></textarea>
-        </div>
-        <button type="submit">Save</button>
-    </form>
+    <h1>Home</h1>
+    <a th:href="@{/write}">글 작성</a> <a th:href="@{/print}">내용 출력</a>
 </body>
 </html>
