@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.oraclejpa.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -23,9 +23,11 @@ public class Post {
     public Long getId() {
         return id;
     }
+
     public String getTitle() {
         return title;
     }
+
     public String getContent() {
         return content;
     }

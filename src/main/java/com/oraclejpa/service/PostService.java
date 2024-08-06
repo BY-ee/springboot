@@ -1,7 +1,7 @@
-package com.example.demo.service;
+package com.oraclejpa.service;
 
-import com.example.demo.model.Post;
-import com.example.demo.repository.PostRepository;
+import com.oraclejpa.model.Post;
+import com.oraclejpa.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

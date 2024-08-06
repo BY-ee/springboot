@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.oraclejpa.model;
 
 
 import jakarta.persistence.Entity;
@@ -19,9 +19,11 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -29,9 +31,11 @@ public class User {
     public Long getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
+
     public String getPassword() {
         return password;
     }

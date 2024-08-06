@@ -1,7 +1,8 @@
-package com.example.demo.controller;
+package com.oraclejpa.controller;
 
-import com.example.demo.model.User;
+import com.oraclejpa.model.User;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
