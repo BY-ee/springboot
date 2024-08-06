@@ -3,8 +3,8 @@ package com.oraclejpa.service;
 import com.oraclejpa.model.Post;
 import com.oraclejpa.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
 
@@ -13,8 +13,12 @@ import java.util.List;
 public class PostService {
     private final PostRepository postRepository;
 
-    public void save(Post post) {
+    public void save(@ModelAttribute Post post) {
         postRepository.save(post);
+    }
+
+    public void deleteAll() {
+        postRepository.deleteAll();
     }
 
     public List<Post> findAll() {

@@ -29,23 +29,34 @@ public class PostController {
     @PostMapping("/write")
     public String writePost(@ModelAttribute Post post) {
         postService.save(post);
-        return "post/com";
+        return "post/comSave";
     }
 
-    @GetMapping("/print")
-    public String print(Model model) {
+    @GetMapping("/list")
+    public String list(Model model) {
         List<Post> dataList = postService.findAll();
         model.addAttribute("dataList", dataList);
-        return "post/print";
+        return "post/list";
     }
 
-    @PostMapping("/print")
-    public String print() {
+    @PostMapping("/list")
+    public String listToIndex() {
         return "redirect:/";
     }
 
-    @PostMapping("/com")
-    public String com() {
+    @PostMapping("/comSave")
+    public String comToIndex() {
         return "redirect:/";
+    }
+
+    @GetMapping("/delete")
+    public String delete() {
+        return "post/delete";
+    }
+
+    @PostMapping("/delete")
+    public String deletePostAll() {
+        postService.deleteAll();
+        return "post/comDelete";
     }
 }

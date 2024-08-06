@@ -5,14 +5,14 @@
     <title>출력</title>
 </head>
 <body>
-    <form th:action="@{/print}" method="post">
+    <form th:action="@{/list}" method="post">
         <h1>출력</h1>
         <div th:each="post : ${dataList}">
             <div th:text="${post.getId()}"></div>
             <p th:text="'Title: ' + ${post.getTitle()}"></p>
             <p th:text="'Content: ' + ${post.getContent()}"></p>
         </div>
-        <button type="submit">Return</button>
+        <input type="button" value="Delete" onclick="window.location.href='delete'"><button type="submit">Return</button>
     </form>
 </body>
 </html>
