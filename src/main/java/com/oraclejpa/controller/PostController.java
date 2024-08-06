@@ -2,31 +2,30 @@ package com.oraclejpa.controller;
 
 import com.oraclejpa.model.Post;
 import com.oraclejpa.service.PostService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
+@RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
 
-    @Autowired
-    public PostController(PostService postService) {
-        this.postService = postService;
-    }
-
-    // 게시글 보여주는 메소드
     @GetMapping("/")
-    public String post() {
-        return "post/new";
+    public String index() {
+        return "post/index";
     }
 
-    // 게시글 폼 제출시 db에 데이터 insert하는 메소드
     @PostMapping("/")
     public String savePost(@ModelAttribute Post post) {
         postService.save(post);
-        return "post/hi";
+        return "post/com";
+    }
+
+    @PostMapping("/com")
+    public String com() {
+        return "post/index";
     }
 }

@@ -1,23 +1,34 @@
 databaseChangeLog:
   - changeSet:
-      id: 1
-      author: mini
+        id: "createPostSequence"
+        author: "mini"
+        changes:
+          - createSequence:
+              sequenceName: "post_seq"
+              incrementBy: 1
+  - changeSet:
+      id: "createPostTable"
+      author: "mini"
       changes:
         - createTable:
-            tableName: post
-            tablespace: board_tablespace
+            tableName: "post"
             columns:
               - column:
-                  name: id
-                  type: bigint
+                  name: "id"
+                  type: "int"
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: title
-                  type: varchar(255)
-                  constraints:
-                    nullable: false  # 제목은 null이 될 수 없음
+                  name: "title"
+                  type: "varchar2(30)"
               - column:
-                  name: content
-                  type: text
+                  name: "content"
+                  type: "varchar2(255)"
+
+#  - changeSet:
+#      id: "insertPostIntoTable"
+#      author: "mini"
+#      changes:
+#        - insert:
+#            tableName: "post"
