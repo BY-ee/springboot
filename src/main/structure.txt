@@ -1,0 +1,10 @@
+src
+└── main
+    └── java
+        └── com
+            └── yourpackage
+                ├── Application.java
+                ├── model
+                ├── repository
+                ├── service
+                └── controller
