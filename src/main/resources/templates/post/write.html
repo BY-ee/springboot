@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>글 작성</title>
+</head>
+<body>
+    <h3>글 작성</h3>
+    <form th:action="@{/write}" method="post">
+        <div>
+            <label for="content">Title:</label>
+            <textarea id="title" name="title"></textarea>
+        </div>
+        <div>
+            <label for="content">Content:</label>
+            <textarea id="content" name="content"></textarea>
+        </div>
+        <button type="submit">작성</button><input type="button" value="Home" onclick="window.location.href='/'">
+    </form>
+</body>
+</html>
