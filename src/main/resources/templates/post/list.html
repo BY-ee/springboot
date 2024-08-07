@@ -2,17 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>출력</title>
+    <title>글 조회 페이지</title>
 </head>
 <body>
-    <form th:action="@{/list}" method="post">
-        <h1>출력</h1>
-        <div th:each="post : ${dataList}">
-            <div th:text="${post.getId()}"></div>
-            <p th:text="'Title: ' + ${post.getTitle()}"></p>
-            <p th:text="'Content: ' + ${post.getContent()}"></p>
-        </div>
-        <input type="button" value="Delete" onclick="window.location.href='delete'"><button type="submit">Return</button>
-    </form>
+    <h1 style="color: gray">게시글 조회</h1>
+    <div th:text="'ID: ' + ${post.getId()}"></div>
+    <div th:text="'제목: ' + ${post.getTitle()}"></div>
+    <div th:text="'내용: ' + ${post.getContent()}"></div>
+
+    <div class="button-container" style="display:flex; gap:10px;">
+        <form th:action="@{/update}" method="get">
+            <input type="hidden" th:value="${post.getId()}" name="id">
+            <button type="submit">수정</button>
+        </form>
+        <form th:action="@{/delete}" method="post">
+            <input type="hidden" th:value="${post.getId()}" name="id">
+            <button type="submit">삭제</button>
+        </form>
+        <form th:action="@{/lists}" method="get">
+            <button type="submit">글 목록</button>
+        </form>
+    </div>
 </body>
 </html>

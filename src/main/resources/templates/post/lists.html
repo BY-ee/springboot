@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>글 목록 페이지</title>
+    <style>
+        .post-box {
+            border: 1px solid #ccc; /* 박스 테두리 */
+            padding: 10px; /* 내부 여백 */
+            margin: 10px; /* 외부 여백 */
+            cursor: pointer; /* 마우스 클릭 버튼 */
+            transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
+        }
+
+        .post-box:hover {
+            background-color: #f0f0f0; /* 호버 시 배경색 변화 */
+        }
+    </style>
+</head>
+<body>
+    <h1>글 목록</h1>
+    <div th:each="post : ${dataList}">
+        <form th:action="@{/list}" method="get">
+            <input type="hidden" th:value="${post.getId()}" name="id">
+            <div class="post-box" onclick="this.closest('form').submit();">
+                <p th:text="'제목: ' + ${post.getTitle()}"></p>
+                <p th:text="'내용: ' + ${post.getContent()}"></p>
+            </div>
+        </form>
+    </div>
+    <div class="button-container" style="display:flex; gap:10px;">
+        <form th:action="@{/list}" method="get">
+            글 번호: <label><input type="text" name="id"></label>
+            <button type="submit">조회</button>
+        </form>
+        <form th:action="@{/home}" method="get">
+            <button type="submit">Home</button>
+        </form>
+    </div>
+</body>
+</html>

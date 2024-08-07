@@ -6,6 +6,13 @@
 </head>
 <body>
     <h1>Home</h1>
-    <a th:href="@{/write}">글 작성</a> <a th:href="@{/list}">작성글 목록</a>
+    <div class="button-container" style="display:flex; gap:10px;">
+        <form th:action="@{/write}" method="get">
+            <button type="submit">글 작성</button>
+        </form>
+        <form th:action="@{/lists}" method="get">
+            <button type="submit">글 목록</button>
+        </form>
+    </div>
 </body>
 </html>

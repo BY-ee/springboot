@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>글 작성 페이지</title>
+    <title>글 수정 페이지</title>
 </head>
 <body>
-    <h1>게시글 작성</h1>
-    <div class="button-container" style="display:flex; gap:10px;">
-        <form th:action="@{/write}" method="post">
+    <h1>글 수정</h1>
+    <div class="button-container" style="display:flex; gap:10px">
+        <form th:action="@{/update}" method="post">
             <div>
                 <label for="title">제목:</label>
                 <textarea id="title" name="title"></textarea>
@@ -16,11 +16,12 @@
                 <label for="content">내용:</label>
                 <textarea id="content" name="content"></textarea>
             </div>
-            <button type="submit">작성</button>
+                <input type="hidden" th:value="${id}" name="id">
+                <button type="submit">수정</button>
+        </form>
+        <form th:action="@{/lists}" method="get">
+            <button type="submit">글 목록</button>
         </form>
     </div>
-    <form th:action="@{/home}" method="get">
-        <button type="submit">Home</button>
-    </form>
 </body>
 </html>
