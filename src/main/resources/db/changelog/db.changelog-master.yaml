@@ -25,12 +25,12 @@ databaseChangeLog:
               - column:
                   name: "content"
                   type: "varchar2(255)"
-#  - changeSet:
-#      id: "dropPostSequence"
-#      author: "mini"
-#      changes:
-#        - dropSequence:
-#            sequenceName: "post_seq"
+  - changeSet:
+     id: "dropPostSequence"
+     author: "mini"
+     changes:
+      - dropSequence:
+          sequenceName: "post_seq"
   - changeSet:
       id: "createPostSequence_1"
       author: "mini"

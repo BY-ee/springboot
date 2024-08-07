@@ -4,6 +4,7 @@ import com.oraclejpa.model.Post;
 import com.oraclejpa.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -37,13 +38,10 @@ public class PostService {
     }
 
     public Page<Post> getPosts(int page, int size) {
-        return postRepository.findAll(PageRequest.of(page, size));
+        int start = page * size + 1;
+        int end = start + size - 1;
+        long totalElements = postRepository.count(); // 전체 데이터 수
+        List<Post> posts = postRepository.findAllPosts(start, end); // 수정된 쿼리 호출
+        return new PageImpl<>(posts, PageRequest.of(page, size), totalElements);
     }
-
-
-
-//    public void resetPostSequence() {
-//        postRepository.dropPostSequence();
-//        postRepository.createPostSequence();
-//    }
 }

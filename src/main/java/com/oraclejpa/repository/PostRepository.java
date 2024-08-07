@@ -1,6 +1,8 @@
 package com.oraclejpa.repository;
 
 import com.oraclejpa.model.Post;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -18,6 +20,10 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Transactional
     @Query(value = "UPDATE post SET title=:title,content=:content WHERE id=:id", nativeQuery = true)
     void updateById(@Param("id") Long id, @Param("title") String title, @Param("content") String content);
+
+    @Query(value = "SELECT * FROM (SELECT p1_0.*, ROW_NUMBER() OVER (ORDER BY p1_0.id) AS rn " +
+                    "FROM post p1_0) WHERE rn BETWEEN :start AND :end", nativeQuery = true)
+    List<Post> findAllPosts(@Param("start") int start, @Param("end") int end);
 // @Modifying
 // @Transactional
 // @Query(value = "DROP SEQUENCE post_seq", nativeQuery = true)

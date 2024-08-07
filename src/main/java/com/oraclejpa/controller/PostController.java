@@ -42,9 +42,11 @@ public class PostController {
 //    }
 
     @GetMapping("/lists")
-    public Page<Post> list(@RequestParam(value = "page", defaultValue = "0") int page,
-                           @RequestParam(value = "size", defaultValue = "10") int size) {
-        return postService.getPosts(page, size);
+    public String list(@RequestParam(value = "page") int page,
+                       @RequestParam(value = "size") int size, Model model) {
+         Page<Post> postPage = postService.getPosts(page, size);
+         model.addAttribute("postPage", postPage);
+         return "post/lists";
     }
 
     @GetMapping("/list")

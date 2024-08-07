@@ -19,20 +19,26 @@
 </head>
 <body>
     <h1>글 목록</h1>
-    <div th:each="post : ${dataList}">
+    <div th:each="post : ${postPage.content}">
         <form th:action="@{/list}" method="get">
-            <input type="hidden" th:value="${post.getId()}" name="id">
+            <input type="hidden" th:value="${post.id}" name="id">
             <div class="post-box" onclick="this.closest('form').submit();">
-                <p th:text="'제목: ' + ${post.getTitle()}"></p>
-                <p th:text="'내용: ' + ${post.getContent()}"></p>
+                <p th:text="'제목: ' + ${post.title}"></p>
+                <p th:text="'내용: ' + ${post.content}"></p>
             </div>
         </form>
     </div>
-    <div class="button-container" style="display:flex; gap:10px;">
-        <form th:action="@{/list}" method="get">
-            글 번호: <label><input type="text" name="id"></label>
-            <button type="submit">조회</button>
-        </form>
+
+    <div style="margin: 10px;">
+        <span>페이지: <span th:text="${postPage.number+1} + '/'
+                    + ${postPage.totalPages}"></span></span>
+    </div>
+
+    <div style="margin: 10px;">
+        <a th:if="${postPage.hasPrevious()}" th:href="@{/lists(page=${postPage.number-1}, size=${postPage.size})}">이전</a>
+        <a th:if="${postPage.hasNext()}" th:href="@{/lists(page=${postPage.number+1}, size=${postPage.size})}">다음</a>
+    </div>
+    <div style="margin: 10px;">
         <form th:action="@{/home}" method="get">
             <button type="submit">Home</button>
         </form>
