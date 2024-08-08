@@ -3,7 +3,6 @@ package com.oraclejpa.service;
 import com.oraclejpa.model.User;
 import com.oraclejpa.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private final UserRepository userRepository;
 
-    public void saveUser(User user) {
+    public void save(User user) {
         userRepository.save(user);
     }
 }

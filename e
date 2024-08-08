@@ -796,3 +796,20 @@
 [31m-</body>[m
 [31m-</html>[m
 \ No newline at end of file[m
+[1mdiff --git a/src/main/java/com/oraclejpa/controller/PostController.java b/src/main/java/com/oraclejpa/controller/PostController.java[m
+[1mindex a24b5cb..fd40776 100644[m
+[1m--- a/src/main/java/com/oraclejpa/controller/PostController.java[m
+[1m+++ b/src/main/java/com/oraclejpa/controller/PostController.java[m
+[36m@@ -44,9 +44,9 @@[m [mpublic class PostController {[m
+     @GetMapping("/lists")[m
+     public String list(@RequestParam(value = "page") int page,[m
+                        @RequestParam(value = "size") int size, Model model) {[m
+[31m-         Page<Post> postPage = postService.getPosts(page, size);[m
+[31m-         model.addAttribute("postPage", postPage);[m
+[31m-         return "post/lists";[m
+[32m+[m[32m        Page<Post> postPage = postService.getPosts(page, size);[m
+[32m+[m[32m        model.addAttribute("postPage", postPage);[m
+[32m+[m[32m        return "post/lists";[m
+     }[m
+ [m
+     @GetMapping("/list")[m

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>홈 화면</title>
+</head>
+<body>
+    <h1>홈페이지</h1>
+    <form th:action="@{/login}" method="post">
+        <div>
+            <label for="id">ID</label>
+            <input type="text" id="id" name="id">
+        </div>
+
+        <div>
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" name="password">
+        </div>
+        <button type="submit">로그인</button>
+    </form>
+
+    <div style="display: flex; gap: 10px;">
+        <form th:action="@{/signup}" method="get">
+            <button type="submit">회원가입</button>
+        </form>
+    </div>
+</body>
+</html>

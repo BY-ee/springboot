@@ -6,17 +6,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/post")
 public class PostController {
     private final PostService postService;
+
+    @GetMapping("")
+    public String redirectToIndex() {
+        return "redirect:/post/";
+    }
 
     @GetMapping("/")
     public String index() {
@@ -31,7 +32,7 @@ public class PostController {
     @PostMapping("/write")
     public String writePost(@ModelAttribute Post post) {
         postService.savePost(post);
-        return "post/comSave";
+        return "post/com-save";
     }
 
 //    @GetMapping("/lists")
@@ -57,25 +58,26 @@ public class PostController {
     }
 
     @GetMapping("/update")
-    public String update(@RequestParam("id") Long id, Model model) {
-        model.addAttribute("id", id);
+    public String update(@RequestParam("id") Long in, Model model) {
+        Post post = postService.findById(in);
+        model.addAttribute("post", post);
         return "post/update";
     }
 
     @PostMapping("/update")
     public String updatePostById(@RequestParam("id") Long id, @ModelAttribute Post post) {
         postService.updateById(id, post);
-        return "redirect:/lists";
+        return "redirect:/post/lists?page=0&size=5";
     }
 
     @PostMapping("/delete")
     public String deletePostById(@RequestParam("id") Long id) {
         postService.deleteById(id);
-        return "redirect:/lists";
+        return "redirect:/post/lists?page=0&size=5";
     }
 
     @GetMapping("/home")
     public String redirectToHome() {
-        return "redirect:/";
+        return "redirect:/post";
     }
 }
