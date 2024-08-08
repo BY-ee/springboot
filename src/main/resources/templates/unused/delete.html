@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>글 작성 완료 페이지</title>
+    <title>글 삭제</title>
 </head>
 <body>
-    <h1>글 작성 완료</h1>
-    <div>홈 화면으로 이동하려면 Home 버튼 클릭</div>
+    <h1>글 삭제 페이지</h1>
     <div class="button-container" style="display:flex; gap:10px;">
+        <form th:action="@{/delete}" method="post">
+            <button type="submit">삭제</button>
+        </form>
         <form th:action="@{/home}" method="get">
             <button type="submit">Home</button>
         </form>

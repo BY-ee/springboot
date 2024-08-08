@@ -25,10 +25,47 @@ databaseChangeLog:
               - column:
                   name: "content"
                   type: "varchar2(255)"
-
-#  - changeSet:
-#      id: "insertPostIntoTable"
-#      author: "mini"
-#      changes:
-#        - insert:
-#            tableName: "post"
+  - changeSet:
+     id: "dropPostSequence"
+     author: "mini"
+     changes:
+      - dropSequence:
+          sequenceName: "post_seq"
+  - changeSet:
+      id: "createPostSequence_1"
+      author: "mini"
+      changes:
+        - createSequence:
+            sequenceName: "post_seq"
+            startValue: 1
+            incrementBy: 1
+  - changeSet:
+      id: "dropPostSequence_2"
+      author: "mini"
+      changes:
+        - dropSequence:
+            sequenceName: "post_seq"
+  - changeSet:
+      id: "createPostSequence_2"
+      author: "mini"
+      changes:
+        - createSequence:
+            sequenceName: "post_seq"
+            startValue: 1
+            incrementBy: 1
+            cacheSize: 0
+  - changeSet:
+      id: "dropPostSequence_3"
+      author: "mini"
+      changes:
+      - dropSequence:
+          sequenceName: "post_seq"
+  - changeSet:
+     id: "createPostSequence_3"
+     author: "mini"
+     changes:
+       - createSequence:
+           sequenceName: "post_seq"
+           startValue: 1
+           incrementBy: 1
+           cacheSize: 10
