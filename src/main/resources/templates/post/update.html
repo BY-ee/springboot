@@ -15,11 +15,11 @@
         <form th:action="@{/post/update}" method="post" onsubmit="showUpdateAlert()">
             <div>
                 <label for="title">제목:</label>
-                <input type="text" id="title" th:value="${post.title}" name="title" />
+                <input type="text" id="title" th:value="${post.title}" name="title" required />
             </div>
             <div>
                 <label for="content">내용:</label>
-                <textarea id="content" th:text="${post.content}" name="content"></textarea>
+                <textarea id="content" th:text="${post.content}" name="content" required></textarea>
             </div>
                 <input type="hidden" th:value="${post.id}" name="id">
                 <button type="submit">수정</button>

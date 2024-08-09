@@ -16,23 +16,25 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(@ModelAttribute User user, Model model) {
+        model.addAttribute("user", user);
         return "user/index";
     }
 
     @PostMapping("/login")
     public String login(@ModelAttribute User user,
-                        HttpServletRequest request, Model model) {
+                        HttpServletRequest request,
+                        RedirectAttributes redirectAttributes) {
         User authenticatedUser = userService.findByUserIdAndPassword(user.getUserId(), user.getPassword());
 
         if (authenticatedUser != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", authenticatedUser);
-            model.addAttribute("message", "로그인에 성공하였습니다.");
-            return "post/index";
+            redirectAttributes.addFlashAttribute("message", "로그인에 성공하였습니다.");
+            return "redirect:/post/";
         } else {
-            model.addAttribute("message", "아이디 또는 비밀번호가 잘못되었습니다.");
-            return "user/index";
+            redirectAttributes.addFlashAttribute("message", "아이디 또는 비밀번호가 잘못되었습니다.");
+            return "redirect:/";
         }
     }
 

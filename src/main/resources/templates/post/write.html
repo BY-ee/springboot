@@ -15,11 +15,11 @@
         <form th:action="@{/post/write}" method="post" onsubmit="showSuccessAlert()">
             <div>
                 <label for="title">제목:</label>
-                <input type="text" id="title" name="title">
+                <input type="text" id="title" name="title" required />
             </div>
             <div>
                 <label for="content">내용:</label>
-                <textarea id="content" name="content"></textarea>
+                <textarea id="content" name="content" required></textarea>
             </div>
             <button type="submit">작성</button>
         </form>

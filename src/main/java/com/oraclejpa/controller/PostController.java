@@ -2,6 +2,9 @@ package com.oraclejpa.controller;
 
 import com.oraclejpa.model.Post;
 import com.oraclejpa.service.PostService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -74,6 +77,16 @@ public class PostController {
     public String deletePostById(@RequestParam("id") Long id) {
         postService.deleteById(id);
         return "redirect:/post/lists?page=0&size=5";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        try {
+            request.logout();
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/";
     }
 
     @GetMapping("/home")
