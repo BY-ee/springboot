@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>글 작성 페이지</title>
+    <script>
+        function showSuccessAlert() {
+            alert("글이 성공적으로 작성되었습니다.");
+        }
+    </script>
 </head>
 <body>
     <h1>게시글 작성</h1>
     <div class="button-container" style="display:flex; gap:10px;">
-        <form th:action="@{/post/write}" method="post">
+        <form th:action="@{/post/write}" method="post" onsubmit="showSuccessAlert()">
             <div>
                 <label for="title">제목:</label>
                 <input type="text" id="title" name="title">

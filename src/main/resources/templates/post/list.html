@@ -3,6 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>글 조회 페이지</title>
+    <script>
+        function confirmDeletePost() {
+            let confirmFlag = confirm("정말 삭제하시겠습니까?");
+            if(confirmFlag) {
+                alert("글이 성공적으로 삭제되었습니다.")
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
     <h1 style="color: gray">게시글 조회</h1>
@@ -16,7 +27,7 @@
             <button type="submit">수정</button>
         </form>
 
-        <form th:action="@{/post/delete}" method="post">
+        <form th:action="@{/post/delete}" method="post" onsubmit="return confirmDeletePost()">
             <input type="hidden" th:value="${post.id}" name="id">
             <button type="submit">삭제</button>
         </form>

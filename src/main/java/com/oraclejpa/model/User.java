@@ -1,10 +1,9 @@
 package com.oraclejpa.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import java.sql.Timestamp;
 
 @Entity
 @Getter
@@ -12,8 +11,14 @@ import lombok.Setter;
 @Table(name = "member")
 public class User {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq")
+    @SequenceGenerator(name = "member_seq", sequenceName = "member_seq", allocationSize = 1)
+    private Long id;
+    @Column(name = "user_id")
+    private String userId;
     private String password;
     private String email;
     private String nickname;
+    @Column(name = "created_at")
+    private Timestamp createdAt;
 }

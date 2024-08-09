@@ -32,7 +32,7 @@ public class PostController {
     @PostMapping("/write")
     public String writePost(@ModelAttribute Post post) {
         postService.savePost(post);
-        return "post/com-save";
+        return "redirect:/post/";
     }
 
 //    @GetMapping("/lists")

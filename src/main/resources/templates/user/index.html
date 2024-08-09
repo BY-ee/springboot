@@ -3,20 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>홈 화면</title>
+
+    <style>
+        div {
+            margin: 10px;
+        }
+    </style>
+
+    <script>
+        window.onload(message);
+        function showLogInAlert() {
+            alert(message);
+        }
+    </script>
 </head>
 <body>
     <h1>홈페이지</h1>
-    <form th:action="@{/login}" method="post">
+
+<!--    <script>-->
+<!--        if (message) {-->
+<!--            showLogInAlert(message);-->
+<!--        }-->
+<!--    </script>-->
+
+    <form th:action="@{/login}" method="post" onsubmit="showLogInAlert()">
         <div>
-            <label for="id">ID</label>
-            <input type="text" id="id" name="id">
+            <label for="userId">ID</label>
+            <input type="text" id="userId" name="userId">
         </div>
 
         <div>
             <label for="password">비밀번호</label>
             <input type="password" id="password" name="password">
         </div>
-        <button type="submit">로그인</button>
+
+        <div>
+            <button type="submit">로그인</button>
+        </div>
     </form>
 
     <div style="display: flex; gap: 10px;">
