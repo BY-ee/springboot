@@ -30,10 +30,10 @@ public class UserController {
         if (authenticatedUser != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", authenticatedUser);
-            redirectAttributes.addFlashAttribute("message", "로그인에 성공하였습니다.");
+            redirectAttributes.addFlashAttribute("logInMessage", "로그인에 성공하였습니다.");
             return "redirect:/post/";
         } else {
-            redirectAttributes.addFlashAttribute("message", "아이디 또는 비밀번호가 잘못되었습니다.");
+            redirectAttributes.addFlashAttribute("logInMessage", "아이디 또는 비밀번호가 잘못되었습니다.");
             return "redirect:/";
         }
     }
@@ -59,6 +59,22 @@ public class UserController {
         user.setNickname(nickname);
         userService.save(user);
         return "redirect:/";
+    }
+
+    @GetMapping("/myPage")
+    public String myPage(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if (session == null) {
+            System.out.println("로그인 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        } else {
+            System.out.println("로그인 되어있음 oooooooooooooooooooooooo");
+        }
+
+        System.out.println(session);
+        String loggedInUserId = (String) session.getAttribute("userId");
+        User user = userService.findByUserId(loggedInUserId);
+        model.addAttribute("user", user);
+        return "user/myPage";
     }
 
     @GetMapping("/home")
