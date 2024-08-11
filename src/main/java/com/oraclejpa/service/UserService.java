@@ -1,12 +1,17 @@
 package com.oraclejpa.service;
 
+import com.oraclejpa.model.Post;
 import com.oraclejpa.model.User;
 import com.oraclejpa.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor

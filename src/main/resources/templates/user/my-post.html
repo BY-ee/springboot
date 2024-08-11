@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>글 목록 페이지</title>
+    <title>내 글 페이지</title>
     <style>
         .post-box {
             border: 1px solid #ccc; /* 박스 테두리 */
@@ -18,12 +18,14 @@
     </style>
 </head>
 <body>
-    <h1>글 목록</h1>
+    <h1>내 글</h1>
     <div th:each="post : ${postPage.content}">
-        <form th:action="@{/post/list}" method="get">
-            <input type="hidden" th:value="${post.id}" name="id">
+        <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
             <div class="post-box" onclick="this.closest('form').submit();">
-                <p th:text="'제목: ' + ${post.title}"></p>
+                <div style="display: flex; gap: 50px;">
+                    <p th:text="'제목: ' + ${post.title}"></p>
+                    <p th:text="'작성자: ' + ${post.nickname}"></p>
+                </div>
                 <p th:text="'내용: ' + ${post.content}"></p>
             </div>
         </form>
@@ -35,8 +37,8 @@
     </div>
 
     <div style="margin: 10px;">
-        <a th:if="${postPage.hasPrevious()}" th:href="@{/post/lists(page=${postPage.number-1}, size=${postPage.size})}">이전</a>
-        <a th:if="${postPage.hasNext()}" th:href="@{/post/lists(page=${postPage.number+1}, size=${postPage.size})}">다음</a>
+        <a th:if="${postPage.hasPrevious()}" th:href="@{/post/my-post(page=${postPage.number-1})}">이전</a>
+        <a th:if="${postPage.hasNext()}" th:href="@{/post/my-post(page=${postPage.number+1})}">다음</a>
     </div>
     <div style="margin: 10px;">
         <form th:action="@{/post/home}" method="get">

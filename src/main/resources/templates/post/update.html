@@ -24,9 +24,8 @@
                 <input type="hidden" th:value="${post.id}" name="id">
                 <button type="submit">수정</button>
         </form>
-        <form th:action="@{/post/lists}" method="get">
+        <form th:action="@{/post/articles}" method="get">
             <input type="hidden" th:value="0" name="page">
-            <input type="hidden" th:value="5" name="size">
             <button type="submit">글 목록</button>
         </form>
     </div>

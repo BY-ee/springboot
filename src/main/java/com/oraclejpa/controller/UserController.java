@@ -1,10 +1,13 @@
 package com.oraclejpa.controller;
 
+import com.oraclejpa.model.Post;
 import com.oraclejpa.model.User;
 import com.oraclejpa.service.UserService;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +19,15 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/")
-    public String index(@ModelAttribute User user, Model model) {
-        model.addAttribute("user", user);
-        return "user/index";
+    public String index(HttpServletRequest request,
+                        @ModelAttribute User user, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("user") != null) {
+            return "redirect:/post";
+        } else {
+            model.addAttribute("user", user);
+            return "user/index";
+        }
     }
 
     @PostMapping("/login")
@@ -61,20 +70,30 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/myPage")
+    @GetMapping("/my-page")
     public String myPage(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
-        if (session == null) {
-            System.out.println("로그인 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-        } else {
-            System.out.println("로그인 되어있음 oooooooooooooooooooooooo");
-        }
-
-        System.out.println(session);
-        String loggedInUserId = (String) session.getAttribute("userId");
-        User user = userService.findByUserId(loggedInUserId);
+        User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
-        return "user/myPage";
+        return "user/my-page";
+    }
+
+    @GetMapping("/check-user")
+    public String editUser() {
+        return "redirect:/user/edit";
+    }
+
+    @GetMapping("/user/edit")
+    public String editUser(@ModelAttribute User user, Model model) {
+        model.addAttribute("user", user);
+        return "user/edit";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.invalidate();
+        return "redirect:/";
     }
 
     @GetMapping("/home")

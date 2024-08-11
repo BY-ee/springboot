@@ -1,8 +1,8 @@
 package com.oraclejpa.controller;
 
 import com.oraclejpa.model.Post;
+import com.oraclejpa.model.User;
 import com.oraclejpa.service.PostService;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +33,12 @@ public class PostController {
     }
 
     @PostMapping("/write")
-    public String writePost(@ModelAttribute Post post) {
-        postService.savePost(post);
+    public String writePost(HttpServletRequest request,
+                            @ModelAttribute Post post) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        String nickname = user.getNickname();
+        postService.writePost(nickname, post);
         return "redirect:/post/";
     }
 
@@ -45,24 +49,27 @@ public class PostController {
 //        return "post/lists";
 //    }
 
-    @GetMapping("/lists")
-    public String list(@RequestParam(value = "page") int page,
-                       @RequestParam(value = "size") int size, Model model) {
-         Page<Post> postPage = postService.getPosts(page, size);
-         model.addAttribute("postPage", postPage);
-         return "post/lists";
+    @GetMapping("/articles")
+    public String articles(@RequestParam(value = "page") int page, Model model) {
+        int size = 5;
+        Page<Post> postPage = postService.getPosts(page, size);
+        model.addAttribute("postPage", postPage);
+        return "post/articles";
     }
 
-    @GetMapping("/list")
-    public String list(@RequestParam("id") Long id, Model model) {
+    @GetMapping("/detail/{id}")
+    public String detail(@PathVariable Long id,
+                         HttpSession session, Model model) {
+        Integer currentPage = (Integer) session.getAttribute("currentPage");
         Post post = postService.findById(id);
         model.addAttribute("post", post);
-        return "post/list";
+        model.addAttribute("currentPage", currentPage);
+        return "post/detail";
     }
 
     @GetMapping("/update")
-    public String update(@RequestParam("id") Long in, Model model) {
-        Post post = postService.findById(in);
+    public String update(@RequestParam("id") Long id, Model model) {
+        Post post = postService.findById(id);
         model.addAttribute("post", post);
         return "post/update";
     }
@@ -70,23 +77,25 @@ public class PostController {
     @PostMapping("/update")
     public String updatePostById(@RequestParam("id") Long id, @ModelAttribute Post post) {
         postService.updateById(id, post);
-        return "redirect:/post/lists?page=0&size=5";
+        return "redirect:/post/articles?page=0";
     }
 
     @PostMapping("/delete")
     public String deletePostById(@RequestParam("id") Long id) {
         postService.deleteById(id);
-        return "redirect:/post/lists?page=0&size=5";
+        return "redirect:/post/articles?page=0";
     }
 
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request) {
-        try {
-            request.logout();
-        } catch (ServletException e) {
-            e.printStackTrace();
-        }
-        return "redirect:/";
+    @GetMapping("/my-post")
+    public String myPost(@RequestParam("page") int page,
+                         HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        int size = 5;
+        Page<Post> postPage = postService.findPostsByNickName(page, size, user.getNickname());
+        model.addAttribute("user", user);
+        model.addAttribute("postPage", postPage);
+        return "user/my-post";
     }
 
     @GetMapping("/home")
