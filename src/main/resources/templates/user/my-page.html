@@ -16,7 +16,12 @@
             <button type="submit">내 글</button>
         </form>
         <button type="button">내 댓글</button>
-        <button type="button">회원탈퇴</button>
+        <form th:action="@{withdrawal}" method="get">
+            <button type="submit">회원탈퇴</button>
+        </form>
     </div>
+    <form th:action="@{/}" method="get">
+        <button type="submit">돌아가기</button>
+    </form>
 </body>
 </html>
