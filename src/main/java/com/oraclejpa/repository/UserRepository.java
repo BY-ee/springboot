@@ -3,9 +3,11 @@ package com.oraclejpa.repository;
 import com.oraclejpa.model.Post;
 import com.oraclejpa.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,5 +21,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByUserId(String userId);
 
+    User findByPassword(String password);
 
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE member u1_0 SET u1_0.email=:email,u1_0.nickname=:nickname WHERE u1_0.user_id=:userId", nativeQuery = true)
+    void updateEmailAndNicknameByUserId(String userId, String email, String nickname);
 }

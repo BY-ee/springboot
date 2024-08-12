@@ -78,15 +78,34 @@ public class UserController {
         return "user/my-page";
     }
 
-    @GetMapping("/check-user")
-    public String editUser() {
-        return "redirect:/user/edit";
+    @PostMapping("/check-user")
+    public boolean checkUser(@RequestParam("password") String password) {
+        return userService.findByPassword(password) != null;
     }
 
     @GetMapping("/user/edit")
-    public String editUser(@ModelAttribute User user, Model model) {
+    public String editUser(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
         return "user/edit";
+    }
+
+    @PostMapping("/user/edit")
+    public String editUser(@ModelAttribute User user) {
+        String userId = user.getUserId();
+        String email = user.getEmail();
+        String nickname = user.getNickname();
+        userService.updateEmailAndNicknameById(userId, email, nickname);
+        return "redirect:/my-page";
+    }
+
+    @GetMapping("/withdrawal")
+    public String withdrawal() {
+        if(!checkUser())
+            return "redirect:/my-page";
+        return "redirect:/user/withdrawal";
+
     }
 
     @GetMapping("/logout")
