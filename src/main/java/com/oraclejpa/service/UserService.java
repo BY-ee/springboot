@@ -39,7 +39,7 @@ public class UserService {
         userRepository.updateEmailAndNicknameByUserId(userId, email, nickname);
     }
 
-    public User findByPassword(String password) {
-        return userRepository.findByPassword(password);
+    public User findUserByPassword(String password) {
+        return userRepository.findUserByPassword(password);
     }
 }

@@ -78,20 +78,20 @@ public class UserController {
         return "user/my-page";
     }
 
-    @PostMapping("/check-user")
-    public boolean checkUser(@RequestParam("password") String password) {
-        return userService.findByPassword(password) != null;
+    @GetMapping("/update")
+    public String update() {
+        return "redirect:/user/verify-password?action=update";
     }
 
-    @GetMapping("/user/edit")
+    @GetMapping("/user/update")
     public String editUser(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
-        return "user/edit";
+        return "user/update";
     }
 
-    @PostMapping("/user/edit")
+    @PostMapping("/update")
     public String editUser(@ModelAttribute User user) {
         String userId = user.getUserId();
         String email = user.getEmail();
@@ -102,10 +102,36 @@ public class UserController {
 
     @GetMapping("/withdrawal")
     public String withdrawal() {
-        if(!checkUser())
-            return "redirect:/my-page";
-        return "redirect:/user/withdrawal";
+        return "redirect:/user/verify-password?action=withdrawal";
+    }
 
+    @GetMapping("/user/verify-password")
+    public String verifyPassword() {
+        return "/user/verify-password";
+    }
+
+    public boolean checkUser(String password) {
+        return userService.findUserByPassword(password) != null;
+    }
+
+    @PostMapping("/user/verify-password")
+    public String verifyPassword(@RequestParam("password") String password,
+                                 @RequestParam("action") String action) {
+        if(checkUser(password)) {
+            return handleAction(action);
+        }
+        return "redirect:/user/verify-password?action=" + action;
+    }
+
+    private String handleAction(String action) {
+        switch(action) {
+            case "update":
+                return "/user/update";
+            case "withdrawal":
+                return "/user/withdrawal";
+            default:
+                return "redirect:/user/verify-password";
+        }
     }
 
     @GetMapping("/logout")

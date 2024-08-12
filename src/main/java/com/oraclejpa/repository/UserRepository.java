@@ -21,7 +21,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByUserId(String userId);
 
-    User findByPassword(String password);
+    User findUserByPassword(String password);
 
     @Modifying
     @Transactional
