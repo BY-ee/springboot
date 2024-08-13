@@ -91,7 +91,7 @@ public class UserController {
         return "user/update";
     }
 
-    @PostMapping("/update")
+    @PostMapping("/user/update")
     public String editUser(@ModelAttribute User user) {
         String userId = user.getUserId();
         String email = user.getEmail();
@@ -101,34 +101,54 @@ public class UserController {
     }
 
     @GetMapping("/withdrawal")
-    public String withdrawal() {
+    public String verifyPasswordForWithdrawal() {
         return "redirect:/user/verify-password?action=withdrawal";
     }
 
+    @GetMapping("/user/withdrawal")
+    public String withdrawal(Model model) {
+        return "user/withdrawal";
+    }
+
+    @PostMapping("/user/withdrawal")
+    public String withdrawal() {
+        return "redirect:/";
+    }
+
     @GetMapping("/user/verify-password")
-    public String verifyPassword() {
+    public String verifyPassword(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        String password = user.getPassword();
+        model.addAttribute("password", password);
         return "/user/verify-password";
     }
 
-    public boolean checkUser(String password) {
-        return userService.findUserByPassword(password) != null;
-    }
+//    public boolean checkUser(String password) {
+//        return userService.findUserByPassword(password) != null;
+//    }
 
     @PostMapping("/user/verify-password")
     public String verifyPassword(@RequestParam("password") String password,
-                                 @RequestParam("action") String action) {
-        if(checkUser(password)) {
+                                 @RequestParam("action") String action,
+                                 HttpServletRequest request,
+                                 RedirectAttributes redirectAttributes) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if(password.equals(user.getPassword())) {
             return handleAction(action);
+        } else {
+            redirectAttributes.addFlashAttribute("errorMessage", "잘못된 비밀번호가 입력되었습니다.");
+            return "redirect:/user/verify-password?action=" + action;
         }
-        return "redirect:/user/verify-password?action=" + action;
     }
 
     private String handleAction(String action) {
         switch(action) {
             case "update":
-                return "/user/update";
+                return "redirect:/user/update";
             case "withdrawal":
-                return "/user/withdrawal";
+                return "redirect:/user/withdrawal";
             default:
                 return "redirect:/user/verify-password";
         }
