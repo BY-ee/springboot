@@ -59,11 +59,10 @@ public class PostController {
 
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable Long id,
-                         HttpSession session, Model model) {
-        Integer currentPage = (Integer) session.getAttribute("currentPage");
+                         @RequestParam(value = "page") int page, Model model) {
         Post post = postService.findById(id);
         model.addAttribute("post", post);
-        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("page", page);
         return "post/detail";
     }
 
