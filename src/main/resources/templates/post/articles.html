@@ -21,6 +21,7 @@
     <h1>글 목록</h1>
     <div th:each="post : ${postPage.content}">
         <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
+            <input type="hidden" th:value="${postPage.number}" name="page" />
             <div class="post-box" onclick="this.closest('form').submit();">
                 <div style="display: flex; gap: 50px;">
                     <p th:text="'제목: ' + ${post.title}"></p>
