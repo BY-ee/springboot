@@ -38,18 +38,14 @@
             <button type="submit">내정보</button>
         </form>
 
-        <form th:action="@{/post/write}" method="get">
-            <button type="submit">글 작성</button>
-        </form>
-
         <form th:action="@{/post/articles}" method="get">
             <input type="hidden" th:value="0" name="page">
             <button type="submit">글 목록</button>
         </form>
-    </div>
 
-    <form th:action="@{/logout}" method="get" onsubmit="return confirmLogOutPost()">
-        <button type="submit">로그아웃</button>
-    </form>
+        <form th:action="@{/logout}" method="get" onsubmit="return confirmLogOutPost()">
+            <button type="submit">로그아웃</button>
+        </form>
+    </div>
 </body>
 </html>
