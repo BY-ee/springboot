@@ -33,7 +33,7 @@
         </form>
 
         <form th:action="@{/post/articles}" method="get">
-            <input type="hidden" th:value="${currentPage}" name="page">
+            <input type="hidden" th:value="${page}" name="page">
             <button type="submit">글 목록</button>
         </form>
     </div>
