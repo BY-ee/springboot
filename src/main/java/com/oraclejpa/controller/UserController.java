@@ -1,14 +1,10 @@
 package com.oraclejpa.controller;
 
-import com.oraclejpa.model.Post;
 import com.oraclejpa.model.User;
-import com.oraclejpa.service.PostService;
 import com.oraclejpa.service.UserService;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-    private final PostService postService;
 
     @GetMapping("/")
     public String index(HttpServletRequest request,
@@ -28,7 +23,7 @@ public class UserController {
             return "redirect:/post";
         } else {
             model.addAttribute("user", user);
-            return "user/index";
+            return "user/index-v1";
         }
     }
 
