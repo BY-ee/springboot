@@ -2,6 +2,7 @@ package com.oraclejpa.controller;
 
 import com.oraclejpa.model.Post;
 import com.oraclejpa.model.User;
+import com.oraclejpa.service.PostService;
 import com.oraclejpa.service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final PostService postService;
 
     @GetMapping("/")
     public String index(HttpServletRequest request,
@@ -92,11 +94,17 @@ public class UserController {
     }
 
     @PostMapping("/user/update")
-    public String editUser(@ModelAttribute User user) {
-        String userId = user.getUserId();
+    public String editUser(@ModelAttribute User user,
+                           HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User loggedInUser = (User) session.getAttribute("user");
+        String currentNickname = loggedInUser.getNickname();
         String email = user.getEmail();
         String nickname = user.getNickname();
-        userService.updateEmailAndNicknameById(userId, email, nickname);
+        userService.updateNicknameForUniqueKeyAndForeignKey(currentNickname, email, nickname);
+
+        User updatedUser = userService.findByUserId(user.getUserId());
+        session.setAttribute("user", updatedUser);
         return "redirect:/my-page";
     }
 
