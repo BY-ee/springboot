@@ -1,0 +1,128 @@
+/* ==========================================
+   Global Styles
+========================================== */
+
+/* Reset or Normalize */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Typography */
+body {
+    background-image: url(../image/flower.jpg);
+    background-size: 1920px 1420px;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* ==========================================
+   Layout Styles
+========================================== */
+
+/* Header Styles */
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+/* Navigation Styles */
+nav {
+    display: flex;
+    justify-content: space-around;
+}
+
+/* Heading Styles */
+h1 {
+    text-align: center;
+    margin: 100px;
+    font-size: 40px;
+    color: rgb(212, 212, 214);
+}
+
+/* ==========================================
+   Component Styles
+========================================== */
+
+/* Button Styles */
+button {
+    background: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Table Styles */
+table {
+    width: 30%;
+    margin: auto;
+    margin-top: 200px;
+    border-collapse: collapse;
+    text-align: left;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    /* overflow-x: auto; */
+    white-space: nowrap;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+
+    th, td {
+        padding: 20px 10px 20px 10px;
+        border-bottom: 1px solid #dee2e6;
+        border-right: 1px solid #dee2e6;
+    }
+
+    th {
+        background: #7e7e7e;
+        color: #fff;
+    }
+
+    tr:hover {
+        background: #f5f5f5;
+    }
+
+    input {
+        border: none;
+        background-color:aliceblue;
+        
+    }
+    input:focus {
+        outline: #007bff;
+        background-color: #e8ecef;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+}
+
+
+
+
+/* ==========================================
+   Utility Classes
+========================================== */
+
+/* Margin Utility */
+.margin-top {
+    margin-top: 20px;
+}
+
+/* ==========================================
+   Media Queries
+========================================== */
+
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+}
