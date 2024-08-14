@@ -24,7 +24,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findUserByPassword(String password);
 
     @Modifying
-    @Transactional
-    @Query(value = "UPDATE member u1_0 SET u1_0.email=:email,u1_0.nickname=:nickname WHERE u1_0.user_id=:userId", nativeQuery = true)
-    void updateEmailAndNicknameByUserId(String userId, String email, String nickname);
+    @Query(value = "UPDATE member u1_0 SET u1_0.email=:email,u1_0.nickname=:nickname WHERE u1_0.nickname=:currentNickname", nativeQuery = true)
+    void updateEmailAndNicknameByCurrentNickname(String currentNickname, String email, String nickname);
 }
