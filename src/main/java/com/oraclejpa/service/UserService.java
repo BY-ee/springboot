@@ -53,4 +53,8 @@ public class UserService {
     public User findUserByPassword(String password) {
         return userRepository.findUserByPassword(password);
     }
+
+    public void deleteUser(User user) {
+        userRepository.delete(user);
+    }
 }

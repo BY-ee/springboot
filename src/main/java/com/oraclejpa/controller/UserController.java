@@ -114,12 +114,16 @@ public class UserController {
     }
 
     @GetMapping("/user/withdrawal")
-    public String withdrawal(Model model) {
+    public String moveWithdrawalView() {
         return "user/withdrawal";
     }
 
     @PostMapping("/user/withdrawal")
-    public String withdrawal() {
+    public String withdrawal(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        userService.deleteUser(user);
+        session.setAttribute("user", null);
         return "redirect:/";
     }
 
