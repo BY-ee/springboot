@@ -11,7 +11,7 @@
 
 /* Typography */
 body {
-    background-image: url(../image/flower.jpg);
+    background-image: url(/image/flower.jpg);
     background-size: 1920px 1200px;
     background-position: center;
     background-repeat: no-repeat;
@@ -35,6 +35,14 @@ header {
 nav {
     display: flex;
     justify-content: space-around;
+}
+
+/* Box Styles */
+.box {
+    background: #cacaca;
+    width: 50%;
+    padding: 15px;
+    border-radius: 20px;
 }
 
 /* Heading Styles */
