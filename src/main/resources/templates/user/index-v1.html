@@ -30,25 +30,29 @@
                 <tr>
                     <th>ID</th>
                     <td>
-                        <input type="text" id="userId" th:field="*{userId}" autofocus placeholder="아이디 입력" required />
+                        <input type="text" id="userId" th:field="*{userId}" autofocus placeholder="아이디 입력" />
                     </td>
                 </tr>
+
                 <tr>
                     <th>패스워드</th>
                     <td>
-                        <input type="password" id="password" th:field="*{password}" placeholder="비밀번호 입력" required />
+                        <input type="password" id="password" th:field="*{password}" placeholder="비밀번호 입력" />
                     </td>
                 </tr>
 
                 <tr>
                     <td colspan="2">
-                        <span class="button-container">
-                            <div style="padding: 8px 20px 0 0;">
-                                <label for="remember">아이디 기억</label>
-                                <input type="checkbox" id="remember" name="remember">
-                            </div>
-                            <button type="submit">로그인</button>
-                        </span>
+                        <div style="display: flex; align-items: center;">
+                        <div style="margin-left: 100px;">
+                            <label for="remember" style="font-size: 14px;">아이디 기억</label>
+                            <input type="checkbox" id="remember" name="remember" style="width: auto; margin-right: 20px;">
+                        </div>
+                        
+                        <div style="margin-left: 0px;">
+                        <button type="submit">로그인</button>
+                        </div>
+                        </div>
                     </td>
                 </tr>
         </form>
