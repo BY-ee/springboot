@@ -61,17 +61,15 @@ button {
 
 /* Table Styles */
 table {
-    width: 30%;
-    margin: auto;
-    margin-top: 200px;
+    width: 500px;
+    margin: 150px auto;
     border-collapse: collapse;
+    border: 3px solid #dee2e6;
     text-align: left;
-    border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     /* overflow-x: auto; */
     white-space: nowrap;
     background: #f8f9fa;
-    border: 1px solid #dee2e6;
 
     th, td {
         padding: 20px 10px 20px 10px;
@@ -101,7 +99,7 @@ table {
     .button-container {
         display: flex;
         justify-content: center;
-        gap: 10px;
+        gap: 20px;
     }
 }
 
