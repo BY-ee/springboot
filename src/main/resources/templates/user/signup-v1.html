@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+
+    <link rel="stylesheet" href="../../static/css/styles.css">
+
+    <script>
+        function showSignUpAlert() {
+            alert("회원가입에 성공하였습니다.");
+        }
+    </script>
+</head>
+<body>
+    <h1>회원가입 페이지</h1>
+    <table style="margin-top: 0;">
+        <form th:action="@{/signup}" th:object="${user}" method="post" onsubmit="showSignUpAlert()">
+            <tr>
+                <th>아이디</th>
+                <td>
+                    <input type="text" id="id" th:field="*{userId}" placeholder="아이디 입력 (4~15자 이내)" />
+                </td>
+            </tr>
+
+            <tr>
+                <th>비밀번호</th>
+                <td>
+                    <input type="password" id="password" th:field="*{password}" placeholder="비밀번호 입력 (특수문자 포함 8~20자 이내)" />
+                </td>
+            </tr>
+
+            <tr>
+                <th>이메일</th>
+                <td>
+                    <input type="email" id="email" th:field="*{email}" placeholder="이메일 입력" />
+                </td>
+            </tr>
+
+            <tr>
+                <th>닉네임</th>
+                <td>
+                    <input type="text" id="nickname" th:field="*{nickname}" placeholder="닉네임 입력 (2~12자 이내)" />
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <span class="button-container">
+                        <button type="submit">회원가입</button>
+                        <button type="button" onclick="window.location.href='@{/}'">돌아가기</button>
+                    </span>
+                </td>
+            </tr>
+        </form>
+
+        <!-- <form th:action="@{/home}" method="get">
+            <button type="submit">돌아가기</button>
+        </form> -->
+    </table>
+</body>
+</html>
