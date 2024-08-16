@@ -23,8 +23,12 @@ public class PostController {
     }
 
     @GetMapping("/")
-    public String index() {
-        return "post/index";
+    public String index(Model model) {
+        int page = 0;
+        int size = 5;
+        Page<Post> postPage = postService.getPosts(page, size);
+        model.addAttribute("postPage", postPage);
+        return "post/index-v1";
     }
 
     @GetMapping("/write")

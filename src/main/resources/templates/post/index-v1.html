@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}" href="../../static/css/styles.css">
+
+    <style>
+        body {
+            background-image: url(../../static/image/milkyway.jpg);
+            background-size: 1920px 1620px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function showLogInAlert(message) {
+            if (message) {
+                alert(message);
+            }
+        }
+    </script>
+
+    <script>
+        function confirmLogOutPost() {
+            let confirmFlag = confirm("로그아웃하시겠습니까?");
+            if(confirmFlag) {
+                alert("성공적으로 로그아웃되었습니다.")
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div style="display: flex; justify-content: end; gap: 20px; margin-right: 20px;">
+        <form th:action="@{/my-page}" method="get">
+            <button type="submit">내정보</button>
+        </form>
+
+        <form th:action="@{/logout}" method="get" onsubmit="return confirmLogOutPost()">
+            <button type="submit">로그아웃</button>
+        </form>
+    </div>
+
+
+    <!-- <div th:if="${logInMessage != null}">
+        <script>
+            showLogInAlert("[[${logInMessage}]]");
+        </script>
+    </div> -->
+
+    <div style="display: flex; flex-direction: column; align-items: center; margin: 150px 0;">
+        <div class="box" style="margin-bottom: 20px;">
+            <p style="font-size: 24px; margin-left: 20px;"><b>Q&A</b></p>
+        </div>
+
+        <div th:each="post : ${postPage.content}" style="width: 100%; max-width: 600px;">
+            <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
+                <input type="hidden" th:value="${postPage.number}" name="page" />
+                <div class="post-box" onclick="this.closest('form').submit();" style="margin: 20px 0; border: 1px solid #ccc;">
+                    <div style="display: flex; gap: 50px;">
+                        <p th:text="'제목: ' + ${post.title}"></p>
+                    </div>
+                    <p th:text="'내용: ' + ${post.content}"></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+        <div class="box" style="margin: 0 80px;">
+            <p style="font-size: 24px; margin-left: 20px;"><b>커뮤니티</b></p>
+        </div>
+    
+
+    <form th:action="@{/post/articles}" method="get">
+        <input type="hidden" th:value="0" name="page">
+        <button type="submit">글 목록</button>
+    </form>
+
+</body>
+</html>
