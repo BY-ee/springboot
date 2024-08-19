@@ -58,7 +58,7 @@ public class PostController {
         int size = 5;
         Page<Post> postPage = postService.getPosts(page, size);
         model.addAttribute("postPage", postPage);
-        return "post/articles";
+        return "post/articles-v1";
     }
 
     @GetMapping("/detail/{id}")
