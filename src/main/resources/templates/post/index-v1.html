@@ -8,7 +8,7 @@
 
     <style>
         body {
-            background-image: url(../../static/image/milkyway.jpg);
+            background-image: url(/image/milkyway.jpg);
             background-size: 1920px 1620px;
         }
     </style>
@@ -45,39 +45,60 @@
     </div>
 
 
-    <!-- <div th:if="${logInMessage != null}">
+    <div th:if="${logInMessage != null}">
         <script>
             showLogInAlert("[[${logInMessage}]]");
         </script>
-    </div> -->
-
-    <div style="display: flex; flex-direction: column; align-items: center; margin: 150px 0;">
-        <div class="box" style="margin-bottom: 20px;">
-            <p style="font-size: 24px; margin-left: 20px;"><b>Q&A</b></p>
-        </div>
-
-        <div th:each="post : ${postPage.content}" style="width: 100%; max-width: 600px;">
-            <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
-                <input type="hidden" th:value="${postPage.number}" name="page" />
-                <div class="post-box" onclick="this.closest('form').submit();" style="margin: 20px 0; border: 1px solid #ccc;">
-                    <div style="display: flex; gap: 50px;">
-                        <p th:text="'제목: ' + ${post.title}"></p>
-                    </div>
-                    <p th:text="'내용: ' + ${post.content}"></p>
-                </div>
-            </form>
-        </div>
     </div>
 
-        <div class="box" style="margin: 0 80px;">
-            <p style="font-size: 24px; margin-left: 20px;"><b>커뮤니티</b></p>
+    <div style="display: flex; justify-content: space-around;">
+        <div style="display: flex; flex-direction: column; align-items: start;">
+            <div class="box" style="width: 400px; margin: 100px 0 30px 200px;">
+                <p style="font-size: 24px; margin-left: 20px;"><b>Q&A</b></p>
+            </div>
+
+            <div th:each="post : ${postPage.content}" style="width: 400px; margin: 0 20px 0 200px;">
+                <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
+                    <input type="hidden" th:value="${postPage.number}" name="page" />
+                    <div class="post-box" style="color: #c7c7c7" onclick="this.closest('form').submit();">
+                        <div style="cursor: pointer; margin-left: 10px;">
+                            <div style="display: flex; gap: 50px; margin-bottom: 5px;">
+                                <p th:text="${post.nickname}"></p>
+                            </div>
+                            <p th:text="${post.title}"></p>
+                        </div>
+                    </div>
+
+                    <hr style="margin: 15px 0;">
+                </form>
+            </div>
+
+            <a href="articles?page=0" style="margin-left: 210px; color: #FFF">전체 글 보기</a>
         </div>
-    
 
-    <form th:action="@{/post/articles}" method="get">
-        <input type="hidden" th:value="0" name="page">
-        <button type="submit">글 목록</button>
-    </form>
+        <div style="display: flex; flex-direction: column; align-items: end;">
+            <div class="box" style="width: 400px; margin: 100px 200px 30px 0;">
+                <p style="font-size: 24px; margin-left: 20px;"><b>커뮤니티</b></p>
+            </div>
 
+            <div th:each="post : ${postPage.content}" style="width: 400px; margin: 0 200px 0 20px;">
+                <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
+                    <input type="hidden" th:value="${postPage.number}" name="page" />
+                    <div class="post-box" style="color: #c7c7c7;" onclick="this.closest('form').submit();">
+                        <div style="cursor: pointer; margin-left: 10px;">
+                            <div style="display: flex; gap: 50px; margin-bottom: 5px;">
+                                <p th:text="${post.nickname}"></p>
+                            </div>
+                            <p th:text="${post.title}"></p>
+                        </div>
+
+                        <hr style="margin: 15px 0;">
+                    </div>
+                </form>
+            </div>
+
+            <a href="articles?page=0" style="margin-right: 500px; color: #FFF">전체 글 보기</a>
+        </div>
+    </div>
 </body>
 </html>
