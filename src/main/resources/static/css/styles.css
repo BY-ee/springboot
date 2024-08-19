@@ -47,6 +47,15 @@ nav {
     border-radius: 20px;
 }
 
+/* Post-box Styles */
+.post-box {
+    color: #c7c7c7;
+}
+
+.post-box:hover {
+    background-color: #0d002c27;
+}
+
 /* Heading Styles */
 h1 {
     text-align: center;

@@ -60,7 +60,7 @@
             <div th:each="post : ${postPage.content}" style="width: 400px; margin: 0 20px 0 200px;">
                 <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
                     <input type="hidden" th:value="${postPage.number}" name="page" />
-                    <div class="post-box" style="color: #c7c7c7" onclick="this.closest('form').submit();">
+                    <div class="post-box" onclick="this.closest('form').submit();">
                         <div style="cursor: pointer; margin-left: 10px;">
                             <div style="display: flex; gap: 50px; margin-bottom: 5px;">
                                 <p th:text="${post.nickname}"></p>
@@ -84,7 +84,7 @@
             <div th:each="post : ${postPage.content}" style="width: 400px; margin: 0 200px 0 20px;">
                 <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
                     <input type="hidden" th:value="${postPage.number}" name="page" />
-                    <div class="post-box" style="color: #c7c7c7;" onclick="this.closest('form').submit();">
+                    <div class="post-box" onclick="this.closest('form').submit();">
                         <div style="cursor: pointer; margin-left: 10px;">
                             <div style="display: flex; gap: 50px; margin-bottom: 5px;">
                                 <p th:text="${post.nickname}"></p>
