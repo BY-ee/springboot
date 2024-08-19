@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
     private final PostService postService;
 
-    @GetMapping("")
-    public String redirectToIndex() {
-        return "redirect:/post/";
-    }
+//    @GetMapping("")
+//    public String redirectToIndex() {
+//        return "redirect:/post/";
+//    }
 
-    @GetMapping("/")
+    @GetMapping("")
     public String index(Model model) {
         int page = 0;
         int size = 5;

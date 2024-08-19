@@ -37,7 +37,7 @@ public class UserController {
             HttpSession session = request.getSession();
             session.setAttribute("user", authenticatedUser);
             redirectAttributes.addFlashAttribute("logInMessage", "로그인에 성공하였습니다.");
-            return "redirect:/post/";
+            return "redirect:/post";
         } else {
             redirectAttributes.addFlashAttribute("logInMessage", "아이디 또는 비밀번호가 잘못되었습니다.");
             return "redirect:/";
