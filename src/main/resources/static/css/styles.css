@@ -56,6 +56,13 @@ nav {
     background-color: #0d002c27;
 }
 
+/* Button-container Styles */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
 /* Heading Styles */
 h1 {
     text-align: center;
