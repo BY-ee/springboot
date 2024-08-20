@@ -5,6 +5,13 @@
     <title>글 목록 페이지</title>
 
     <link rel="stylesheet" th:href="@{/css/styles.css}" href="../../static/css/styles.css">
+
+    <style>
+        body {
+            background-image: url(/image/milkyway.jpg);
+            background-size: 1920px 1620px;
+        }
+    </style>
     <!-- <style>
         .post-box {
             border: 1px solid #ccc; /* 박스 테두리 */
@@ -22,39 +29,45 @@
 <body>
     <h1>글 목록</h1>
 
-    <form th:action="@{/post/write}" method="get">
-        <button type="submit">글 작성</button>
-    </form>
-
-    <div th:each="post : ${postPage.content}" style="width: 400px; margin: 0 200px 0 20px;">
-        <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
-            <input type="hidden" th:value="${postPage.number}" name="page" />
-            <div class="post-box" onclick="this.closest('form').submit();">
-                <div style="cursor: pointer; margin-left: 10px;">
-                    <div style="display: flex; gap: 50px; margin-bottom: 5px;">
-                        <p th:text="${post.nickname}"></p>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <div th:each="post : ${postPage.content}" style="width: 800px;">
+            <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
+                <input type="hidden" th:value="${postPage.number}" name="page" />
+                <div class="post-box" onclick="this.closest('form').submit();">
+                    <div style="cursor: pointer; margin-left: 10px;">
+                        <div style="display: flex; gap: 50px; margin-bottom: 5px;">
+                            <p th:text="${post.nickname}"></p>
+                        </div>
+                        <p th:text="${post.title}"></p>
                     </div>
-                    <p th:text="${post.title}"></p>
+
+                    <hr style="margin: 15px 0;">
                 </div>
+            </form>
+        </div>
 
-                <hr style="margin: 15px 0;">
-            </div>
-        </form>
-    </div>
+        <div style="color: aliceblue;">
+            1 2 3 4 5 ... 10
+        </div>
 
-    <div style="margin: 10px;">
-        <span>페이지: <span th:text="${postPage.number+1} + '/'
-                    + ${postPage.totalPages}"></span></span>
-    </div>
+        <div style="color: aliceblue;">
+            <span th:text="'페이지: ' + ${postPage.number+1} + '/' + ${postPage.totalPages}"></span>
+        </div>
 
-    <div style="margin: 10px;">
-        <a th:if="${postPage.hasPrevious()}" th:href="@{/post/articles(page=${postPage.number-1})}">이전</a>
-        <a th:if="${postPage.hasNext()}" th:href="@{/post/articles(page=${postPage.number+1})}">다음</a>
-    </div>
-    <div style="margin: 10px;">
-        <form th:action="@{/post/home}" method="get">
-            <button type="submit">Home</button>
-        </form>
+        <div style="color: aliceblue;">
+            <a th:if="${postPage.hasPrevious()}" th:href="@{/post/articles(page=${postPage.number-1})}">이전</a>
+            <a th:if="${postPage.hasNext()}" th:href="@{/post/articles(page=${postPage.number+1})}">다음</a>
+        </div>
+
+        <div class="button-container">
+            <form th:action="@{/post/write}" method="get">
+                <button type="submit">글 작성</button>
+            </form>
+
+            <form th:action="@{/post/home}" method="get">
+                <button type="submit">Home</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>
