@@ -24,7 +24,7 @@ public class PostController {
 
     @GetMapping("")
     public String index(Model model) {
-        int page = 0;
+        int page = 1;
         int size = 5;
         Page<Post> postPage = postService.getPosts(page, size);
         model.addAttribute("postPage", postPage);
@@ -43,7 +43,7 @@ public class PostController {
         User user = (User) session.getAttribute("user");
         String nickname = user.getNickname();
         postService.writePost(nickname, post);
-        return "redirect:/post/";
+        return "redirect:/post";
     }
 
 //    @GetMapping("/lists")
