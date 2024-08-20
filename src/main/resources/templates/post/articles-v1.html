@@ -7,24 +7,30 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}" href="../../static/css/styles.css">
 
     <style>
+        /* Background-image Styles */
         body {
             background-image: url(/image/milkyway.jpg);
             background-size: 1920px 1620px;
         }
-    </style>
-    <!-- <style>
-        .post-box {
-            border: 1px solid #ccc; /* 박스 테두리 */
-            padding: 10px; /* 내부 여백 */
-            margin: 10px; /* 외부 여백 */
-            cursor: pointer; /* 마우스 클릭 버튼 */
-            transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
+
+        /* Link Styles */
+        a {
+            color: #bebebe;
+            padding: 15px;
         }
 
-        .post-box:hover {
-            background-color: #f0f0f0; /* 호버 시 배경색 변화 */
+        a:hover {
+            color: #ffffff;
         }
-    </style> -->
+
+        a:focus {
+            color: #ffffff;
+        }
+
+        {
+            color: #877eff
+        }
+    </style>
 </head>
 <body>
     <h1>글 목록</h1>
@@ -46,17 +52,10 @@
             </form>
         </div>
 
-        <div style="color: aliceblue;">
-            1 2 3 4 5 ... 10
-        </div>
-
-        <div style="color: aliceblue;">
-            <span th:text="'페이지: ' + ${postPage.number+1} + '/' + ${postPage.totalPages}"></span>
-        </div>
-
-        <div style="color: aliceblue;">
-            <a th:if="${postPage.hasPrevious()}" th:href="@{/post/articles(page=${postPage.number-1})}">이전</a>
-            <a th:if="${postPage.hasNext()}" th:href="@{/post/articles(page=${postPage.number+1})}">다음</a>
+        <div style="color: aliceblue; font-size: 16px; display: flex;">
+            <div th:each="pageNum : ${#numbers.sequence(1, postPage.totalPages)}">
+                <a th:text="${pageNum}" th:href="@{/post/articles(page=${pageNum})}"></a>
+            </div>
         </div>
 
         <div class="button-container">
@@ -64,9 +63,7 @@
                 <button type="submit">글 작성</button>
             </form>
 
-            <form th:action="@{/post/home}" method="get">
-                <button type="submit">Home</button>
-            </form>
+            <button type="button" onclick="window.location.href='/post'">돌아가기</button>
         </div>
     </div>
 </body>
