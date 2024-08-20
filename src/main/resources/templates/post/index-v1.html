@@ -73,7 +73,10 @@
                 </form>
             </div>
 
-            <a href="articles?page=0" style="margin-left: 210px; color: #FFF">전체 글 보기</a>
+            <form th:action="@{/post/articles}" method="get">
+                <input type="hidden" value="0" name="page" />
+                <p onclick="this.closest('form').submit()" style="margin-left: 210px; color: #FFF; cursor: pointer;">전체 글 보기</p>
+            </form>
         </div>
 
         <div style="display: flex; flex-direction: column; align-items: end;">
@@ -97,7 +100,10 @@
                 </form>
             </div>
 
-            <a href="articles?page=0" style="margin-right: 500px; color: #FFF">전체 글 보기</a>
+            <form th:action="@{/post/articles}" method="get">
+                <input type="hidden" value="0" name="page" />
+                <p onclick="this.closest('form').submit()" style="margin-left: 210px; color: #FFF; cursor: pointer;">전체 글 보기</p>
+            </form>
         </div>
     </div>
 </body>
