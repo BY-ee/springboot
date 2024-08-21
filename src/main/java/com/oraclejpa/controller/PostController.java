@@ -24,7 +24,7 @@ public class PostController {
 
     @GetMapping("")
     public String index(Model model) {
-        int page = 1;
+        int page = 0;
         int size = 5;
         Page<Post> postPage = postService.getPosts(page, size);
         model.addAttribute("postPage", postPage);
@@ -54,15 +54,15 @@ public class PostController {
 //    }
 
     @GetMapping("/articles")
-    public String articles(@RequestParam(value = "page") int page, Model model) {
+    public String articles(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         int size = 5;
-        Page<Post> postPage = postService.getPosts(page, size);
+        Page<Post> postPage = postService.getPosts(page - 1, size);
         model.addAttribute("postPage", postPage);
         return "post/articles-v1";
     }
 
     @GetMapping("/detail/{id}")
-    public String detail(@PathVariable Long id,
+    public String detail(@PathVariable("id") Long id,
                          @RequestParam(value = "page") int page, Model model) {
         Post post = postService.findById(id);
         model.addAttribute("post", post);
@@ -70,23 +70,25 @@ public class PostController {
         return "post/detail";
     }
 
-    @GetMapping("/update")
-    public String update(@RequestParam("id") Long id, Model model) {
+    @GetMapping("/update/{id}")
+    public String update(@PathVariable("id") Long id,
+                         @RequestParam("page") int page, Model model) {
         Post post = postService.findById(id);
         model.addAttribute("post", post);
+        model.addAttribute("page", page);
         return "post/update";
     }
 
     @PostMapping("/update")
     public String updatePostById(@RequestParam("id") Long id, @ModelAttribute Post post) {
         postService.updateById(id, post);
-        return "redirect:/post/articles?page=0";
+        return "redirect:/post/articles?page=1";
     }
 
     @PostMapping("/delete")
     public String deletePostById(@RequestParam("id") Long id) {
         postService.deleteById(id);
-        return "redirect:/post/articles?page=0";
+        return "redirect:/post/articles?page=1";
     }
 
     @GetMapping("/my-post")
@@ -95,7 +97,7 @@ public class PostController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         int size = 5;
-        Page<Post> postPage = postService.findPostsByNickName(page, size, user.getNickname());
+        Page<Post> postPage = postService.findPostsByNickName(page - 1, size, user.getNickname());
         model.addAttribute("user", user);
         model.addAttribute("postPage", postPage);
         return "user/my-post";
