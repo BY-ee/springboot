@@ -34,7 +34,7 @@
     <div style="display: flex; flex-direction: column; align-items: center;">
         <div th:each="post : ${postPage.content}" style="width: 800px;">
             <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
-                <input type="hidden" th:value="${postPage.number}" name="page" />
+                <input type="hidden" th:value="${postPage.number + 1}" name="page" />
                 <div class="post-box" onclick="this.closest('form').submit();">
                     <div style="cursor: pointer; margin-left: 10px;">
                         <div style="display: flex; gap: 50px; margin-bottom: 5px;">

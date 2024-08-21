@@ -59,7 +59,7 @@
 
             <div th:each="post : ${postPage.content}" style="width: 400px; margin: 0 20px 0 200px;">
                 <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
-                    <input type="hidden" th:value="${postPage.number}" name="page" />
+                    <input type="hidden" th:value="${postPage.number + 1}" name="page" />
                     <div class="post-box" onclick="this.closest('form').submit();">
                         <div style="cursor: pointer; margin-left: 10px;">
                             <div style="display: flex; gap: 50px; margin-bottom: 5px;">
@@ -74,7 +74,7 @@
             </div>
 
             <form th:action="@{/post/articles}" method="get">
-                <input type="hidden" value="1" name="page" />
+                <input type="hidden" th:value="${postPage.number + 1}" name="page" />
                 <p onclick="this.closest('form').submit()" style="margin-left: 210px; color: #FFF; cursor: pointer;">전체 글 보기</p>
             </form>
         </div>
@@ -86,7 +86,7 @@
 
             <div th:each="post : ${postPage.content}" style="width: 400px; margin: 0 200px 0 20px;">
                 <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
-                    <input type="hidden" th:value="${postPage.number}" name="page" />
+                    <input type="hidden" th:value="${postPage.number + 1}" name="page" />
                     <div class="post-box" onclick="this.closest('form').submit();">
                         <div style="cursor: pointer; margin-left: 10px;">
                             <div style="display: flex; gap: 50px; margin-bottom: 5px;">
@@ -101,7 +101,6 @@
             </div>
 
             <form th:action="@{/post/articles}" method="get">
-                <input type="hidden" value="0" name="page" />
                 <p onclick="this.closest('form').submit()" style="margin-right: 500px; color: #FFF; cursor: pointer;">전체 글 보기</p>
             </form>
         </div>
