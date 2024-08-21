@@ -22,8 +22,8 @@
     <div th:text="'내용: ' + ${post.content}"></div>
 
     <div class="button-container" style="display:flex; gap:10px;">
-        <form th:action="@{/post/update}" method="get">
-            <input type="hidden" th:value="${post.id}" name="id">
+        <form th:action="@{/post/update/{id}(id=${post.id})}" method="get">
+            <input type="hidden" th:value="${page}" name="page" />
             <button type="submit">수정</button>
         </form>
 
