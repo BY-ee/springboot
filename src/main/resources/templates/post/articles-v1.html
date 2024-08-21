@@ -26,10 +26,6 @@
         a:focus {
             color: #ffffff;
         }
-
-        {
-            color: #877eff
-        }
     </style>
 </head>
 <body>
@@ -54,7 +50,8 @@
 
         <div style="color: aliceblue; font-size: 16px; display: flex;">
             <div th:each="pageNum : ${#numbers.sequence(1, postPage.totalPages)}">
-                <a th:text="${pageNum}" th:href="@{/post/articles(page=${pageNum})}"></a>
+                <a th:if="${pageNum != postPage.number + 1}" th:text="${pageNum}" th:href="@{/post/articles(page=${pageNum})}"></a>
+                <span th:if="${pageNum == postPage.number + 1}" class="no-pointer" th:text="${pageNum}" style="color: #659bff; padding: 15px;"></span>
             </div>
         </div>
 
