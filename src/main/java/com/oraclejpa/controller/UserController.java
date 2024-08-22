@@ -72,24 +72,11 @@ public class UserController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
-        return "user/my-page";
-    }
-
-    @GetMapping("/update")
-    public String update() {
-        return "redirect:/user/verify-password?action=update";
-    }
-
-    @GetMapping("/user/update")
-    public String editUser(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        model.addAttribute("user", user);
-        return "user/update";
+        return "user/my-page-v1";
     }
 
     @PostMapping("/user/update")
-    public String editUser(@ModelAttribute User user,
+    public String updateUser(@ModelAttribute User user,
                            HttpServletRequest request) {
         HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("user");
