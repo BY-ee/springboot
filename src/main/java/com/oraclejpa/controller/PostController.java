@@ -100,7 +100,7 @@ public class PostController {
         Page<Post> postPage = postService.findPostsByNickName(page - 1, size, user.getNickname());
         model.addAttribute("user", user);
         model.addAttribute("postPage", postPage);
-        return "user/my-post";
+        return "user/my-post-v1";
     }
 
     @GetMapping("/home")
