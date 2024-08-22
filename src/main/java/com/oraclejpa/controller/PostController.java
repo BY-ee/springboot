@@ -63,7 +63,7 @@ public class PostController {
 
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable("id") Long id,
-                         @RequestParam(value = "page") int page, Model model) {
+                         @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         Post post = postService.findById(id);
         model.addAttribute("post", post);
         model.addAttribute("page", page);
@@ -72,7 +72,7 @@ public class PostController {
 
     @GetMapping("/update/{id}")
     public String update(@PathVariable("id") Long id,
-                         @RequestParam("page") int page, Model model) {
+                         @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         Post post = postService.findById(id);
         model.addAttribute("post", post);
         model.addAttribute("page", page);
@@ -92,7 +92,7 @@ public class PostController {
     }
 
     @GetMapping("/my-post")
-    public String myPost(@RequestParam("page") int page,
+    public String myPost(@RequestParam(value = "page", defaultValue = "1") int page,
                          HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");

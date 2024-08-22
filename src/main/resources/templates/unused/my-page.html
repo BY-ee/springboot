@@ -8,7 +8,7 @@
     <h1>내 정보</h1>
     <div th:text="'닉네임: ' + ${user.nickname}"></div>
     <div class="button-container" style="display: flex; gap: 10px;">
-        <form th:action="@{/update}" method="get">
+        <form th:action="@{/user/update}" method="get">
             <button type="submit">회원정보 수정</button>
         </form>
         <form th:action="@{/post/my-post}" method="get">
