@@ -14,7 +14,7 @@
 </head>
 <body>
     <h1>회원가입 페이지</h1>
-    <table style="margin-top: 0;">
+    <table>
         <form th:action="@{/signup}" th:object="${user}" method="post" onsubmit="showSignUpAlert()">
             <tr>
                 <th>아이디</th>
@@ -53,10 +53,6 @@
                 </td>
             </tr>
         </form>
-
-        <!-- <form th:action="@{/home}" method="get">
-            <button type="submit">돌아가기</button>
-        </form> -->
     </table>
 </body>
 </html>
