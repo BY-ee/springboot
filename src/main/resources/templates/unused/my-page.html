@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>내 정보 페이지</title>
+</head>
+<body>
+    <h1>내 정보</h1>
+    <div th:text="'닉네임: ' + ${user.nickname}"></div>
+    <div class="button-container" style="display: flex; gap: 10px;">
+        <form th:action="@{/user/update}" method="get">
+            <button type="submit">회원정보 수정</button>
+        </form>
+        <form th:action="@{/post/my-post}" method="get">
+            <input type="hidden" th:value="0" name="page" />
+            <button type="submit">내 글</button>
+        </form>
+        <button type="button">내 댓글</button>
+        <form th:action="@{/withdrawal}" method="get">
+            <button type="submit">회원탈퇴</button>
+        </form>
+    </div>
+    <form th:action="@{/}" method="get">
+        <button type="submit">돌아가기</button>
+    </form>
+</body>
+</html>

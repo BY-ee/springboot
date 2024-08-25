@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>홈 화면</title>
+
+    <style>
+        div {
+            margin: 10px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function showLogInAlert(message) {
+            if(message) {
+                alert(message);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1 align="center">홈페이지</h1>
+
+    <div th:if="${logInMessage != null}">
+        <script>
+            showLogInAlert("[[${logInMessage}]]");
+        </script>
+    </div>
+    <table border="1" align="center">
+        <form th:action="@{/login}" th:object="${user}" method="post">
+            <tr>
+                <th>ID</th>
+                <td>
+                    <input type="text" id="userId" th:field="*{userId}" autofocus required />
+                </td>
+            </tr>
+            <tr>
+                <th>비밀번호</th>
+                <td>
+                    <input type="password" id="password" th:field="*{password}" placeholder="비밀번호 입력" required />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <label for="remember">아이디 기억</label>
+                    <input type="checkbox" id="remember" name="remember">
+                    <button type="submit">로그인</button>
+                </td>
+            </tr>
+        </form>
+
+        <tr>
+            <td colspan="2" align="center">
+                <form th:action="@{/signup}" method="get">
+                    <button type="submit">회원가입</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

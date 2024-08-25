@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>홈 화면</title>
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}" href="../../static/css/styles.css">
+
+    <style>
+        label[for="remember"] {
+            font-size: 14px;
+            color: black;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function showLogInAlert(message) {
+            if(message) {
+                alert(message);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>홈페이지</h1>
+
+    <div th:if="${logInMessage != null}">
+        <script>
+            showLogInAlert("[[${logInMessage}]]");
+        </script>
+    </div>
+
+    <table>
+        <form th:action="@{/login}" th:object="${user}" method="post">
+            <tr>
+                <th>ID</th>
+                <td>
+                    <input type="text" id="userId" th:field="*{userId}" autofocus placeholder="아이디 입력" />
+                </td>
+            </tr>
+
+            <tr>
+                <th>패스워드</th>
+                <td>
+                    <input type="password" id="password" th:field="*{password}" placeholder="비밀번호 입력" />
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <div class="center">
+                        <label for="remember">아이디 기억</label>
+                        <input type="checkbox" id="remember" name="remember"
+                            style="width: auto; margin: auto 20px auto 5px;">
+
+                        <button type="submit" style="margin-right: 120px;">로그인</button>
+                    </div>
+                </td>
+            </tr>
+        </form>
+
+        <tr>
+            <td colspan="2">
+                <div class="button-container">
+                    <form th:action="@{/signup}" method="get">
+                        <button type="submit">회원가입</button>
+                    </form>
+                    <form th:action="@{/find-data}" method="get">
+                        <button type="submit">아이디 / 비밀번호 찾기</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

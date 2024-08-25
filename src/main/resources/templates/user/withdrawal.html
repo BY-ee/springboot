@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원탈퇴 페이지</title>
+    <script>
+        function confirmWithdrawal() {
+            let confirmFlag = confirm("정말 탈퇴하시겠습니까?")
+            if(confirmFlag) {
+                alert("회원탈퇴가 정상적으로 완료되었습니다.")
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>회원탈퇴</h1>
+    <p>계정을 탈퇴하시려면 탈퇴 버튼을 눌러주세요.</p>
+    <p>탈퇴 후에는 계정 복구가 불가합니다.</p>
+    <p>메인 화면으로 돌아가시려면 돌아가기 버튼을 눌러주세요.</p>
+
+    <div class="button-container" style="display: flex; gap: 10px;">
+        <form th:action="@{/user/withdrawal}" method="post" onsubmit="return confirmWithdrawal()">
+            <button type="submit">회원탈퇴</button>
+        </form>
+
+        <form th:action="@{/}" method="get">
+            <button type="submit">돌아가기</button>
+        </form>
+    </div>
+</body>
+</html>

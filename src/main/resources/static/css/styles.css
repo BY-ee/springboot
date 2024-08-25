@@ -1,0 +1,194 @@
+/* ==========================================
+   Global Styles
+========================================== */
+
+/* Reset or Normalize */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Typography */
+body {
+    background-image: url(../image/flower.jpg);
+    background-size: 1920px 1200px;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* ==========================================
+   Layout Styles
+========================================== */
+
+/* Header Styles */
+header {
+    background: #333;
+    color: #FFF;
+    padding: 10px 0;
+}
+
+/* Label Styles */
+label {
+    color: #FFF;
+}
+
+/* Navigation Styles */
+nav {
+    display: flex;
+    justify-content: space-around;
+}
+
+/* Heading Styles */
+h1 {
+    text-align: center;
+    margin: 100px;
+    font-size: 40px;
+    color: rgb(212, 212, 214);
+}
+
+/* Link Styles */
+a {
+    text-decoration: none;
+}
+
+/* Pointer Styles */
+.no-pointer {
+    cursor: default;
+}
+
+/* Input Styles */
+input {
+    border: #686868 solid 1px;
+    border-radius: 5px;
+    background: #353535;
+    padding: 10px 180px 10px 10px;
+    margin-bottom: 15px;
+    color: #FFF;
+    font-size: 16px;
+}
+
+/* ==========================================
+   Component Styles
+========================================== */
+
+/* Button Styles */
+button {
+    background: #007bff;
+    color: #fff;
+    padding: 10px;
+    margin: 20px 0 20px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0058b6;
+    transition: background 0.3s ease;
+}
+
+/* Table Styles */
+table {
+    width: 500px;
+    margin: 150px auto;
+    border-collapse: collapse;
+    border: 3px solid #dee2e6;
+    /* text-align: left; */
+    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); */
+    /* overflow-x: auto; */
+    white-space: nowrap;
+    background: #fff;
+}
+
+table th, td {
+        /* padding-left: 10px; */
+        border-bottom: 1px solid #dee2e6;
+        border-right: 1px solid #dee2e6;
+}
+
+table th {
+        /* text-align: center; */
+        background: #98b9f7;
+        color: #fff;
+}
+
+/* table tr:hover {
+    background: #f5f5f5;
+} */
+
+table input {
+    color: #000;
+    border: none;
+    background: #fff;
+    padding: 20px 0 20px 10px;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+}
+
+table input:hover {
+    background: #f5f5f5;
+}
+
+table input:focus {
+    outline: #007bff;
+    background-color: #f5f5f5;
+}
+
+/* ==========================================
+   Utility Classes
+========================================== */
+
+/* Margin Utility */
+.margin-top {
+    margin-top: 20px;
+}
+
+/* Center Utility */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Box Utility */
+.box {
+    background: #cacaca;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 20px;
+}
+
+/* Post-box Utility */
+.post-box {
+    color: #c7c7c7;
+}
+
+.post-box:hover {
+    background-color: #0d002c27;
+}
+
+/* Button-container Utility */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* ==========================================
+   Media Queries
+========================================== */
+
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+}

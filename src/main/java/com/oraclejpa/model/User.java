@@ -1,42 +1,24 @@
 package com.oraclejpa.model;
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import java.sql.Timestamp;
 
 @Entity
+@Getter
+@Setter
+@Table(name = "member")
 public class User {
-    // Entity의 기본 키를 의미
     @Id
-    // 기본 키 생성 전략
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq")
+    @SequenceGenerator(name = "member_seq", sequenceName = "member_seq", allocationSize = 1)
     private Long id;
-    private String name;
+    @Column(name = "user_id")
+    private String userId;
     private String password;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
+    private String email;
+    private String nickname;
+    @Column(name = "created_at")
+    private Timestamp createdAt;
 }
