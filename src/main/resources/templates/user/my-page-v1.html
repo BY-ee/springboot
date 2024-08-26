@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>유저 정보 수정 페이지</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}" href="../../static/css/styles.css">
+    <link rel="stylesheet" th:href="@{/css/styles-v1.css}" href="../../static/css/styles-v1.css">
 
     <style>
         label {
@@ -25,32 +25,36 @@
 </head>
 <body>
     <h1>회원정보</h1>
-    <div class="center">
-        <form th:action="@{/user/update}" th:object="${user}" method="post" onsubmit="showEditUserAlert()">
-            <label for="userId">아이디</label>
-            <input class="no-pointer" type="text" id="userId" th:value="${user.userId}" th:field="*{userId}" style="background: #818181;" readonly />
+    <div class="flex">
+        <div class="flex-column">
+            <form th:action="@{/post/my-post}" method="get">
+                <button class="btn btn-primary" type="submit">내 글</button>
+            </form>
+            <button class="btn btn-primary" type="button">내 댓글</button>
+            <form th:action="@{/withdrawal}" method="get">
+                <button class="btn btn-primary" type="submit">회원탈퇴</button>
+            </form>
+        </div>
 
-            <label for="email">이메일</label>
-            <input type="email" id="email" th:value="${user.email}" th:field="*{email}"
-                placeholder="이메일을 입력해주세요." autofocus />
-        
-            <label for="nickname">닉네임</label>
-            <input type="text" id="nickname" th:value="${user.nickname}" th:field="*{nickname}"
-                placeholder="닉네임을 입력해주세요." />
-        
-            <div class="button-container">
-                <button type="submit">저장</button>
-                <button type="button" onclick="window.location.href='/'">돌아가기</button>
-            </div>
-        </form>
+        <div class="m-0-auto">
+            <form th:action="@{/user/update}" th:object="${user}" method="post" onsubmit="showEditUserAlert()">
+                <label for="userId">아이디</label>
+                <input class="no-pointer" type="text" id="userId" th:value="${user.userId}" th:field="*{userId}" style="background: #818181;" readonly />
 
-        <form th:action="@{/post/my-post}" method="get">
-            <button type="submit">내 글</button>
-        </form>
-        <button type="button">내 댓글</button>
-        <form th:action="@{/withdrawal}" method="get">
-            <button type="submit">회원탈퇴</button>
-        </form>
+                <label for="email">이메일</label>
+                <input type="email" id="email" th:value="${user.email}" th:field="*{email}"
+                    placeholder="이메일을 입력해주세요." autofocus />
+            
+                <label for="nickname">닉네임</label>
+                <input type="text" id="nickname" th:value="${user.nickname}" th:field="*{nickname}"
+                    placeholder="닉네임을 입력해주세요." />
+            
+                <div class="flex-center gap-20">
+                    <button class="btn btn-primary" type="submit">저장</button>
+                    <button class="btn btn-primary" type="button" onclick="window.location.href='/'">돌아가기</button>
+                </div>
+            </form> 
+        </div>
     </div>
 </body>
 </html>
