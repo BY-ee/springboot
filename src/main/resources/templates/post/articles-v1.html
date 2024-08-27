@@ -7,12 +7,6 @@
     <link rel="stylesheet" th:href="@{/css/styles-v1.css}" href="../../static/css/styles-v1.css">
 
     <style>
-        /* Background-image Styles */
-        body {
-            background-image: url(/image/milkyway.jpg);
-            background-size: 1920px 1620px;
-        }
-
         /* Link Styles */
         a {
             color: #bebebe;
@@ -28,14 +22,14 @@
         }
     </style>
 </head>
-<body>
+<body class="bg-image-milkyway">
     <h1>글 목록</h1>
 
-    <div style="display: flex; flex-direction: column; align-items: center;">
+    <div class="flex-col" style="align-items: center;">
         <div th:each="post : ${postPage.content}" style="width: 800px;">
             <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
                 <input type="hidden" th:value="${postPage.number + 1}" name="page" />
-                <div class="post-box" onclick="this.closest('form').submit();">
+                <div id="articles" onclick="this.closest('form').submit();">
                     <div style="cursor: pointer; margin-left: 10px;">
                         <div style="display: flex; gap: 50px; margin-bottom: 5px;">
                             <p th:text="${post.nickname}"></p>
@@ -57,10 +51,10 @@
 
         <div class="button-container">
             <form th:action="@{/post/write}" method="get">
-                <button type="submit">글 작성</button>
+                <button class="btn btn-primary" type="submit">글 작성</button>
             </form>
 
-            <button type="button" onclick="window.location.href='/post'">돌아가기</button>
+            <button class="btn btn-primary" type="button" onclick="window.location.href='/post'">돌아가기</button>
         </div>
     </div>
 </body>
