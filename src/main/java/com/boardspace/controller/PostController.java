@@ -1,8 +1,8 @@
-package com.oraclejpa.controller;
+package com.boardspace.controller;
 
-import com.oraclejpa.model.Post;
-import com.oraclejpa.model.User;
-import com.oraclejpa.service.PostService;
+import com.boardspace.model.Post;
+import com.boardspace.model.User;
+import com.boardspace.service.PostService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
-package com.oraclejpa.controller;
+package com.boardspace.controller;
 
-import com.oraclejpa.model.User;
-import com.oraclejpa.service.UserService;
+import com.boardspace.model.User;
+import com.boardspace.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -55,9 +55,6 @@ public class UserController {
                          @RequestParam String password,
                          @RequestParam String email,
                          @RequestParam String nickname) {
-//        if(userService.existsByUserId(user.getUserId())) {
-//            return "user/duplicate";
-//        }
         User user = new User();
         user.setUserId(userId);
         user.setPassword(password);
@@ -65,6 +62,11 @@ public class UserController {
         user.setNickname(nickname);
         userService.save(user);
         return "redirect:/";
+    }
+
+    @GetMapping("/forgot")
+    public String forgot(Model model) {
+        
     }
 
     @GetMapping("/my-page")
@@ -117,10 +119,6 @@ public class UserController {
         model.addAttribute("password", password);
         return "/user/verify-password";
     }
-
-//    public boolean checkUser(String password) {
-//        return userService.findUserByPassword(password) != null;
-//    }
 
     @PostMapping("/user/verify-password")
     public String verifyPassword(@RequestParam("password") String password,

@@ -1,19 +1,14 @@
-package com.oraclejpa.service;
+package com.boardspace.service;
 
-import com.oraclejpa.model.Post;
-import com.oraclejpa.model.User;
-import com.oraclejpa.repository.PostRepository;
-import com.oraclejpa.repository.UserRepository;
+import com.boardspace.model.User;
+import com.boardspace.repository.PostRepository;
+import com.boardspace.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
