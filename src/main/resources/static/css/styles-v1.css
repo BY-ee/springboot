@@ -11,10 +11,7 @@
 
 /* Body Setting */
 body {
-    background-image: url(../image/flower.jpg);
-    background-size: 1920px 1200px;
-    background-position: center;
-    background-repeat: no-repeat;
+    min-height: 100vh;
     width: 80%;
     margin: 0 10%;
     font-family: 'Arial', sans-serif;
@@ -22,10 +19,29 @@ body {
     font-size: 16px;
 }
 
+/* Background Image Setting */
+.bg-image-flower {
+    background-image: url(../image/flower.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.bg-image-milkyway {
+    background-image: url(../image/milkyway.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 /* ==========================================
    ID Styles
 ========================================== */
 
+/* Post Styles */
+#articles {
+    color: #FFF;
+}
 
 
 
@@ -54,7 +70,7 @@ nav {
 /* Heading Styles */
 h1 {
     text-align: center;
-    margin: 100px;
+    margin: 100px 100px 50px 100px;
     font-size: 40px;
     color: rgb(212, 212, 214);
 }
@@ -432,7 +448,7 @@ table input:focus {
 
 .flex-start {
     display: flex;
-    justify-content: flex-start;
+    justify-content: start;
 }
 
 .flex-center {
@@ -443,7 +459,7 @@ table input:focus {
 
 .flex-end {
     display: flex;
-    justify-content: flex-end;
+    justify-content: end;
 }
 
 .flex-space-between {
@@ -480,38 +496,93 @@ table input:focus {
 }
 
 .btn-secondary {
-    background: #ffc107;
-    color: #333;
+    background: #f66;
+    color: #ffffff;
 }
 
 .btn-secondary:hover {
-    background: #ffc800;
+    background: #f33;
     transition: background 0.3s ease;
 }
 
 /* Pointer Styles */
+.pointer {
+    cursor: pointer;
+}
+
 .no-pointer {
     cursor: default;
 }
 
+/* Post Styles */
+.post-nickname {
+    color: #B9B9B9;
+}
+
+.post-sub {
+    color: #B9B9B9;
+    font-size: 14px;
+    margin-bottom: 40px;
+}
+
+.post-title {
+    color: #FFF;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.post-content {
+    color: #B9B9B9;
+    font-size: 18px;
+    line-height: 2;
+}
+
+.post-preview {
+    color: #C7C7C7
+}
+
+.post-preview:hover {
+    background: #ff00aa27;
+    transition: 0.3s ease;
+}
+
+.post-box {
+    border-top: #E7E7E7 solid 1px;
+    width: 1000px;
+    height: 500px;
+    color: #FFF;
+    margin: 0 auto;
+    padding: 40px 20px;
+    overflow: auto;
+    word-wrap: break-word;
+}
 
 /* Box Utility */
-.box {
-    background: #cacaca;
-    width: 100%;
+.box-left {
+    background: #CACACA;
+    width: 400px;
     display: flex;
     align-items: center;
     padding: 15px;
+    margin: 100px 0 30px 200px;
     border-radius: 20px;
 }
 
-/* Post-box Utility */
-.post-box {
-    color: #c7c7c7;
+.box-right {
+    background: #CACACA;
+    width: 400px;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin: 100px 200px 30px 0;
+    border-radius: 20px;
 }
 
-.post-box:hover {
-    background-color: #0d002c27;
+.box-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 20px;
 }
 
 /* Button-container Utility */
