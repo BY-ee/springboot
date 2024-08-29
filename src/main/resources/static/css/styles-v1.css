@@ -59,6 +59,10 @@ header {
 /* Label Styles */
 label {
     color: #FFF;
+    display: flex;
+    font-size: 14px;
+    margin-left: 3px;
+    margin-bottom: 3px;
 }
 
 /* Navigation Styles */
@@ -70,9 +74,9 @@ nav {
 /* Heading Styles */
 h1 {
     text-align: center;
-    margin: 100px 100px 50px 100px;
+    margin-top: 100px;
     font-size: 40px;
-    color: rgb(212, 212, 214);
+    color: #D4D4D4;
 }
 
 /* Link Styles */
@@ -80,15 +84,26 @@ a {
     text-decoration: none;
 }
 
+/* Paragraph Styles */
+p {
+    color: #B9B9B9;
+    text-align: center;
+    font-size: 14px;
+}
+
 /* Input Styles */
 input {
     border: #686868 solid 1px;
     border-radius: 5px;
     background: #353535;
-    padding: 10px 180px 10px 10px;
+    padding: 10px;
     margin-bottom: 15px;
     color: #FFF;
-    font-size: 16px;
+    font-size: 14px;
+}
+
+input::placeholder {
+    font-size: 14px;
 }
 
 /* Table Styles */
@@ -411,6 +426,44 @@ table input:focus {
     gap: 20px;
 }
 
+/* Input Styles */
+
+.input-width-15p {
+    width: 15%;
+}
+
+.input-width-25p {
+    width: 25%;
+}
+
+.input-width-50p {
+    width: 50%;
+}
+
+.input-width-100p {
+    width: 100%;
+}
+
+.input-width-100 {
+    width: 100px;
+}
+
+.input-width-200 {
+    width: 200px;
+}
+
+.input-width-300 {
+    width: 300px;
+}
+
+.input-width-400 {
+    width: 400px;
+}
+
+.input-width-500 {
+    width: 500px;
+}
+
 /* Flex Styles */
 .flex {
     display: flex;
@@ -472,6 +525,31 @@ table input:focus {
     justify-content: space-around;
 }
 
+.align-start {
+    align-items: flex-start;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.align-end {
+    align-items: flex-end;
+}
+
+.align-self-start {
+    align-self: flex-start;
+}
+
+.align-self-center {
+    align-self: center;
+}
+
+.align-self-end {
+    align-self: flex-end;
+}
+
+
 /* ========================= */
 /*        Style Class        */
 /* ========================= */
@@ -503,6 +581,26 @@ table input:focus {
 .btn-secondary:hover {
     background: #f33;
     transition: background 0.3s ease;
+}
+
+.btn-selected {
+    background: #2f00ff;
+    color: #ffffff;
+    cursor: default;
+    padding: 10px 20px;
+    margin-top: 50px;
+}
+
+.btn-unselected {
+    background: #7fbdff;
+    color: #ffffff;
+    padding: 10px 20px;
+    margin-top: 50px;
+}
+
+.btn-unselected:hover {
+    background: #4ba2ff;
+    color: #ffffff;
 }
 
 /* Pointer Styles */

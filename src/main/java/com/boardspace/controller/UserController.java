@@ -65,8 +65,8 @@ public class UserController {
     }
 
     @GetMapping("/forgot")
-    public String forgot(Model model) {
-        
+    public String forgot() {
+        return "user/forgot-id";
     }
 
     @GetMapping("/my-page")
