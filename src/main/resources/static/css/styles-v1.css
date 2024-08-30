@@ -200,6 +200,30 @@ table input:focus {
     margin-top: 20px;
 }
 
+.mt-5p{
+    margin-top: 5%;
+}
+
+.mt-10p {
+    margin-top: 10%;
+}
+
+.mt-20p {
+    margin-top: 20%;
+}
+
+.mt-30p {
+    margin-top: 30%;
+}
+
+.mt-40p {
+    margin-top: 40%;
+}
+
+.mt-50p {
+    margin-top: 50%;
+}
+
 .mb-5 {
     margin-bottom: 5px;
 }
