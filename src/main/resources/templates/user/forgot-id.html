@@ -4,28 +4,34 @@
         <meta charset="UTF-8">
         <title>아이디 찾기 페이지</title>
 
+        <style>
+            body {
+                overflow: hidden;
+            }
+        </style>
+
         <link rel="stylesheet" th:href="@{/css/styles-v1.css}" href="../../static/css/styles-v1.css">
     </head>
     <body class="bg-image-flower">
-        <h1>아이디 찾기</h1>
-        <p>회원가입 시 입력하신 이메일을 입력해주세요.</p>
-        <p>메일을 통해 이메일 확인이 완료될 시 아이디를 보내드립니다.</p>
-        <p>메일이 도착하지 않는다면 스팸 메일함을 확인해주세요.</p>
-
-        <div class="button-container">
+        <div class="button-container mt-5p">
             <button class="btn btn-selected">아이디 찾기</button>
             <button class="btn btn-unselected" onclick="window.location.href='/forgot-pw'">비밀번호 찾기</button>
         </div>
+        <p class="mt-5p">회원가입 시 입력하신 이메일을 입력해주세요.</p>
+        <p>메일을 통해 이메일 확인이 완료될 시 아이디를 보내드립니다.</p>
+        <p>메일이 도착하지 않는다면 스팸 메일함을 확인해주세요.</p>
 
-        <div class="flex mt-20">
-            <div class="m-0-auto">
-                <label for="email">이메일 주소</label>
-                <input class="input-width-400" type="text" id="email" name="email">        
+        <form th:action="forgot-id" method="post">
+            <div class="flex mt-5p">
+                <div class="m-0-auto">
+                    <label for="email">이메일 주소</label>
+                    <input class="input-width-400" type="text" id="email" name="email">        
+                </div>
             </div>
-        </div>
-        <div class="button-container">
-            <button class="btn btn-primary" onclick="window.location.href='/'">돌아가기</button>
-            <button class="btn btn-primary">이메일 확인</button>
-        </div>
+            <div class="button-container">
+                <button class="btn btn-primary" type="button" onclick="window.location.href='/'">돌아가기</button>
+                <button class="btn btn-primary" type="submit">이메일 확인</button>
+            </div>
+        </form>
     </body>
 </html>

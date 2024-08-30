@@ -64,9 +64,21 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/forgot")
+    @GetMapping("/forgot-id")
     public String forgot() {
         return "user/forgot-id";
+    }
+
+    @GetMapping("/forgot-pw")
+    public String forgotPw() {
+        return "user/forgot-pw";
+    }
+
+    @PostMapping("/forgot-id")
+    public String forgotId(@RequestParam("email") String email, Model model) {
+        String userId = userService.findUserIdByEmail(email);
+        model.addAttribute("userid", userId);
+        return "user/return-id";
     }
 
     @GetMapping("/my-page")
