@@ -67,7 +67,7 @@ public class PostController {
         Post post = postService.findById(id);
         model.addAttribute("post", post);
         model.addAttribute("page", page);
-        return "post/detail";
+        return "post/detail-v1";
     }
 
     @GetMapping("/update/{id}")
