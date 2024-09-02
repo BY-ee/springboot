@@ -65,7 +65,7 @@ public class UserController {
     }
 
     @GetMapping("/forgot-id")
-    public String forgot() {
+    public String forgotId() {
         return "user/forgot-id";
     }
 
@@ -77,15 +77,28 @@ public class UserController {
     }
 
     @GetMapping("/forgot-pw")
-    public String forgotPw() {
+    public String forgotPassword() {
         return "user/forgot-pw";
     }
 
     @PostMapping("/forgot-pw")
-    public String forgotId(@RequestParam("userid") String userId, @RequestParam("email") String email, Model model) {
-        User user = userService.findByUserIdAndEmail(userId, email);
-        model.addAttribute("user", user);
+    public String checkUserPassword(@RequestParam("userid") String userId,
+                           @RequestParam("email") String email,
+                           HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Long id = userService.findIdByUserIdAndEmail(userId, email);
+        session.setAttribute("passwordResetId", id);
+        model.addAttribute("id", id);
         return "user/reset-pw";
+    }
+
+    @PostMapping("/reset-pw")
+    public String resetPassword(@RequestParam("password") String password,
+                          HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        long id = (long) session.getAttribute("passwordResetId");
+        userService.updatePasswordById(password, id);
+        return "redirect:/";
     }
 
     @GetMapping("/my-page")

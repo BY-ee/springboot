@@ -37,8 +37,8 @@ public class UserService {
         return userRepository.findUserIdByEmail(email);
     }
 
-    public User findByUserIdAndEmail(String userId, String email) {
-        return userRepository.findByUserIdAndEmail(userId, email);
+    public Long findIdByUserIdAndEmail(String userId, String email) {
+        return userRepository.findIdByUserIdAndEmail(userId, email);
     }
 
 //    public void updateEmailAndNicknameById(String userId, String email, String nickname) {
@@ -51,6 +51,11 @@ public class UserService {
         userRepository.updateEmailAndNicknameByCurrentNickname(currentNickname, email, nickname);
         postRepository.updateNicknameByCurrentNickname(currentNickname, nickname);
         postRepository.addConstraint();
+    }
+
+    @Transactional
+    public void updatePasswordById(String password, long id) {
+        userRepository.updatePasswordById(password, id);
     }
 
     public User findUserByPassword(String password) {
