@@ -4,6 +4,9 @@ import com.boardspace.model.User;
 import com.boardspace.repository.PostRepository;
 import com.boardspace.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +16,7 @@ import java.time.LocalDateTime;
 @Service
 @RequiredArgsConstructor
 public class UserService {
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
     private final PostRepository postRepository;
 
@@ -41,16 +45,15 @@ public class UserService {
         return userRepository.findIdByUserIdAndEmail(userId, email);
     }
 
-//    public void updateEmailAndNicknameById(String userId, String email, String nickname) {
-//        userRepository.updateEmailAndNicknameByUserId(userId, email, nickname);
-//    }
-
     @Transactional
     public void updateNicknameForUniqueKeyAndForeignKey(String currentNickname, String email, String nickname) {
-        postRepository.dropConstraint();
-        userRepository.updateEmailAndNicknameByCurrentNickname(currentNickname, email, nickname);
-        postRepository.updateNicknameByCurrentNickname(currentNickname, nickname);
-        postRepository.addConstraint();
+        try {
+            userRepository.updateEmailAndNicknameByCurrentNickname(currentNickname, email, nickname);
+            postRepository.updateNicknameByCurrentNickname(currentNickname, nickname);
+            postRepository.addConstraint();
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+        }
     }
 
     @Transactional
