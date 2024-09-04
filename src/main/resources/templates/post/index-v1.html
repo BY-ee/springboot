@@ -44,56 +44,57 @@
         </script>
     </div>
 
-    <div class="flex-space-around">
-        <div class="flex-col" style="align-items: start;">
-            <div class="box-left">
-                <p class="box-title">Q&A</p>
-            </div>
+    <div class="flex mt-10p">
+        <div class="flex-col">
+            <div class="div-width-100p">
+                <div class="board-title-box div-width-100p">
+                    <p class="board-title-font">Q&A</p>
+                </div>
 
-            <div th:each="post : ${postPage.content}" style="width: 400px; margin: 0 20px 0 200px;">
-                <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
-                    <input type="hidden" th:value="${postPage.number + 1}" name="page" />
-                    <div class="post-preview" onclick="this.closest('form').submit();">
-                        <div class="pointer ml-10">
-                            <div class="flex mb-5" style="gap: 50px;">
+                <div class="div-width-100p" th:each="post : ${postPage.content}">
+                    <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
+                        <input type="hidden" th:value="${postPage.number + 1}" name="page" />
+                        <div class="post-preview" onclick="this.closest('form').submit();">
+                            <div class="pointer m-15">
                                 <p th:text="${post.nickname}"></p>
+                                <p th:text="${post.title}"></p>
                             </div>
-                            <p th:text="${post.title}"></p>
                         </div>
-                    </div>
-                    <hr class="my-15">
-                </form>
+                        <hr>
+                    </form>
+                </div>
             </div>
 
             <form th:action="@{/post/articles}" method="get">
                 <input type="hidden" th:value="${postPage.number + 1}" name="page" />
-                <p onclick="this.closest('form').submit()" style="margin-left: 210px; color: #FFF; cursor: pointer;">전체 글 보기</p>
+                <p class="pointer pl-10 pt-10" onclick="this.closest('form').submit()">전체 글 보기</p>
             </form>
         </div>
 
-        <div class="flex-col" style="align-items: end;">
-            <div class="box-right">
-                <p class="box-title">커뮤니티</p>
-            </div>
+        <div class="flex-col">
+            <div class="div-width-100p">
+                <div class="board-title-box div-width-100p">
+                    <p class="board-title-font">커뮤니티</p>
+                </div>
 
-            <div th:each="post : ${postPage.content}" style="width: 400px; margin: 0 200px 0 20px;">
-                <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
-                    <input type="hidden" th:value="${postPage.number + 1}" name="page" />
-                    <div class="post-preview" onclick="this.closest('form').submit();">
-                        <div class="pointer ml-10">
-                            <div class="flex mb-5" style="gap: 50px;">
+                <div class="div-width-100p" th:each="post : ${postPage.content}">
+                    <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
+                        <input type="hidden" th:value="${postPage.number + 1}" name="page" />
+                        <div class="post-preview" onclick="this.closest('form').submit();">
+                            <div class="pointer m-15">
                                 <p th:text="${post.nickname}"></p>
+                                <p th:text="${post.title}"></p>
                             </div>
-                            <p th:text="${post.title}"></p>
                         </div>
-                    </div>
-                    <hr class="my-15">
-                </form>
+                        <hr>
+                    </form>
+                </div>
             </div>
 
-            <form th:action="@{/post/articles}" method="get">
-                <p onclick="this.closest('form').submit()" style="margin-right: 500px; color: #FFF; cursor: pointer;">전체 글 보기</p>
-            </form>
+            <!-- <form th:action="@{/post/articles}" method="get"> -->
+                <span class="pointer ml-10 mt-10" onclick="window.location.href='/post/articles'"
+                    style="font-size: 14px; color: #B9B9B9; display: inline;">전체 글 보기</span>
+            <!-- </form> -->
         </div>
     </div>
 </body>

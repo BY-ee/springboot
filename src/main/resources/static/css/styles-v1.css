@@ -87,7 +87,6 @@ a {
 /* Paragraph Styles */
 p {
     color: #B9B9B9;
-    text-align: center;
     font-size: 14px;
 }
 
@@ -468,6 +467,10 @@ table input:focus {
     width: 75%;
 }
 
+.div-width-100p {
+    width: 100%;
+}
+
 .div-width-100 {
     width: 100px;
 }
@@ -647,6 +650,35 @@ table input:focus {
     align-self: flex-end;
 }
 
+/* Text Styles */
+
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-lowercase {
+    text-transform: lowercase;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
 
 /* ========================= */
 /*        Style Class        */
@@ -672,7 +704,7 @@ table input:focus {
 }
 
 .btn-primary-disabled {
-    background: #F6F6F6;
+    background: #f5f5f5;
     color: #B3B3B3;
     cursor: default;
 }
@@ -685,6 +717,12 @@ table input:focus {
 .btn-secondary:hover {
     background: #f33;
     transition: background 0.3s ease;
+}
+
+.btn-secondary-disabled {
+    background: #FCC;
+    color: #B3B3B3;
+    cursor: default;
 }
 
 .btn-selected {
@@ -760,31 +798,19 @@ table input:focus {
     word-wrap: break-word;
 }
 
-/* Box Utility */
-.box-left {
+/* Board Utility */
+.board-title-box {
     background: #CACACA;
-    width: 400px;
     display: flex;
-    align-items: center;
     padding: 15px;
-    margin: 100px 0 30px 200px;
     border-radius: 20px;
 }
 
-.box-right {
-    background: #CACACA;
-    width: 400px;
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    margin: 100px 200px 30px 0;
-    border-radius: 20px;
-}
-
-.box-title {
+.board-title-font {
     font-size: 24px;
     font-weight: bold;
     margin-left: 20px;
+    color: #222;
 }
 
 /* Button-container Utility */
