@@ -671,6 +671,12 @@ table input:focus {
     transition: background 0.3s ease;
 }
 
+.btn-primary-disabled {
+    background: #F6F6F6;
+    color: #B3B3B3;
+    cursor: default;
+}
+
 .btn-secondary {
     background: #f66;
     color: #ffffff;
