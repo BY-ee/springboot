@@ -85,6 +85,7 @@ a {
 }
 
 a:hover {
+    color: #FFF;
     text-decoration: underline;
 }
 
@@ -223,6 +224,38 @@ table input:focus {
     margin-top: 50%;
 }
 
+.mt-5vh {
+    margin-top: 5vh;
+}
+
+.mt-10vh {
+    margin-top: 10vh;
+}
+
+.mt-15vh {
+    margin-top: 15vh;
+}
+
+.mt-20vh {
+    margin-top: 20vh;
+}
+
+.mt-25vh {
+    margin-top: 25vh;
+}
+
+.mt-30vh {
+    margin-top: 30vh;
+}
+
+.mt-40vh {
+    margin-top: 40vh;
+}
+
+.mt-50vh {
+    margin-top: 50vh;
+}
+
 .mb-0 {
     margin-bottom: 0;
 }
@@ -265,6 +298,38 @@ table input:focus {
 
 .mb-50p {
     margin-bottom: 50%;
+}
+
+.mb-5vh {
+    margin-bottom: 5vh;
+}
+
+.mb-10vh {
+    margin-bottom: 10vh;
+}
+
+.mb-15vh {
+    margin-bottom: 15vh;
+}
+
+.mb-20vh {
+    margin-bottom: 20vh;
+}
+
+.mb-25vh {
+    margin-bottom: 25vh;
+}
+
+.mb-30vh {
+    margin-bottom: 30vh;
+}
+
+.mb-40vh {
+    margin-bottom: 40vh;
+}
+
+.mb-50vh {
+    margin-bottom: 50vh;
 }
 
 .ml-0 {
@@ -311,6 +376,38 @@ table input:focus {
     margin-left: 50%;
 }
 
+.ml-5vh {
+    margin-left: 5vh;
+}
+
+.ml-10vh {
+    margin-left: 10vh;
+}
+
+.ml-15vh {
+    margin-left: 15vh;
+}
+
+.ml-20vh {
+    margin-left: 20vh;
+}
+
+.ml-25vh {
+    margin-left: 25vh;
+}
+
+.ml-30vh {
+    margin-left: 30vh;
+}
+
+.ml-40vh {
+    margin-left: 40vh;
+}
+
+.ml-50vh {
+    margin-left: 50vh;
+}
+
 .mr-0 {
     margin-right: 0;
 }
@@ -353,6 +450,38 @@ table input:focus {
 
 .mr-50p {
     margin-right: 50%;
+}
+
+.mr-5vh {
+    margin-right: 5vh;
+}
+
+.mr-10vh {
+    margin-right: 10vh;
+}
+
+.mr-15vh {
+    margin-right: 15vh;
+}
+
+.mr-20vh {
+    margin-right: 20vh;
+}
+
+.mr-25vh {
+    margin-right: 25vh;
+}
+
+.mr-30vh {
+    margin-right: 30vh;
+}
+
+.mr-40vh {
+    margin-right: 40vh;
+}
+
+.mr-50vh {
+    margin-right: 50vh;
 }
 
 .mx-0 {
@@ -410,6 +539,46 @@ table input:focus {
     margin-right: 50%;
 }
 
+.mx-5vh {
+    margin-left: 5vh;
+    margin-right: 5vh;
+}
+
+.mx-10vh {
+    margin-left: 10vh;
+    margin-right: 10vh;
+}
+
+.mx-15vh {
+    margin-left: 15vh;
+    margin-right: 15vh;
+}
+
+.mx-20vh {
+    margin-left: 20vh;
+    margin-right: 20vh;
+}
+
+.mx-25vh {
+    margin-left: 25vh;
+    margin-right: 25vh;
+}
+
+.mx-30vh {
+    margin-left: 30vh;
+    margin-right: 30vh;
+}
+
+.mx-40vh {
+    margin-left: 40vh;
+    margin-right: 40vh;
+}
+
+.mx-50vh {
+    margin-left: 50vh;
+    margin-right: 50vh;
+}
+
 .my-0 {
     margin-top: 0;
     margin-bottom: 0;
@@ -463,6 +632,46 @@ table input:focus {
 .my-50p {
     margin-top: 50%;
     margin-bottom: 50%;
+}
+
+.my-5vh {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+.my-10vh {
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+}
+
+.my-15vh {
+    margin-top: 15vh;
+    margin-bottom: 15vh;
+}
+
+.my-20vh {
+    margin-top: 20vh;
+    margin-bottom: 20vh;
+}
+
+.my-25vh {
+    margin-top: 25vh;
+    margin-bottom: 25vh;
+}
+
+.my-30vh {
+    margin-top: 30vh;
+    margin-bottom: 30vh;
+}
+
+.my-40vh {
+    margin-top: 40vh;
+    margin-bottom: 40vh;
+}
+
+.my-50vh {
+    margin-top: 50vh;
+    margin-bottom: 50vh;
 }
 
 /* Padding Layout */
@@ -930,6 +1139,7 @@ table input:focus {
 /* Post Styles */
 .post-nickname {
     color: #B9B9B9;
+    font-size: 18px;
 }
 
 .post-sub {
@@ -939,7 +1149,7 @@ table input:focus {
 
 .post-title {
     color: #FFF;
-    font-size: 24px;
+    font-size: 36px;
     font-weight: bold;
     margin-bottom: 30px;
 }
@@ -950,12 +1160,12 @@ table input:focus {
     line-height: 2;
 }
 
-.post-preview {
+.post-list {
     color: #C7C7C7;
     cursor: pointer;
 }
 
-.post-preview:hover {
+.post-list:hover {
     background: #ff00aa27;
     transition: 0.3s ease;
 }
@@ -984,6 +1194,34 @@ table input:focus {
     font-weight: bold;
     margin-left: 20px;
     color: #222;
+}
+
+.active-page {
+    color: #98B9F7;
+    padding: 5px;
+    margin: 10px;
+}
+
+.inactive-page {
+    color: aliceblue;
+    padding: 5px;
+    margin: 10px;
+}
+
+.page-line {
+    position: relative;
+    display: inline-block;
+}
+
+.page-line .active-page::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -10px;
+    height: 3px;
+    background-color: #98B9F7;
+    z-index: -1;
 }
 
 /* Button-container Utility */
