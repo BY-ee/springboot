@@ -17,6 +17,7 @@ body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
     font-size: 14px;
+    overflow-y: auto;
 }
 
 /* Background Image Setting */
@@ -208,8 +209,16 @@ table input:focus {
     margin-top: 10%;
 }
 
+.mt-15p {
+    margin-top: 15%;
+}
+
 .mt-20p {
     margin-top: 20%;
+}
+
+.mt-25p {
+    margin-top: 25%;
 }
 
 .mt-30p {
@@ -284,8 +293,16 @@ table input:focus {
     margin-bottom: 10%;
 }
 
+.mb-15p {
+    margin-bottom: 15%;
+}
+
 .mb-20p {
     margin-bottom: 20%;
+}
+
+.mb-25p {
+    margin-bottom: 25%;
 }
 
 .mb-30p {
@@ -360,8 +377,16 @@ table input:focus {
     margin-left: 10%;
 }
 
+.ml-15p {
+    margin-left: 15%;
+}
+
 .ml-20p {
     margin-left: 20%;
+}
+
+.ml-25p {
+    margin-left: 25%;
 }
 
 .ml-30p {
@@ -436,8 +461,16 @@ table input:focus {
     margin-right: 10%;
 }
 
+.mr-15p {
+    margin-right: 15%;
+}
+
 .mr-20p {
     margin-right: 20%;
+}
+
+.mr-25p {
+    margin-right: 25%;
 }
 
 .mr-30p {
@@ -519,9 +552,19 @@ table input:focus {
     margin-right: 10%;
 }
 
+.mx-15p {
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
 .mx-20p {
     margin-left: 20%;
     margin-right: 20%;
+}
+
+.mx-25p {
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
 .mx-30p {
@@ -614,9 +657,19 @@ table input:focus {
     margin-bottom: 10%;
 }
 
+.my-15p {
+    margin-top: 15%;
+    margin-bottom: 15%;
+}
+
 .my-20p {
     margin-top: 20%;
     margin-bottom: 20%;
+}
+
+.my-25p {
+    margin-top: 25%;
+    margin-bottom: 25%;
 }
 
 .my-30p {
@@ -707,6 +760,70 @@ table input:focus {
     padding-top: 20px;
 }
 
+.pt-5p {
+    padding-top: 5%;
+}
+
+.pt-10p {
+    padding-top: 10%;
+}
+
+.pt-15p {
+    padding-top: 15%;
+}
+
+.pt-20p {
+    padding-top: 20%;
+}
+
+.pt-25p {
+    padding-top: 25%;
+}
+
+.pt-30p {
+    padding-top: 30%;
+}
+
+.pt-40p {
+    padding-top: 40%;
+}
+
+.pt-50p {
+    padding-top: 50%;
+}
+
+.pt-5vh {
+    padding-top: 5vh;
+}
+
+.pt-10vh {
+    padding-top: 10vh;
+}
+
+.pt-15vh {
+    padding-top: 15vh;
+}
+
+.pt-20vh {
+    padding-top: 20vh;
+}
+
+.pt-25vh {
+    padding-top: 25vh;
+}
+
+.pt-30vh {
+    padding-top: 30vh;
+}
+
+.pt-40vh {
+    padding-top: 40vh;
+}
+
+.pt-50vh {
+    padding-top: 50vh;
+}
+
 .pb-5 {
     padding-bottom: 5px;
 }
@@ -721,6 +838,70 @@ table input:focus {
 
 .pb-20 {
     padding-bottom: 20px;
+}
+
+.pb-5p {
+    padding-bottom: 5%;
+}
+
+.pb-10p {
+    padding-bottom: 10%;
+}
+
+.pb-15p {
+    padding-bottom: 15%;
+}
+
+.pb-20p {
+    padding-bottom: 20%;
+}
+
+.pb-25p {
+    padding-bottom: 25%;
+}
+
+.pb-30p {
+    padding-bottom: 30%;
+}
+
+.pb-40p {
+    padding-bottom: 40%;
+}
+
+.pb-50p {
+    padding-bottom: 50%;
+}
+
+.pb-5vh {
+    padding-bottom: 5vh;
+}
+
+.pb-10vh {
+    padding-bottom: 10vh;
+}
+
+.pb-15vh {
+    padding-bottom: 15vh;
+}
+
+.pb-20vh {
+    padding-bottom: 20vh;
+}
+
+.pb-25vh {
+    padding-bottom: 25vh;
+}
+
+.pb-30vh {
+    padding-bottom: 30vh;
+}
+
+.pb-40vh {
+    padding-bottom: 40vh;
+}
+
+.pb-50vh {
+    padding-bottom: 50vh;
 }
 
 .pl-5 {
@@ -739,6 +920,70 @@ table input:focus {
     padding-left: 20px;
 }
 
+.pl-5p {
+    padding-left: 5%;
+}
+
+.pl-10p {
+    padding-left: 10%;
+}
+
+.pl-15p {
+    padding-left: 15%;
+}
+
+.pl-20p {
+    padding-left: 20%;
+}
+
+.pl-25p {
+    padding-left: 25%;
+}
+
+.pl-30p {
+    padding-left: 30%;
+}
+
+.pl-40p {
+    padding-left: 40%;
+}
+
+.pl-50p {
+    padding-left: 50%;
+}
+
+.pl-5vh {
+    padding-left: 5vh;
+}
+
+.pl-10vh {
+    padding-left: 10vh;
+}
+
+.pl-15vh {
+    padding-left: 15vh;
+}
+
+.pl-20vh {
+    padding-left: 20vh;
+}
+
+.pl-25vh {
+    padding-left: 25vh;
+}
+
+.pl-30vh {
+    padding-left: 30vh;
+}
+
+.pl-40vh {
+    padding-left: 40vh;
+}
+
+.pl-50vh {
+    padding-left: 50vh;
+}
+
 .pr-5 {
     padding-right: 5px;
 }
@@ -753,6 +998,70 @@ table input:focus {
 
 .pr-20 {
     padding-right: 20px;
+}
+
+.pr-5p {
+    padding-right: 5%;
+}
+
+.pr-10p {
+    padding-right: 10%;
+}
+
+.pr-15p {
+    padding-right: 15%;
+}
+
+.pr-20p {
+    padding-right: 20%;
+}
+
+.pr-25p {
+    padding-right: 25%;
+}
+
+.pr-30p {
+    padding-right: 30%;
+}
+
+.pr-40p {
+    padding-right: 40%;
+}
+
+.pr-50p {
+    padding-right: 50%;
+}
+
+.pr-5vh {
+    padding-right: 5vh;
+}
+
+.pr-10vh {
+    padding-right: 10vh;
+}
+
+.pr-15vh {
+    padding-right: 15vh;
+}
+
+.pr-20vh {
+    padding-right: 20vh;
+}
+
+.pr-25vh {
+    padding-right: 25vh;
+}
+
+.pr-30vh {
+    padding-right: 30vh;
+}
+
+.pr-40vh {
+    padding-right: 40vh;
+}
+
+.pr-50vh {
+    padding-right: 50vh;
 }
 
 .px-5 {
@@ -775,6 +1084,86 @@ table input:focus {
     padding-right: 20px;
 }
 
+.px-5p {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.px-10p {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.px-15p {
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.px-20p {
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.px-25p {
+    padding-left: 25%;
+    padding-right: 25%;
+}
+
+.px-30p {
+    padding-left: 30%;
+    padding-right: 30%;
+}
+
+.px-40p {
+    padding-left: 40%;
+    padding-right: 40%;
+}
+
+.px-50p {
+    padding-left: 50%;
+    padding-right: 50%;
+}
+
+.px-5vh {
+    padding-left: 5vh;
+    padding-right: 5vh;
+}
+
+.px-10vh {
+    padding-left: 10vh;
+    padding-right: 10vh;
+}
+
+.px-15vh {
+    padding-left: 15vh;
+    padding-right: 15vh;
+}
+
+.px-20vh {
+    padding-left: 20vh;
+    padding-right: 20vh;
+}
+
+.px-25vh {
+    padding-left: 25vh;
+    padding-right: 25vh;
+}
+
+.px-30vh {
+    padding-left: 30vh;
+    padding-right: 30vh;
+}
+
+.px-40vh {
+    padding-left: 40vh;
+    padding-right: 40vh;
+}
+
+.px-50vh {
+    padding-left: 50vh;
+    padding-right: 50vh;
+}
+
 .py-5 {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -793,6 +1182,86 @@ table input:focus {
 .py-20 {
     padding-top: 20px;
     padding-bottom: 20px;
+}
+
+.py-5p {
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.py-10p {
+    padding-top: 10%;
+    padding-bottom: 10%;
+}
+
+.py-15p {
+    padding-top: 15%;
+    padding-bottom: 15%;
+}
+
+.py-20p {
+    padding-top: 20%;
+    padding-bottom: 20%;
+}
+
+.py-25p {
+    padding-top: 25%;
+    padding-bottom: 25%;
+}
+
+.py-30p {
+    padding-top: 30%;
+    padding-bottom: 30%;
+}
+
+.py-40p {
+    padding-top: 40%;
+    padding-bottom: 40%;
+}
+
+.py-50p {
+    padding-top: 50%;
+    padding-bottom: 50%;
+}
+
+.py-5vh {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+.py-10vh {
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+}
+
+.py-15vh {
+    padding-top: 15vh;
+    padding-bottom: 15vh;
+}
+
+.py-20vh {
+    padding-top: 20vh;
+    padding-bottom: 20vh;
+}
+
+.py-25vh {
+    padding-top: 25vh;
+    padding-bottom: 25vh;
+}
+
+.py-30vh {
+    padding-top: 30vh;
+    padding-bottom: 30vh;
+}
+
+.py-40vh {
+    padding-top: 40vh;
+    padding-bottom: 40vh;
+}
+
+.py-50vh {
+    padding-top: 50vh;
+    padding-bottom: 50vh;
 }
 
 /* Gap Styles */
@@ -1171,14 +1640,36 @@ table input:focus {
 }
 
 .post-box {
-    border-top: #E7E7E7 solid 1px;
-    width: 1000px;
-    height: 500px;
+    width: 50%;
     color: #FFF;
     margin: 0 auto;
     padding: 40px 20px;
     overflow: auto;
     word-wrap: break-word;
+}
+
+.line-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.line-left {
+    flex: 0.1;
+    height: 1px;
+    background-color: #FFF;
+}
+
+.line-right {
+    flex: 0.4;
+    height: 1px;
+    background-color: #FFF;
+}
+
+.line-text {
+    padding: 0 10px;
+    color: #FFF;
 }
 
 /* Board Utility */
