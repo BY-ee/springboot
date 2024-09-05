@@ -48,7 +48,7 @@
     <div class="flex mt-10vh">
         <div>
             <div class="div-width-75p m-0-auto">
-                <div class="board-title-box div-width-100p mb-20">
+                <div class="board-title-box div-width-100p mb-40">
                     <p class="board-title-font">Q&A</p>
                 </div>
 
@@ -65,15 +65,13 @@
                     </form>
                 </div>
                 
-                <a class="m-10 pointer" th:href="@{/post/articles(page=${postPage.number + 1})}">전체 글 보기</a>
+                <a class="inline-block m-5 p-5 pointer" th:href="@{/post/articles(page=${postPage.number + 1})}">전체 글 보기</a>
             </div>
-
-            
         </div>
 
         <div>
             <div class="div-width-75p m-0-auto">
-                <div class="board-title-box div-width-100p mb-20">
+                <div class="board-title-box div-width-100p mb-40">
                     <p class="board-title-font">커뮤니티</p>
                 </div>
 
@@ -90,7 +88,7 @@
                     </form>
                 </div>
 
-                <a class="m-10 pointer" th:href="@{/post/articles(page=${postPage.number + 1})}">전체 글 보기</a>
+                <a class="inline-block m-5 p-5 pointer" th:href="@{/post/articles(page=${postPage.number + 1})}">전체 글 보기</a>
             </div>
         </div>
     </div>
