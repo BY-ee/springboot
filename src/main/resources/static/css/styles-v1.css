@@ -16,7 +16,7 @@ body {
     margin: 0 10%;
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 /* Background Image Setting */
@@ -60,7 +60,6 @@ header {
 label {
     color: #FFF;
     display: flex;
-    font-size: 14px;
     margin-left: 3px;
     margin-bottom: 3px;
 }
@@ -82,12 +81,16 @@ h1 {
 /* Link Styles */
 a {
     text-decoration: none;
+    color: #C7C7C7;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 /* Paragraph Styles */
 p {
     color: #B9B9B9;
-    font-size: 14px;
 }
 
 /* Input Styles */
@@ -98,11 +101,6 @@ input {
     padding: 10px;
     margin-bottom: 15px;
     color: #FFF;
-    font-size: 14px;
-}
-
-input::placeholder {
-    font-size: 14px;
 }
 
 /* Table Styles */
@@ -111,23 +109,18 @@ table {
     margin: 150px auto;
     border-collapse: collapse;
     border: 3px solid #dee2e6;
-    /* text-align: left; */
-    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); */
-    /* overflow-x: auto; */
     white-space: nowrap;
     background: #fff;
 }
 
 table th, td {
-        /* padding-left: 10px; */
-        border-bottom: 1px solid #dee2e6;
-        border-right: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
 }
 
 table th {
-        /* text-align: center; */
-        background: #98b9f7;
-        color: #fff;
+    background: #98b9f7;
+    color: #fff;
 }
 
 table input {
@@ -138,7 +131,6 @@ table input {
     margin: 0;
     width: 100%;
     height: 100%;
-    font-size: 14px;
 }
 
 table input:hover {
@@ -159,6 +151,10 @@ table input:focus {
 /* ========================= */
 
 /* Margin Layout */
+.m-0 {
+    margin: 0;
+}
+
 .m-5 {
     margin: 5px;
 }
@@ -183,6 +179,10 @@ table input:focus {
     margin: auto 0;
 }
 
+.mt-0 {
+    margin-top: 0;
+}
+
 .mt-5 {
     margin-top: 5px;
 }
@@ -199,7 +199,7 @@ table input:focus {
     margin-top: 20px;
 }
 
-.mt-5p{
+.mt-5p {
     margin-top: 5%;
 }
 
@@ -223,6 +223,10 @@ table input:focus {
     margin-top: 50%;
 }
 
+.mb-0 {
+    margin-bottom: 0;
+}
+
 .mb-5 {
     margin-bottom: 5px;
 }
@@ -237,6 +241,34 @@ table input:focus {
 
 .mb-20 {
     margin-bottom: 20px;
+}
+
+.mb-5p {
+    margin-bottom: 5%;
+}
+
+.mb-10p {
+    margin-bottom: 10%;
+}
+
+.mb-20p {
+    margin-bottom: 20%;
+}
+
+.mb-30p {
+    margin-bottom: 30%;
+}
+
+.mb-40p {
+    margin-bottom: 40%;
+}
+
+.mb-50p {
+    margin-bottom: 50%;
+}
+
+.ml-0 {
+    margin-left: 0;
 }
 
 .ml-5 {
@@ -255,6 +287,34 @@ table input:focus {
     margin-left: 20px;
 }
 
+.ml-5p {
+    margin-left: 5%;
+}
+
+.ml-10p {
+    margin-left: 10%;
+}
+
+.ml-20p {
+    margin-left: 20%;
+}
+
+.ml-30p {
+    margin-left: 30%;
+}
+
+.ml-40p {
+    margin-left: 40%;
+}
+
+.ml-50p {
+    margin-left: 50%;
+}
+
+.mr-0 {
+    margin-right: 0;
+}
+
 .mr-5 {
     margin-right: 5px;
 }
@@ -269,6 +329,35 @@ table input:focus {
 
 .mr-20 {
     margin-right: 20px;
+}
+
+.mr-5p {
+    margin-right: 5%;
+}
+
+.mr-10p {
+    margin-right: 10%;
+}
+
+.mr-20p {
+    margin-right: 20%;
+}
+
+.mr-30p {
+    margin-right: 30%;
+}
+
+.mr-40p {
+    margin-right: 40%;
+}
+
+.mr-50p {
+    margin-right: 50%;
+}
+
+.mx-0 {
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .mx-5 {
@@ -291,6 +380,41 @@ table input:focus {
     margin-right: 20px;
 }
 
+.mx-5p {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.mx-10p {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.mx-20p {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.mx-30p {
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.mx-40p {
+    margin-left: 40%;
+    margin-right: 40%;
+}
+
+.mx-50p {
+    margin-left: 50%;
+    margin-right: 50%;
+}
+
+.my-0 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .my-5 {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -309,6 +433,36 @@ table input:focus {
 .my-20 {
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.my-5p {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.my-10p {
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.my-20p {
+    margin-top: 20%;
+    margin-bottom: 20%;
+}
+
+.my-30p {
+    margin-top: 30%;
+    margin-bottom: 30%;
+}
+
+.my-40p {
+    margin-top: 40%;
+    margin-bottom: 40%;
+}
+
+.my-50p {
+    margin-top: 50%;
+    margin-bottom: 50%;
 }
 
 /* Padding Layout */
@@ -608,7 +762,6 @@ table input:focus {
 .flex-center {
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .flex-end {
@@ -678,6 +831,26 @@ table input:focus {
 
 .text-capitalize {
     text-transform: capitalize;
+}
+
+.font-size-12 {
+    font-size: 12px;
+}
+
+.font-size-14 {
+    font-size: 14px;
+}
+
+.font-size-16 {
+    font-size: 16px;
+}
+
+.font-size-18 {
+    font-size: 18px;
+}
+
+.font-bold {
+    font-weight: bold;
 }
 
 /* ========================= */
@@ -761,7 +934,6 @@ table input:focus {
 
 .post-sub {
     color: #B9B9B9;
-    font-size: 14px;
     margin-bottom: 40px;
 }
 
@@ -779,7 +951,8 @@ table input:focus {
 }
 
 .post-preview {
-    color: #C7C7C7
+    color: #C7C7C7;
+    cursor: pointer;
 }
 
 .post-preview:hover {
