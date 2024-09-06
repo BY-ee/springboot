@@ -19,6 +19,8 @@ public class User {
     private String password;
     private String email;
     private String nickname;
+    private boolean emailOptIn;
+    private boolean termsAgreement;
     @Column(name = "created_at")
     private Timestamp createdAt;
 }

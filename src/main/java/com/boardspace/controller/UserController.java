@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Optional;
+
 @Controller
 @RequiredArgsConstructor
 public class UserController {
@@ -31,9 +33,9 @@ public class UserController {
     public String login(@ModelAttribute User user,
                         HttpServletRequest request,
                         RedirectAttributes redirectAttributes) {
-        User authenticatedUser = userService.findByUserIdAndPassword(user.getUserId(), user.getPassword());
+        Optional<User> authenticatedUser = userService.findByUserIdAndPassword(user.getUserId(), user.getPassword());
 
-        if (authenticatedUser != null) {
+        if (authenticatedUser.isPresent()) {
             HttpSession session = request.getSession();
             session.setAttribute("user", authenticatedUser);
             redirectAttributes.addFlashAttribute("logInMessage", "로그인에 성공하였습니다.");
@@ -60,7 +62,10 @@ public class UserController {
         user.setPassword(password);
         user.setEmail(email);
         user.setNickname(nickname);
-        userService.save(user);
+        // 이메일 수신동의와 약관동의는 추후 확인하는 로직 필요
+        user.setEmailOptIn(true);
+        user.setTermsAgreement(true);
+        userService.saveUser(user);
         return "redirect:/";
     }
 
@@ -71,9 +76,13 @@ public class UserController {
 
     @PostMapping("/forgot-id")
     public String forgotId(@RequestParam("email") String email, Model model) {
-        String userId = userService.findUserIdByEmail(email);
-        model.addAttribute("userid", userId);
-        return "user/return-id";
+        Optional<String> userId = userService.findUserIdByEmail(email);
+        if(userId.isPresent()) {
+            model.addAttribute("userid", userId);
+            return "user/return-id";
+        }
+        // userId가 null일 시 어떻게 처리할지 수정 필요
+        return "user/index-v1";
     }
 
     @GetMapping("/forgot-pw")
@@ -86,10 +95,14 @@ public class UserController {
                            @RequestParam("email") String email,
                            HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
-        Long id = userService.findIdByUserIdAndEmail(userId, email);
-        session.setAttribute("passwordResetId", id);
-        model.addAttribute("id", id);
-        return "user/reset-pw";
+        Optional<Long> id = userService.findIdByUserIdAndEmail(userId, email);
+        if(id.isPresent()) {
+            session.setAttribute("passwordResetId", id.get());
+            model.addAttribute("id", id.get());
+            return "user/reset-pw";
+        }
+        // id가 null일 시 어떻게 처리할지 수정 필요
+        return "user/index-v1";
     }
 
     @PostMapping("/reset-pw")
@@ -114,12 +127,12 @@ public class UserController {
                            HttpServletRequest request) {
         HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("user");
-        String currentNickname = loggedInUser.getNickname();
+        long id = loggedInUser.getId();
         String email = user.getEmail();
         String nickname = user.getNickname();
-        userService.updateNicknameForUniqueKeyAndForeignKey(currentNickname, email, nickname);
+        userService.updateEmailAndNicknameById(id, email, nickname);
 
-        User updatedUser = userService.findByUserId(user.getUserId());
+        User updatedUser = userService.findByUserId(user.getUserId()).orElse(null);
         session.setAttribute("user", updatedUser);
         return "redirect:/my-page";
     }
