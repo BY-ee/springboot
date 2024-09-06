@@ -4,63 +4,37 @@
     <meta charset="UTF-8">
     <title>글 목록 페이지</title>
 
-    <link rel="stylesheet" th:href="@{/css/styles.css}" href="../../static/css/styles.css">
-
-    <style>
-        /* Background-image Styles */
-        body {
-            background-image: url(/image/milkyway.jpg);
-            background-size: 1920px 1620px;
-        }
-
-        /* Link Styles */
-        a {
-            color: #bebebe;
-            padding: 15px;
-        }
-
-        a:hover {
-            color: #ffffff;
-        }
-
-        a:focus {
-            color: #ffffff;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/styles-v1.css}" href="../../static/css/styles-v1.css">
 </head>
-<body>
+<body class="bg-image-milkyway">
     <h1>글 목록</h1>
 
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <div th:each="post : ${postPage.content}" style="width: 800px;">
+    <div class="flex-col align-center mt-5vh">
+        <div class="div-width-50p" th:each="post : ${postPage.content}">
             <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
                 <input type="hidden" th:value="${postPage.number + 1}" name="page" />
-                <div class="post-box" onclick="this.closest('form').submit();">
-                    <div style="cursor: pointer; margin-left: 10px;">
-                        <div style="display: flex; gap: 50px; margin-bottom: 5px;">
-                            <p th:text="${post.nickname}"></p>
-                        </div>
+                <div class="post-list" onclick="this.closest('form').submit();">
+                    <div class="p-5 my-10 font-size-16">
+                        <p th:text="${post.nickname}"></p>
                         <p th:text="${post.title}"></p>
                     </div>
-
-                    <hr style="margin: 15px 0;">
                 </div>
+                <hr>
             </form>
         </div>
 
-        <div style="color: aliceblue; font-size: 16px; display: flex;">
+        <div class="flex mt-10 font-size-16">
             <div th:each="pageNum : ${#numbers.sequence(1, postPage.totalPages)}">
-                <a th:if="${pageNum != postPage.number + 1}" th:text="${pageNum}" th:href="@{/post/articles(page=${pageNum})}"></a>
-                <span th:if="${pageNum == postPage.number + 1}" class="no-pointer" th:text="${pageNum}" style="color: #659bff; padding: 15px;"></span>
+                <div class="page-line">
+                    <a class="inactive-page" th:if="${pageNum != postPage.number + 1}" th:text="${pageNum}" th:href="@{/post/articles(page=${pageNum})}"></a>
+                    <span class="active-page" th:if="${pageNum == postPage.number + 1}" th:text="${pageNum}"></span>
+                </div>
             </div>
         </div>
 
         <div class="button-container">
-            <form th:action="@{/post/write}" method="get">
-                <button type="submit">글 작성</button>
-            </form>
-
-            <button type="button" onclick="window.location.href='/post'">돌아가기</button>
+            <button class="btn btn-primary" type="button" onclick="window.location.href='/post/write'">글 작성</button>
+            <button class="btn btn-primary" type="button" onclick="window.location.href='/post'">돌아가기</button>
         </div>
     </div>
 </body>

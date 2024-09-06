@@ -1,8 +1,8 @@
-package com.oraclejpa.controller;
+package com.boardspace.controller;
 
-import com.oraclejpa.model.Post;
-import com.oraclejpa.model.User;
-import com.oraclejpa.service.PostService;
+import com.boardspace.model.Post;
+import com.boardspace.model.User;
+import com.boardspace.service.PostService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -67,7 +67,7 @@ public class PostController {
         Post post = postService.findById(id);
         model.addAttribute("post", post);
         model.addAttribute("page", page);
-        return "post/detail";
+        return "post/detail-v1";
     }
 
     @GetMapping("/update/{id}")
