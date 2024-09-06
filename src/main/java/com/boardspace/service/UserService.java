@@ -1,6 +1,8 @@
 package com.boardspace.service;
 
 import com.boardspace.model.User;
+import com.boardspace.repository.MemoryPostRepository;
+import com.boardspace.repository.MemoryUserRepository;
 import com.boardspace.repository.PostRepository;
 import com.boardspace.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +19,8 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
-    private final UserRepository userRepository;
-    private final PostRepository postRepository;
+    private final MemoryUserRepository userRepository;
+    private final MemoryPostRepository postRepository;
 
     public void save(User user) {
         user.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
@@ -26,7 +28,7 @@ public class UserService {
     }
 
     public boolean existsByUserId(String userId) {
-        return userRepository.existsByUserId(userId) == 1;
+        return userRepository.existsByUserId(userId);
     }
 
     public User findByUserIdAndPassword(String userId, String password) {
@@ -49,8 +51,8 @@ public class UserService {
     public void updateNicknameForUniqueKeyAndForeignKey(String currentNickname, String email, String nickname) {
         try {
             userRepository.updateEmailAndNicknameByCurrentNickname(currentNickname, email, nickname);
-            postRepository.updateNicknameByCurrentNickname(currentNickname, nickname);
-            postRepository.addConstraint();
+//            postRepository.updateNicknameByCurrentNickname(currentNickname, nickname);
+//            postRepository.addConstraint();
         } catch (Exception e) {
             logger.info(e.getMessage());
         }

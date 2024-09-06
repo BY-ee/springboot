@@ -7,10 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository {
     @Query(value = "SELECT CASE WHEN EXISTS(SELECT 1 FROM member m1_0 WHERE m1_0.user_id=?)" +
             " THEN 1 ELSE 0 END FROM dual", nativeQuery = true)
-    int existsByUserId(String userId);
+    boolean existsByUserId(String userId);
 
     User findByUserIdAndPassword(String userId, String password);
 
