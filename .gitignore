@@ -1,9 +1,4 @@
-HELP.md
-.gradle
-build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
+# IDE
 
 ### STS ###
 .apt_generated
@@ -35,3 +30,38 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Gradle
+/gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Node.js
+node_modules/
+
+# 환경 파일
+.env
+local.properties
+
+# 로그 파일
+*.log
+
+# Docker
+docker-compose.override.yml
+Dockerfile
+
+# Test 결과 파일
+*.test-results
+*.coverage
+*.gcda
+
+# 기타
+*.tmp
+*.swp
+Thumbs.db
+.DS_Store
+HELP.md
+!**/src/main/**/build/
+!**/src/test/**/build/
+e
