@@ -1,10 +1,10 @@
-package com.boardspace;
+package com.oraclejpa;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BoardspaceApplicationTests {
+class OraclejpaApplicationTests {
 
 	@Test
 	void contextLoads() {

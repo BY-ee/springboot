@@ -1,4 +1,4 @@
-package com.boardspace.model;
+package com.oraclejpa.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
