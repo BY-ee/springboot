@@ -1,8 +1,6 @@
-package com.oraclejpa.repository;
+package com.boardspace.repository;
 
-import com.oraclejpa.model.Post;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.boardspace.model.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

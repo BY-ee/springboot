@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>글 조회 페이지</title>
+
+    <link rel="stylesheet" th:href="@{/css/styles-v1.css}" href="../../static/css/styles-v1.css">
+
+    <script>
+        function confirmDeletePost() {
+            let confirmFlag = confirm("게시글을 삭제하시겠습니까?");
+            return confirmFlag;
+        }
+    </script>
+</head>
+<body class="bg-image-milkyway">
+    <div class="line-container pt-15vh">
+        <div class="line-left"></div>
+        <span class="line-text">게시글 조회</span>
+        <div class="line-right"></div>
+    </div>
+
+    <div class="post-box">
+        <p class="post-nickname" th:text="${post.nickname}"></p>
+        <p class="post-sub">15분 전 · 조회수 15</p>
+        <p class="post-title" th:text="${post.title}"></p>
+        <p class="post-content" th:text="${post.content}"></p>
+    </div>
+    
+
+    <div class="button-container flex gap-10 mt-20">
+        <form th:action="@{/post/update/{id}(id=${post.id})}" method="get">
+            <input type="hidden" th:value="${page}" name="page" />
+            <button class="btn btn-primary" type="submit">수정</button>
+        </form>
+
+        <form th:action="@{/post/delete}" method="post" onsubmit="return confirmDeletePost()">
+            <input type="hidden" th:value="${post.id}" name="id">
+            <button class="btn btn-secondary" type="submit">삭제</button>
+        </form>
+
+        <form th:action="@{/post/articles}" method="get">
+            <input type="hidden" th:value="${page}" name="page">
+            <button class="btn btn-primary" type="submit">글 목록</button>
+        </form>
+    </div>
+</body>
+</html>

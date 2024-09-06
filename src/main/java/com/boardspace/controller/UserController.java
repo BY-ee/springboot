@@ -1,7 +1,7 @@
-package com.oraclejpa.controller;
+package com.boardspace.controller;
 
-import com.oraclejpa.model.User;
-import com.oraclejpa.service.UserService;
+import com.boardspace.model.User;
+import com.boardspace.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -55,15 +55,49 @@ public class UserController {
                          @RequestParam String password,
                          @RequestParam String email,
                          @RequestParam String nickname) {
-//        if(userService.existsByUserId(user.getUserId())) {
-//            return "user/duplicate";
-//        }
         User user = new User();
         user.setUserId(userId);
         user.setPassword(password);
         user.setEmail(email);
         user.setNickname(nickname);
         userService.save(user);
+        return "redirect:/";
+    }
+
+    @GetMapping("/forgot-id")
+    public String forgotId() {
+        return "user/forgot-id";
+    }
+
+    @PostMapping("/forgot-id")
+    public String forgotId(@RequestParam("email") String email, Model model) {
+        String userId = userService.findUserIdByEmail(email);
+        model.addAttribute("userid", userId);
+        return "user/return-id";
+    }
+
+    @GetMapping("/forgot-pw")
+    public String forgotPassword() {
+        return "user/forgot-pw";
+    }
+
+    @PostMapping("/forgot-pw")
+    public String checkUserPassword(@RequestParam("userid") String userId,
+                           @RequestParam("email") String email,
+                           HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Long id = userService.findIdByUserIdAndEmail(userId, email);
+        session.setAttribute("passwordResetId", id);
+        model.addAttribute("id", id);
+        return "user/reset-pw";
+    }
+
+    @PostMapping("/reset-pw")
+    public String resetPassword(@RequestParam("password") String password,
+                          HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        long id = (long) session.getAttribute("passwordResetId");
+        userService.updatePasswordById(password, id);
         return "redirect:/";
     }
 
@@ -117,10 +151,6 @@ public class UserController {
         model.addAttribute("password", password);
         return "/user/verify-password";
     }
-
-//    public boolean checkUser(String password) {
-//        return userService.findUserByPassword(password) != null;
-//    }
 
     @PostMapping("/user/verify-password")
     public String verifyPassword(@RequestParam("password") String password,
