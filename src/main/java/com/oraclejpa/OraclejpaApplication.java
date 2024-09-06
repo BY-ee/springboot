@@ -1,13 +1,13 @@
-package com.boardspace;
+package com.oraclejpa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BoardspaceApplication {
+public class OraclejpaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BoardspaceApplication.class, args);
+		SpringApplication.run(OraclejpaApplication.class, args);
 	}
 
 }

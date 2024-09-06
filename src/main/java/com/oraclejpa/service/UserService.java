@@ -1,22 +1,23 @@
-package com.boardspace.service;
+package com.oraclejpa.service;
 
-import com.boardspace.model.User;
-import com.boardspace.repository.PostRepository;
-import com.boardspace.repository.UserRepository;
+import com.oraclejpa.model.Post;
+import com.oraclejpa.model.User;
+import com.oraclejpa.repository.PostRepository;
+import com.oraclejpa.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.orm.jpa.JpaSystemException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
     private final PostRepository postRepository;
 
@@ -37,28 +38,16 @@ public class UserService {
         return userRepository.findByUserId(userId);
     }
 
-    public String findUserIdByEmail(String email) {
-        return userRepository.findUserIdByEmail(email);
-    }
-
-    public Long findIdByUserIdAndEmail(String userId, String email) {
-        return userRepository.findIdByUserIdAndEmail(userId, email);
-    }
+//    public void updateEmailAndNicknameById(String userId, String email, String nickname) {
+//        userRepository.updateEmailAndNicknameByUserId(userId, email, nickname);
+//    }
 
     @Transactional
     public void updateNicknameForUniqueKeyAndForeignKey(String currentNickname, String email, String nickname) {
-        try {
-            userRepository.updateEmailAndNicknameByCurrentNickname(currentNickname, email, nickname);
-            postRepository.updateNicknameByCurrentNickname(currentNickname, nickname);
-            postRepository.addConstraint();
-        } catch (Exception e) {
-            logger.info(e.getMessage());
-        }
-    }
-
-    @Transactional
-    public void updatePasswordById(String password, long id) {
-        userRepository.updatePasswordById(password, id);
+        postRepository.dropConstraint();
+        userRepository.updateEmailAndNicknameByCurrentNickname(currentNickname, email, nickname);
+        postRepository.updateNicknameByCurrentNickname(currentNickname, nickname);
+        postRepository.addConstraint();
     }
 
     public User findUserByPassword(String password) {

@@ -1,7 +1,7 @@
-package com.boardspace.service;
+package com.oraclejpa.service;
 
-import com.boardspace.model.Post;
-import com.boardspace.repository.PostRepository;
+import com.oraclejpa.model.Post;
+import com.oraclejpa.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
