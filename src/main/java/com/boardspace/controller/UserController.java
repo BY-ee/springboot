@@ -53,15 +53,7 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String signUp(@RequestParam String userId,
-                         @RequestParam String password,
-                         @RequestParam String email,
-                         @RequestParam String nickname) {
-        User user = new User();
-        user.setUserId(userId);
-        user.setPassword(password);
-        user.setEmail(email);
-        user.setNickname(nickname);
+    public String signUp(@ModelAttribute("user") User user) {
         // 이메일 수신동의와 약관동의는 추후 확인하는 로직 필요
         user.setEmailOptIn(true);
         user.setTermsAgreement(true);

@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 @RequiredArgsConstructor
 public class MemoryUserRepository implements UserRepository {
-    List<User> users;
+    private final List<User> users;
 
     // 유저 정보 저장
     @Override

@@ -17,7 +17,7 @@ import java.util.Optional;
 public class UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     private final MemoryUserRepository userRepository;
-    private static long id = 1;
+    private long id = 1;
 
     public void saveUser(User user) {
         user.setId(id);
