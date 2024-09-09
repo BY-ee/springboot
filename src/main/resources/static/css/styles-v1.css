@@ -101,7 +101,6 @@ input {
     border-radius: 5px;
     background: #353535;
     padding: 10px;
-    margin-bottom: 15px;
     color: #FFF;
 }
 
@@ -1671,8 +1670,28 @@ table input:focus {
     width: 15%;
 }
 
+.div-width-20p {
+    width: 20%;
+}
+
 .div-width-25p {
     width: 25%;
+}
+
+.div-width-30p {
+    width: 30%;
+}
+
+.div-width-35p {
+    width: 35%;
+}
+
+.div-width-40p {
+    width: 40%;
+}
+
+.div-width-45p {
+    width: 45%;
 }
 
 .div-width-50p {
@@ -1711,8 +1730,28 @@ table input:focus {
     height: 15%;
 }
 
+.div-height-20p {
+    height: 20%;
+}
+
 .div-height-25p {
     height: 25%;
+}
+
+.div-height-30p {
+    height: 30%;
+}
+
+.div-height-35p {
+    height: 35%;
+}
+
+.div-height-40p {
+    height: 40%;
+}
+
+.div-height-45p {
+    height: 45%;
 }
 
 .div-height-50p {
@@ -1721,6 +1760,10 @@ table input:focus {
 
 .div-height-75p {
     height: 75%;
+}
+
+.div-height-100p {
+    height: 100%;
 }
 
 .div-height-100 {
@@ -1749,12 +1792,48 @@ table input:focus {
     width: 15%;
 }
 
+.input-width-20p {
+    width: 20%;
+}
+
 .input-width-25p {
     width: 25%;
 }
 
+.input-width-30p {
+    width: 30%;
+}
+
+.input-width-35p {
+    width: 35%;
+}
+
+.input-width-40p {
+    width: 40%;
+}
+
+.input-width-45p {
+    width: 45%;
+}
+
 .input-width-50p {
     width: 50%;
+}
+
+.input-width-60p {
+    width: 60%;
+}
+
+.input-width-70p {
+    width: 70%;
+}
+
+.input-width-80p {
+    width: 80%;
+}
+
+.input-width-90p {
+    width: 90%;
 }
 
 .input-width-100p {
@@ -1931,6 +2010,55 @@ table input:focus {
 .font-bold {
     font-weight: bold;
 }
+
+.font-red {
+    color: red;
+}
+
+.font-orange {
+    color: orange;
+}
+
+.font-yellow {
+    color: yellow;
+}
+
+.font-green {
+    color: green;
+}
+
+.font-blue {
+    color: blue;
+}
+
+.font-indigo {
+    color: indigo;
+}
+
+.font-violet {
+    color: violet;
+}
+
+.font-purple {
+    color: purple;
+}
+
+.font-pink {
+    color: pink;
+}
+
+.font-white {
+    color: white;
+}
+
+.font-gray {
+    color: gray;
+}
+
+.font-black {
+    color: black;
+}
+
 
 /* ========================= */
 /*        Style Class        */

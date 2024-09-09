@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Line Template</title>
+        
+        <link rel="stylesheet" th:href="@{css/styles-v1.css}" href="../static/css/styles-v1.css" />
+    </head>
+    <body>
+        <div class="line-container pt-15vh">
+            <div class="line-left"></div>
+            <span class="line-text" th:text="${text}">정적 텍스트</span>
+            <div class="line-right"></div>
+        </div>
+    </body>
+</html>
