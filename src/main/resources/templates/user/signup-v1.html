@@ -17,12 +17,12 @@
                     <p class="font-red mt-5" id="userid-message"></p>
 
                     <label class="mt-10" for="password">비밀번호</label>
-                    <input class="input-width-100p" type="password" id="password" th:field="*{password}" placeholder="비밀번호 입력 (특수문자 포함 8~20자 이내)" />
+                    <input class="input-width-100p" type="password" id="password" th:field="*{password}" placeholder="비밀번호 입력 (8~20자 이내)" />
                     <p class="font-red mt-5" id="password-message"></p>
 
                     <label class="mt-10" for="same-password">비밀번호 확인</label>
-                    <input class="input-width-100p" type="password" id="same-password" placeholder="비밀번호 입력 (특수문자 포함 8~20자 이내)" />
-                    <p class="font-red mt-5" id="password-message"></p>
+                    <input class="input-width-100p" type="password" id="same-password" />
+                    <p class="font-red mt-5" id="same-password-message"></p>
 
                     <label class="mt-10" for="email">이메일</label>
                     <input class="input-width-100p" type="email" id="email" th:field="*{email}" placeholder="이메일 입력" />
