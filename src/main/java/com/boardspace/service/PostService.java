@@ -1,6 +1,7 @@
 package com.boardspace.service;
 
 import com.boardspace.model.Post;
+import com.boardspace.repository.MemoryPostRepository;
 import com.boardspace.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -14,14 +15,14 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class PostService {
-    private final PostRepository postRepository;
+    private final MemoryPostRepository postRepository;
 
-    public void writePost(String nickname, @ModelAttribute Post post) {
+    public Post writePost(String nickname, @ModelAttribute Post post) {
         post.setNickname(nickname);
-        postRepository.save(post);
+        return postRepository.save(post);
     }
 
-    public void updateById(Long id, @ModelAttribute Post post) {
+    public void updateById(long id, @ModelAttribute Post post) {
         postRepository.updateById(id, post.getTitle(), post.getContent());
     }
 
@@ -32,10 +33,6 @@ public class PostService {
     public Post findById(Long id) {
         return postRepository.findById(id).orElse(null);
     }
-
-//    public List<Post> findAllByOrderByIdDesc() {
-//        return postRepository.findAllByOrderByIdDesc();
-//    }
 
     public Page<Post> getPosts(int page, int size) {
         int start = page * size;
@@ -52,4 +49,8 @@ public class PostService {
         List<Post> posts = postRepository.findPostsByNickname(start + 1, end, nickname);
         return new PageImpl<>(posts, PageRequest.of(page, size), totalElements);
     }
+
+    //public List<Post> findAllByOrderByIdDesc() {
+    //    return postRepository.findAllByOrderByIdDesc();
+    //}
 }
