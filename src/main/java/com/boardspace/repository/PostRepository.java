@@ -1,22 +1,22 @@
 package com.boardspace.repository;
 
 import com.boardspace.model.Post;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PostRepository {
-    List<Post> findAllPosts(int start, int end);
+    List<Post> findPostsByPage(int start, int size);
 
-    List<Post> findPostsByNickname(int start, int end, String nickname);
+    Optional<Post> findById(long id);
+
+    List<Post> findPostsByPageAndNickname(int start, int size, String nickname);
 
     void updateById(long id, Post newPost);
+
+    void deleteById(long id);
 
     long countByNickname(String nickname);
 

@@ -2,52 +2,51 @@ package com.boardspace.service;
 
 import com.boardspace.model.Post;
 import com.boardspace.repository.MemoryPostRepository;
-import com.boardspace.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class PostService {
     private final MemoryPostRepository postRepository;
 
-    public Post writePost(String nickname, @ModelAttribute Post post) {
+    public void writePost(String nickname, Post post) {
         post.setNickname(nickname);
-        return postRepository.save(post);
+        postRepository.save(post);
     }
 
-    public void updateById(long id, @ModelAttribute Post post) {
-        postRepository.updateById(id, post.getTitle(), post.getContent());
+    public void updateById(long id, Post post) {
+        postRepository.updateById(id, post);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(long id) {
         postRepository.deleteById(id);
     }
 
-    public Post findById(Long id) {
-        return postRepository.findById(id).orElse(null);
+    public Optional<Post> findById(long id) {
+        return postRepository.findById(id);
     }
 
     public Page<Post> getPosts(int page, int size) {
-        int start = page * size;
-        int end = start + size;
-        long totalElements = postRepository.count(); // 전체 데이터 수
-        List<Post> posts = postRepository.findAllPosts(start + 1, end); // 수정된 쿼리 호출
-        return new PageImpl<>(posts, PageRequest.of(page, size), totalElements);
+        // 0-based 인덱스 방식으로 페이지 변환
+        int start = (page - 1) * size;
+        long totalElements = postRepository.count();
+        List<Post> posts = postRepository.findPostsByPage(start, size);
+        return new PageImpl<>(posts, PageRequest.of(page - 1, size), totalElements);
     }
 
     public Page<Post> findPostsByNickName(int page, int size, String nickname) {
-        int start = page * size;
-        int end = start + size;
+        // 0-based 인덱스 방식으로 페이지 변환
+        int start = (page - 1) * size;
         long totalElements = postRepository.countByNickname(nickname);
-        List<Post> posts = postRepository.findPostsByNickname(start + 1, end, nickname);
-        return new PageImpl<>(posts, PageRequest.of(page, size), totalElements);
+        List<Post> posts = postRepository.findPostsByPageAndNickname(start, size, nickname);
+        return new PageImpl<>(posts, PageRequest.of(page - 1, size), totalElements);
     }
 
     //public List<Post> findAllByOrderByIdDesc() {

@@ -17,14 +17,9 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
     private final PostService postService;
 
-//    @GetMapping("")
-//    public String redirectToIndex() {
-//        return "redirect:/post/";
-//    }
-
     @GetMapping("")
     public String index(Model model) {
-        int page = 0;
+        int page = 1;
         int size = 5;
         Page<Post> postPage = postService.getPosts(page, size);
         model.addAttribute("postPage", postPage);
@@ -46,17 +41,10 @@ public class PostController {
         return "redirect:/post";
     }
 
-//    @GetMapping("/lists")
-//    public String list(Model model) {
-//        List<Post> dataList = postService.findAllByOrderByIdDesc();
-//        model.addAttribute("dataList", dataList);
-//        return "post/lists";
-//    }
-
     @GetMapping("/articles")
     public String articles(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         int size = 5;
-        Page<Post> postPage = postService.getPosts(page - 1, size);
+        Page<Post> postPage = postService.getPosts(page, size);
         model.addAttribute("postPage", postPage);
         return "post/articles-v1";
     }
@@ -64,7 +52,7 @@ public class PostController {
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable("id") Long id,
                          @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-        Post post = postService.findById(id);
+        Post post = postService.findById(id).orElseThrow();
         model.addAttribute("post", post);
         model.addAttribute("page", page);
         return "post/detail-v1";
@@ -73,7 +61,7 @@ public class PostController {
     @GetMapping("/update/{id}")
     public String update(@PathVariable("id") Long id,
                          @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-        Post post = postService.findById(id);
+        Post post = postService.findById(id).orElseThrow();
         model.addAttribute("post", post);
         model.addAttribute("page", page);
         return "post/update";
