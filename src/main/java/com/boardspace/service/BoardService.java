@@ -1,7 +1,7 @@
 package com.boardspace.service;
 
-import com.boardspace.model.Post;
-import com.boardspace.repository.MemoryPostRepository;
+import com.boardspace.model.CommunityBoard;
+import com.boardspace.repository.MemoryBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -13,15 +13,15 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class PostService {
-    private final MemoryPostRepository postRepository;
+public class BoardService {
+    private final MemoryBoardRepository postRepository;
 
-    public void writePost(String nickname, Post post) {
+    public void writePost(String nickname, CommunityBoard post) {
         post.setNickname(nickname);
         postRepository.save(post);
     }
 
-    public void updateById(long id, Post post) {
+    public void updateById(long id, CommunityBoard post) {
         postRepository.updateById(id, post);
     }
 
@@ -29,23 +29,23 @@ public class PostService {
         postRepository.deleteById(id);
     }
 
-    public Optional<Post> findById(long id) {
+    public Optional<CommunityBoard> findById(long id) {
         return postRepository.findById(id);
     }
 
-    public Page<Post> getPosts(int page, int size) {
+    public Page<CommunityBoard> getPosts(int page, int size) {
         // 0-based 인덱스 방식으로 페이지 변환
         int start = (page - 1) * size;
         long totalElements = postRepository.count();
-        List<Post> posts = postRepository.findPostsByPage(start, size);
+        List<CommunityBoard> posts = postRepository.findPostsByPage(start, size);
         return new PageImpl<>(posts, PageRequest.of(page - 1, size), totalElements);
     }
 
-    public Page<Post> findPostsByNickName(int page, int size, String nickname) {
+    public Page<CommunityBoard> findPostsByNickName(int page, int size, String nickname) {
         // 0-based 인덱스 방식으로 페이지 변환
         int start = (page - 1) * size;
         long totalElements = postRepository.countByNickname(nickname);
-        List<Post> posts = postRepository.findPostsByPageAndNickname(start, size, nickname);
+        List<CommunityBoard> posts = postRepository.findPostsByPageAndNickname(start, size, nickname);
         return new PageImpl<>(posts, PageRequest.of(page - 1, size), totalElements);
     }
 

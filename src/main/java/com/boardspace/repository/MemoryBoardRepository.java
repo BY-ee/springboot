@@ -1,6 +1,6 @@
 package com.boardspace.repository;
 
-import com.boardspace.model.Post;
+import com.boardspace.model.CommunityBoard;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -9,16 +9,16 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class MemoryPostRepository implements PostRepository {
-    private final List<Post> posts;
+public class MemoryBoardRepository implements BoardRepository {
+    private final List<CommunityBoard> posts;
 
     // 게시글 작성
-    public void save(Post post) {
+    public void save(CommunityBoard post) {
         posts.add(post);
     }
 
     // 게시글 삭제
-    public int delete(Post post) {
+    public int delete(CommunityBoard post) {
         int size = posts.size();
         posts.remove(post);
         return size - posts.size();
@@ -30,25 +30,25 @@ public class MemoryPostRepository implements PostRepository {
     }
 
     // 모든 게시글을 조회
-    public List<Post> findPostsByPage(int start, int size) {
+    public List<CommunityBoard> findPostsByPage(int start, int size) {
         int end = Math.min(start + size, posts.size());
         return posts.subList(start, end);
     }
 
     // 고유 id에 해당하는 게시글을 조회
-    public Optional<Post> findById(long id) {
+    public Optional<CommunityBoard> findById(long id) {
         return posts.stream().filter(post -> post.getId().equals(id)).findAny();
     }
 
     // 게시글 작성자에 해당하는 모든 게시글을 조회
-    public List<Post> findPostsByPageAndNickname(int start, int size, String nickname) {
-        List<Post> postsByNickname = posts.stream().filter(post -> post.getNickname().equals(nickname)).toList();
+    public List<CommunityBoard> findPostsByPageAndNickname(int start, int size, String nickname) {
+        List<CommunityBoard> postsByNickname = posts.stream().filter(post -> post.getNickname().equals(nickname)).toList();
         int end = Math.min(start + size, postsByNickname.size());
         return postsByNickname.subList(start, end);
     }
 
     // 고유 id에 해당하는 게시글을 수정
-    public void updateById(long id, Post newPost) {
+    public void updateById(long id, CommunityBoard newPost) {
         posts.stream()
                 .filter(post -> post.getId().equals(id))
                 .findFirst()

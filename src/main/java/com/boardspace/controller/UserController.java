@@ -22,7 +22,7 @@ public class UserController {
                         @ModelAttribute User user, Model model) {
         HttpSession session = request.getSession();
         if(session.getAttribute("user") != null) {
-            return "redirect:/post";
+            return "redirect:/board";
         } else {
             model.addAttribute("user", user);
             return "user/index-v1";
@@ -39,7 +39,7 @@ public class UserController {
             HttpSession session = request.getSession();
             session.setAttribute("user", authenticatedUser);
             redirectAttributes.addFlashAttribute("logInMessage", "로그인에 성공하였습니다.");
-            return "redirect:/post";
+            return "redirect:/board";
         } else {
             redirectAttributes.addFlashAttribute("logInMessage", "아이디 또는 비밀번호가 잘못되었습니다.");
             return "redirect:/";

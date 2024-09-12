@@ -27,7 +27,7 @@
 
     <div class="flex-col" style="align-items: center;">
         <div th:each="post : ${postPage.content}" style="width: 800px;">
-            <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
+            <form th:action="@{/templates/board/detail/{id}(id=${post.id})}" method="get">
                 <input type="hidden" th:value="${postPage.number + 1}" name="page" />
                 <div id="articles" onclick="this.closest('form').submit();">
                     <div style="cursor: pointer; margin-left: 10px;">
@@ -44,13 +44,13 @@
 
         <div style="color: aliceblue; font-size: 16px; display: flex;">
             <div th:each="pageNum : ${#numbers.sequence(1, postPage.totalPages)}">
-                <a th:if="${pageNum != postPage.number + 1}" th:text="${pageNum}" th:href="@{/post/my-post(page=${pageNum})}"></a>
+                <a th:if="${pageNum != postPage.number + 1}" th:text="${pageNum}" th:href="@{/templates/board/my-post(page=${pageNum})}"></a>
                 <span th:if="${pageNum == postPage.number + 1}" class="no-pointer" th:text="${pageNum}" style="color: #659bff; padding: 15px;"></span>
             </div>
         </div>
 
         <div class="button-container">
-            <form th:action="@{/post/write}" method="get">
+            <form th:action="@{/templates/board/write}" method="get">
                 <button class="btn btn-primary" type="submit">글 작성</button>
             </form>
 

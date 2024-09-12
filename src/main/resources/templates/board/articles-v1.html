@@ -11,7 +11,7 @@
 
     <div class="flex-col align-center mt-5vh">
         <div class="div-width-50p" th:each="post : ${postPage.content}">
-            <form th:action="@{/post/detail/{id}(id=${post.id})}" method="get">
+            <form th:action="@{/templates/board/detail/{id}(id=${post.id})}" method="get">
                 <input type="hidden" th:value="${postPage.number + 1}" name="page" />
                 <div class="post-list" onclick="this.closest('form').submit();">
                     <div class="p-5 my-10 font-size-16">
@@ -26,7 +26,7 @@
         <div class="flex mt-10 font-size-16">
             <div th:each="pageNum : ${#numbers.sequence(1, postPage.totalPages)}">
                 <div class="page-line">
-                    <a class="inactive-page" th:if="${pageNum != postPage.number + 1}" th:text="${pageNum}" th:href="@{/post/articles(page=${pageNum})}"></a>
+                    <a class="inactive-page" th:if="${pageNum != postPage.number + 1}" th:text="${pageNum}" th:href="@{/templates/board/articles(page=${pageNum})}"></a>
                     <span class="active-page" th:if="${pageNum == postPage.number + 1}" th:text="${pageNum}"></span>
                 </div>
             </div>

@@ -1,20 +1,20 @@
 package com.boardspace.repository;
 
-import com.boardspace.model.Post;
+import com.boardspace.model.CommunityBoard;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface PostRepository {
-    List<Post> findPostsByPage(int start, int size);
+public interface BoardRepository {
+    List<CommunityBoard> findPostsByPage(int start, int size);
 
-    Optional<Post> findById(long id);
+    Optional<CommunityBoard> findById(long id);
 
-    List<Post> findPostsByPageAndNickname(int start, int size, String nickname);
+    List<CommunityBoard> findPostsByPageAndNickname(int start, int size, String nickname);
 
-    void updateById(long id, Post newPost);
+    void updateById(long id, CommunityBoard newPost);
 
     void deleteById(long id);
 
@@ -23,30 +23,30 @@ public interface PostRepository {
     //List<Post> findAllByOrderByIdDesc(int start, int end);
 
     //@Query(value = "SELECT * FROM (SELECT p1_0.*, ROW_NUMBER() OVER (ORDER BY p1_0.id DESC) AS rn " +
-    //        "FROM post p1_0) WHERE rn BETWEEN :start AND :end", nativeQuery = true)
+    //        "FROM board p1_0) WHERE rn BETWEEN :start AND :end", nativeQuery = true)
     //List<Post> findAllPosts(@Param("start") int start, @Param("end") int end);
 
     //List<Post> findAllByOrderByIdDesc();
 
     //@Query(value = "SELECT * FROM (SELECT p1_0.*, ROW_NUMBER() OVER (ORDER BY p1_0.id DESC) AS rn " +
-    //        "FROM post p1_0 WHERE p1_0.nickname = :nickname) WHERE rn BETWEEN :start AND :end", nativeQuery = true)
+    //        "FROM board p1_0 WHERE p1_0.nickname = :nickname) WHERE rn BETWEEN :start AND :end", nativeQuery = true)
     //List<Post> findPostsByNickname(@Param("start") int start,
     //                               @Param("end") int end,
     //                               @Param("nickname") String nickname);
 
     //@Modifying
     //@Transactional
-    //@Query(value = "UPDATE post SET title=:title,content=:content WHERE id=:id", nativeQuery = true)
+    //@Query(value = "UPDATE board SET title=:title,content=:content WHERE id=:id", nativeQuery = true)
     //void updateById(@Param("id") Long id, @Param("title") String title, @Param("content") String content);
 
     //long countByNickname(String nickname);
 
     //@Modifying
-    //@Query(value = "ALTER TABLE post DROP CONSTRAINT fk_member_nickname", nativeQuery = true)
+    //@Query(value = "ALTER TABLE board DROP CONSTRAINT fk_member_nickname", nativeQuery = true)
     //void dropConstraint();
 
     //@Modifying
-    //@Query(value = "ALTER TABLE post ADD CONSTRAINT fk_member_nickname FOREIGN KEY(nickname) REFERENCES member(nickname)", nativeQuery = true)
+    //@Query(value = "ALTER TABLE board ADD CONSTRAINT fk_member_nickname FOREIGN KEY(nickname) REFERENCES member(nickname)", nativeQuery = true)
     //void addConstraint();
 
     //@Modifying
