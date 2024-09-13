@@ -37,11 +37,11 @@ public class UserController {
 
         if (authenticatedUser.isPresent()) {
             HttpSession session = request.getSession();
-            session.setAttribute("user", authenticatedUser);
-            redirectAttributes.addFlashAttribute("logInMessage", "로그인에 성공하였습니다.");
+            session.setAttribute("user", authenticatedUser.get());
+            redirectAttributes.addFlashAttribute("logInMessage", UserConstant.LOGIN_SUCCESS_MESSAGE);
             return "redirect:/board";
         } else {
-            redirectAttributes.addFlashAttribute("logInMessage", "아이디 또는 비밀번호가 잘못되었습니다.");
+            redirectAttributes.addFlashAttribute("logInMessage", UserConstant.LOGIN_FAILURE_MESSAGE);
             return "redirect:/";
         }
     }
@@ -68,13 +68,9 @@ public class UserController {
 
     @PostMapping("/forgot-id")
     public String forgotId(@RequestParam("email") String email, Model model) {
-        Optional<String> userId = userService.findUserIdByEmail(email);
-        if(userId.isPresent()) {
-            model.addAttribute("userid", userId);
-            return "user/return-id";
-        }
-        // userId가 null일 시 어떻게 처리할지 수정 필요
-        return "user/index-v1";
+        String userId = userService.findUserIdByEmail(email).orElse(null);
+        model.addAttribute("userid", userId);
+        return "user/return-id";
     }
 
     @GetMapping("/forgot-pw")
@@ -87,21 +83,18 @@ public class UserController {
                            @RequestParam("email") String email,
                            HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
-        Optional<Long> id = userService.findIdByUserIdAndEmail(userId, email);
-        if(id.isPresent()) {
-            session.setAttribute("passwordResetId", id.get());
-            model.addAttribute("id", id.get());
-            return "user/reset-pw";
-        }
-        // id가 null일 시 어떻게 처리할지 수정 필요
-        return "user/index-v1";
+        Long id = userService.findIdByUserIdAndEmail(userId, email).orElse(null);
+        session.setAttribute("passwordResetId", id);
+        model.addAttribute("id", id);
+        return "user/reset-pw";
     }
 
     @PostMapping("/reset-pw")
     public String resetPassword(@RequestParam("password") String password,
                           HttpServletRequest request) {
         HttpSession session = request.getSession();
-        long id = (long) session.getAttribute("passwordResetId");
+        Long id = (Long) session.getAttribute("passwordResetId");
+        session.removeAttribute("passwordResetId");
         userService.updatePasswordById(password, id);
         return "redirect:/";
     }
@@ -119,7 +112,7 @@ public class UserController {
                            HttpServletRequest request) {
         HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("user");
-        long id = loggedInUser.getId();
+        Long id = loggedInUser.getId();
         String email = user.getEmail();
         String nickname = user.getNickname();
         userService.updateEmailAndNicknameById(id, email, nickname);
@@ -167,7 +160,7 @@ public class UserController {
         if(password.equals(user.getPassword())) {
             return handleAction(action);
         } else {
-            redirectAttributes.addFlashAttribute("errorMessage", "잘못된 비밀번호가 입력되었습니다.");
+            redirectAttributes.addFlashAttribute("errorMessage", UserConstant.INVALID_PASSWORD);
             return "redirect:/user/verify-password?action=" + action;
         }
     }
