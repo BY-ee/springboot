@@ -3,10 +3,10 @@ package com.boardspace.controller;
 import com.boardspace.model.CommunityBoard;
 import com.boardspace.model.User;
 import com.boardspace.service.BoardService;
+import com.boardspace.service.Pagination;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ public class BoardController {
     public String index(Model model) {
         int page = 1;
         int size = 5;
-        Page<CommunityBoard> postPage = boardService.getPosts(page, size);
+        Pagination<CommunityBoard> postPage = boardService.getPosts(page, size);
         model.addAttribute("postPage", postPage);
         return "board/index-v1";
     }
@@ -45,7 +45,7 @@ public class BoardController {
     @GetMapping("/articles")
     public String articles(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         int size = 5;
-        Page<CommunityBoard> postPage = boardService.getPosts(page, size);
+        Pagination<CommunityBoard> postPage = boardService.getPosts(page, size);
         model.addAttribute("postPage", postPage);
         return "board/articles-v1";
     }
@@ -86,7 +86,7 @@ public class BoardController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         int size = 5;
-        Page<CommunityBoard> postPage = boardService.findPostsByNickName(page - 1, size, user.getNickname());
+        Pagination<CommunityBoard> postPage = boardService.findPostsByNickName(page - 1, size, user.getNickname());
         model.addAttribute("user", user);
         model.addAttribute("postPage", postPage);
         return "user/my-post-v1";

@@ -3,10 +3,7 @@ package com.boardspace.service;
 import com.boardspace.model.User;
 import com.boardspace.repository.MemoryUserRepository;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -15,15 +12,13 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     private final MemoryUserRepository userRepository;
-    private long id = 1;
+    private long id;
 
     public void saveUser(User user) {
-        user.setId(id);
-        user.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
+        user.setId(id++);
+        user.setCreateTime(Timestamp.valueOf(LocalDateTime.now()));
         userRepository.save(user);
-        id++;
     }
 
     public void deleteUser(User user) {

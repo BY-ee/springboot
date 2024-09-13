@@ -20,17 +20,17 @@ public interface BoardRepository {
 
     long countByNickname(String nickname);
 
-    //List<Post> findAllByOrderByIdDesc(int start, int end);
+    //List<Board> findAllByOrderByIdDesc(int start, int end);
 
     //@Query(value = "SELECT * FROM (SELECT p1_0.*, ROW_NUMBER() OVER (ORDER BY p1_0.id DESC) AS rn " +
     //        "FROM board p1_0) WHERE rn BETWEEN :start AND :end", nativeQuery = true)
-    //List<Post> findAllPosts(@Param("start") int start, @Param("end") int end);
+    //List<Board> findAllPosts(@Param("start") int start, @Param("end") int end);
 
-    //List<Post> findAllByOrderByIdDesc();
+    //List<Board> findAllByOrderByIdDesc();
 
     //@Query(value = "SELECT * FROM (SELECT p1_0.*, ROW_NUMBER() OVER (ORDER BY p1_0.id DESC) AS rn " +
     //        "FROM board p1_0 WHERE p1_0.nickname = :nickname) WHERE rn BETWEEN :start AND :end", nativeQuery = true)
-    //List<Post> findPostsByNickname(@Param("start") int start,
+    //List<Board> findPostsByNickname(@Param("start") int start,
     //                               @Param("end") int end,
     //                               @Param("nickname") String nickname);
 
