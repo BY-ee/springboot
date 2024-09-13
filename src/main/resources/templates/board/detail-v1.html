@@ -29,17 +29,17 @@
     
 
     <div class="button-container flex gap-10 mt-20">
-        <form th:action="@{/templates/board/update/{id}(id=${post.id})}" method="get">
+        <form th:action="@{/board/update/{id}(id=${post.id})}" method="get">
             <input type="hidden" th:value="${page}" name="page" />
             <button class="btn btn-primary" type="submit">수정</button>
         </form>
 
-        <form th:action="@{/templates/board/delete}" method="post" onsubmit="return confirmDeletePost()">
+        <form th:action="@{/board/delete}" method="post" onsubmit="return confirmDeletePost()">
             <input type="hidden" th:value="${post.id}" name="id">
             <button class="btn btn-secondary" type="submit">삭제</button>
         </form>
 
-        <form th:action="@{/templates/board/articles}" method="get">
+        <form th:action="@{/board/articles}" method="get">
             <input type="hidden" th:value="${page}" name="page">
             <button class="btn btn-primary" type="submit">글 목록</button>
         </form>
