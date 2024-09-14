@@ -86,7 +86,7 @@ public class BoardController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         int size = 5;
-        Pagination<CommunityBoard> postPage = boardService.findPostsByNickName(page - 1, size, user.getNickname());
+        Pagination<CommunityBoard> postPage = boardService.findPostsByNickName(page, size, user.getNickname());
         model.addAttribute("user", user);
         model.addAttribute("postPage", postPage);
         return "user/my-post-v1";
