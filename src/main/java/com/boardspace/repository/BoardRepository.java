@@ -1,20 +1,19 @@
 package com.boardspace.repository;
 
-import com.boardspace.model.CommunityBoard;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface BoardRepository {
-    List<CommunityBoard> findPostsByPage(int start, int size);
+public interface BoardRepository<T> {
+    List<T> findPostsByPage(int start, int size);
 
-    Optional<CommunityBoard> findById(long id);
+    Optional<T> findById(long id);
 
-    List<CommunityBoard> findPostsByPageAndNickname(int start, int size, String nickname);
+    List<T> findPostsByPageAndNickname(int start, int size, String nickname);
 
-    void updateById(long id, CommunityBoard newPost);
+    void updateById(long id, T newPost);
 
     void deleteById(long id);
 

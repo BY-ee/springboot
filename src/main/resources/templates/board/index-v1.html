@@ -28,22 +28,14 @@
     </script>
 </head>
 <body class="bg-image-milkyway">
-    <div class="flex-end gap-20 mr-20">
-        <form th:action="@{/my-page}" method="get">
-            <button class="btn btn-primary" type="submit">내정보</button>
-        </form>
-
-        <form th:action="@{/logout}" method="get" onsubmit="return confirmLogOutPost()">
-            <button class="btn btn-secondary" type="submit">로그아웃</button>
-        </form>
+    <div class="flex-end gap-20" th:if="${user}">
+        <button class="btn btn-primary" type="button" onclick="location.href='/my-page'">내정보</button>
+        <button class="btn btn-secondary" type="button" onclick="location.href='/logout'">로그아웃</button>
     </div>
-
-
-    <!-- <div th:if="${logInMessage != null}">
-        <script>
-            showLogInAlert("[[${logInMessage}]]");
-        </script>
-    </div> -->
+    <div class="flex-end gap-20" th:unless="${user}">
+        <button class="btn btn-primary" type="button" onclick="location.href='/signup'">회원가입</button>
+        <button class="btn btn-primary" type="button" onclick="location.href='/login'">로그인</button>
+    </div>
 
     <div class="flex mt-10vh">
         <div>
@@ -52,20 +44,22 @@
                     <p class="board-title-font">Q&A</p>
                 </div>
 
-                <div class="div-width-100p" th:each="post : ${postPage.content}">
-                    <form th:action="@{/board/detail/{id}(id=${post.id})}" method="get">
-                        <input type="hidden" th:value="${postPage.number + 1}" name="page" />
-                        <div class="post-list" onclick="this.closest('form').submit();">
-                            <div class="p-5 my-10 font-size-16">
-                                <p th:text="${post.nickname}"></p>
-                                <p th:text="${post.title}"></p>
+                <div th:if="${qnAPostPage}">
+                    <div class="div-width-100p" th:each="qna-post : ${qnAPostPage.content}">
+                        <form th:action="@{/detail/{id}(id=${post.id})}" method="get">
+                            <input type="hidden" th:value="${postPage.number + 1}" name="page" />
+                            <div class="post-list" onclick="this.closest('form').submit();">
+                                <div class="p-5 my-10 font-size-16">
+                                    <p th:text="${qna-post.nickname}"></p>
+                                    <p th:text="${qna-post.title}"></p>
+                                </div>
                             </div>
-                        </div>
-                        <hr>
-                    </form>
+                            <hr>
+                        </form>
+                    </div>
                 </div>
-                
-                <a class="inline-block m-5 p-5 pointer" th:href="@{/board/articles(page=${postPage.number + 1})}">전체 글 보기</a>
+
+                <a class="inline-block m-5 p-5 pointer" th:href="@{/qna}">전체 글 보기</a>
             </div>
         </div>
 
@@ -75,20 +69,22 @@
                     <p class="board-title-font">커뮤니티</p>
                 </div>
 
-                <div class="div-width-100p" th:each="post : ${postPage.content}">
-                    <form th:action="@{/board/detail/{id}(id=${post.id})}" method="get">
-                        <input type="hidden" th:value="${postPage.number + 1}" name="page" />
-                        <div class="post-list" onclick="this.closest('form').submit();">
-                            <div class="p-5 my-10 font-size-16">
-                                <p th:text="${post.nickname}"></p>
-                                <p th:text="${post.title}"></p>
+                <div th:if="${commPostPage}">
+                    <div class="div-width-100p" th:each="comm-post : ${commPostPage.content}">
+                        <form th:action="@{/detail/{id}(id=${post.id})}" method="get">
+                            <input type="hidden" th:value="${postPage.number + 1}" name="page" />
+                            <div class="post-list" onclick="this.closest('form').submit();">
+                                <div class="p-5 my-10 font-size-16">
+                                    <p th:text="${comm-post.nickname}"></p>
+                                    <p th:text="${comm-post.title}"></p>
+                                </div>
                             </div>
-                        </div>
-                        <hr>
-                    </form>
+                            <hr>
+                        </form>
+                    </div>
                 </div>
-
-                <a class="inline-block m-5 p-5 pointer" th:href="@{/board/articles(page=${postPage.number + 1})}">전체 글 보기</a>
+                    
+                <a class="inline-block m-5 p-5 pointer" th:href="@{/community}">전체 글 보기</a>
             </div>
         </div>
     </div>

@@ -1,9 +1,7 @@
 package com.boardspace.controller;
 
-import com.boardspace.model.CommunityBoard;
 import com.boardspace.model.QnABoard;
 import com.boardspace.model.User;
-import com.boardspace.service.CommunityBoardService;
 import com.boardspace.service.Pagination;
 import com.boardspace.service.QnABoardService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,24 +13,16 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
-public class BoardController {
-    private final CommunityBoardService commBoardService;
+@RequestMapping("/qna")
+public class QnABoardController {
     private final QnABoardService qnABoardService;
 
     @GetMapping
-    public String index(Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        int page = 1;
+    public String listQnAPosts(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         int size = 5;
-
-        // 각 게시글을 size 별로 나눠서 뷰에 전달
         Pagination<QnABoard> qnAPostPage = qnABoardService.getPosts(page, size);
-        Pagination<CommunityBoard> commPostPage = commBoardService.getPosts(page, size);
-        model.addAttribute("qnAPost", qnAPostPage);
-        model.addAttribute("commPost", commPostPage);
-        model.addAttribute("user", user);
-        return "board/index-v1";
+        model.addAttribute("qnAPostPage", qnAPostPage);
+        return "board/articles-v1";
     }
 
     @GetMapping("/write")
@@ -42,18 +32,18 @@ public class BoardController {
 
     @PostMapping("/write")
     public String writePost(HttpServletRequest request,
-                            @ModelAttribute CommunityBoard post) {
+                            @ModelAttribute QnABoard post) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         String nickname = user.getNickname();
-        commBoardService.writePost(nickname, post);
+        qnABoardService.writePost(nickname, post);
         return "redirect:/";
     }
 
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable("id") Long id,
                          @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-        CommunityBoard post = commBoardService.findById(id).orElseThrow();
+        QnABoard post = qnABoardService.findById(id).orElseThrow();
         model.addAttribute("post", post);
         model.addAttribute("page", page);
         return "board/detail-v1";
@@ -62,38 +52,21 @@ public class BoardController {
     @GetMapping("/update/{id}")
     public String update(@PathVariable("id") Long id,
                          @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-        CommunityBoard post = commBoardService.findById(id).orElseThrow();
+        QnABoard post = qnABoardService.findById(id).orElseThrow();
         model.addAttribute("post", post);
         model.addAttribute("page", page);
         return "board/update";
     }
 
     @PostMapping("/update")
-    public String updatePostById(@RequestParam("id") Long id, @ModelAttribute CommunityBoard post) {
-        commBoardService.updateById(id, post);
+    public String updatePostById(@RequestParam("id") Long id, @ModelAttribute QnABoard post) {
+        qnABoardService.updateById(id, post);
         return "redirect:/articles?page=1";
     }
 
     @PostMapping("/delete")
     public String deletePostById(@RequestParam("id") Long id) {
-        commBoardService.deleteById(id);
+        qnABoardService.deleteById(id);
         return "redirect:/articles?page=1";
-    }
-
-    @GetMapping("/my-post")
-    public String myPost(@RequestParam(value = "page", defaultValue = "1") int page,
-                         HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        int size = 5;
-        Pagination<CommunityBoard> postPage = commBoardService.findPostsByNickName(page, size, user.getNickname());
-        model.addAttribute("user", user);
-        model.addAttribute("postPage", postPage);
-        return "user/my-post-v1";
-    }
-
-    @GetMapping("/home")
-    public String redirectToHome() {
-        return "redirect:/";
     }
 }

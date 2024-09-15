@@ -12,7 +12,7 @@
 <body>
     <h1>글 수정</h1>
     <div class="button-container" style="display:flex; gap:10px">
-        <form th:action="@{/board/update}" method="post" onsubmit="showUpdateAlert()">
+        <form th:action="@{/update}" method="post" onsubmit="showUpdateAlert()">
             <div>
                 <label for="title">제목:</label>
                 <input type="text" id="title" th:value="${post.title}" name="title" required />
@@ -24,7 +24,7 @@
                 <input type="hidden" th:value="${post.id}" name="id">
                 <button type="submit">수정</button>
         </form>
-        <form th:action="@{/board/articles(page=${page})}" method="get">
+        <form th:action="@{/articles(page=${page})}" method="get">
             <button type="submit">글 목록</button>
         </form>
     </div>

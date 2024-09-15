@@ -1,11 +1,9 @@
 package com.boardspace.controller;
 
 import com.boardspace.model.CommunityBoard;
-import com.boardspace.model.QnABoard;
 import com.boardspace.model.User;
 import com.boardspace.service.CommunityBoardService;
 import com.boardspace.service.Pagination;
-import com.boardspace.service.QnABoardService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -15,24 +13,16 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
-public class BoardController {
+@RequestMapping("/community")
+public class CommunityBoardController {
     private final CommunityBoardService commBoardService;
-    private final QnABoardService qnABoardService;
 
     @GetMapping
-    public String index(Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        int page = 1;
+    public String listCommPosts(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         int size = 5;
-
-        // 각 게시글을 size 별로 나눠서 뷰에 전달
-        Pagination<QnABoard> qnAPostPage = qnABoardService.getPosts(page, size);
-        Pagination<CommunityBoard> commPostPage = commBoardService.getPosts(page, size);
-        model.addAttribute("qnAPost", qnAPostPage);
-        model.addAttribute("commPost", commPostPage);
-        model.addAttribute("user", user);
-        return "board/index-v1";
+        Pagination<CommunityBoard> commPosts = commBoardService.getPosts(page, size);
+        model.addAttribute("commPosts", commPosts);
+        return "board/articles-v1";
     }
 
     @GetMapping("/write")
@@ -90,10 +80,5 @@ public class BoardController {
         model.addAttribute("user", user);
         model.addAttribute("postPage", postPage);
         return "user/my-post-v1";
-    }
-
-    @GetMapping("/home")
-    public String redirectToHome() {
-        return "redirect:/";
     }
 }
