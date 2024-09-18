@@ -20,9 +20,9 @@ public class CommunityBoardController {
     @GetMapping
     public String listCommPosts(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         int size = 5;
-        Pagination<CommunityBoard> commPosts = commBoardService.getPosts(page, size);
-        model.addAttribute("commPosts", commPosts);
-        return "board/articles-v1";
+        Pagination<CommunityBoard> commPostPage = commBoardService.getPosts(page, size);
+        model.addAttribute("commPostPage", commPostPage);
+        return "board/community";
     }
 
     @GetMapping("/write")
@@ -40,22 +40,13 @@ public class CommunityBoardController {
         return "redirect:/";
     }
 
-    @GetMapping("/detail/{id}")
+    @GetMapping("/{id}")
     public String detail(@PathVariable("id") Long id,
                          @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         CommunityBoard post = commBoardService.findById(id).orElseThrow();
         model.addAttribute("post", post);
         model.addAttribute("page", page);
         return "board/detail-v1";
-    }
-
-    @GetMapping("/update/{id}")
-    public String update(@PathVariable("id") Long id,
-                         @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-        CommunityBoard post = commBoardService.findById(id).orElseThrow();
-        model.addAttribute("post", post);
-        model.addAttribute("page", page);
-        return "board/update";
     }
 
     @PostMapping("/update")
@@ -68,17 +59,5 @@ public class CommunityBoardController {
     public String deletePostById(@RequestParam("id") Long id) {
         commBoardService.deleteById(id);
         return "redirect:/articles?page=1";
-    }
-
-    @GetMapping("/my-post")
-    public String myPost(@RequestParam(value = "page", defaultValue = "1") int page,
-                         HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        int size = 5;
-        Pagination<CommunityBoard> postPage = commBoardService.findPostsByNickName(page, size, user.getNickname());
-        model.addAttribute("user", user);
-        model.addAttribute("postPage", postPage);
-        return "user/my-post-v1";
     }
 }

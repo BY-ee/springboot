@@ -12,14 +12,6 @@
         }
     </style>
 
-    <!-- <script type="text/javascript">
-        function showLogInAlert(message) {
-            if (message) {
-                alert(message);
-            }
-        }
-    </script> -->
-
     <script>
         function confirmLogOutPost() {
             let confirmFlag = confirm("로그아웃하시겠습니까?");
@@ -44,14 +36,14 @@
                     <p class="board-title-font">Q&A</p>
                 </div>
 
-                <div th:if="${qnAPostPage}">
-                    <div class="div-width-100p" th:each="qna-post : ${qnAPostPage.content}">
-                        <form th:action="@{/detail/{id}(id=${post.id})}" method="get">
-                            <input type="hidden" th:value="${postPage.number + 1}" name="page" />
+                <div th:if="${qnAPostPage.totalElements > 0}">
+                    <div class="div-width-100p" th:each="qnAPost : ${qnAPostPage.content}">
+                        <form th:action="@{/qna/{id}(id=${qnAPost.id})}" method="get">
+                            <input type="hidden" th:value="${qnAPostPage.number + 1}" name="page" />
                             <div class="post-list" onclick="this.closest('form').submit();">
                                 <div class="p-5 my-10 font-size-16">
-                                    <p th:text="${qna-post.nickname}"></p>
-                                    <p th:text="${qna-post.title}"></p>
+                                    <p th:text="${qnAPost.nickname}"></p>
+                                    <p th:text="${qnAPost.title}"></p>
                                 </div>
                             </div>
                             <hr>
@@ -69,14 +61,14 @@
                     <p class="board-title-font">커뮤니티</p>
                 </div>
 
-                <div th:if="${commPostPage}">
-                    <div class="div-width-100p" th:each="comm-post : ${commPostPage.content}">
-                        <form th:action="@{/detail/{id}(id=${post.id})}" method="get">
-                            <input type="hidden" th:value="${postPage.number + 1}" name="page" />
+                <div th:if="${commPostPage.totalElements > 0}">
+                    <div class="div-width-100p" th:each="commPost : ${commPostPage.content}">
+                        <form th:action="@{/community/{id}(id=${commPost.id})}" method="get">
+                            <input type="hidden" th:value="${commPostPage.number + 1}" name="page" />
                             <div class="post-list" onclick="this.closest('form').submit();">
                                 <div class="p-5 my-10 font-size-16">
-                                    <p th:text="${comm-post.nickname}"></p>
-                                    <p th:text="${comm-post.title}"></p>
+                                    <p th:text="${commPost.nickname}"></p>
+                                    <p th:text="${commPost.title}"></p>
                                 </div>
                             </div>
                             <hr>

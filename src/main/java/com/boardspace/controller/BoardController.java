@@ -29,8 +29,8 @@ public class BoardController {
         // 각 게시글을 size 별로 나눠서 뷰에 전달
         Pagination<QnABoard> qnAPostPage = qnABoardService.getPosts(page, size);
         Pagination<CommunityBoard> commPostPage = commBoardService.getPosts(page, size);
-        model.addAttribute("qnAPost", qnAPostPage);
-        model.addAttribute("commPost", commPostPage);
+        model.addAttribute("qnAPostPage", qnAPostPage);
+        model.addAttribute("commPostPage", commPostPage);
         model.addAttribute("user", user);
         return "board/index-v1";
     }

@@ -22,7 +22,7 @@ public class QnABoardController {
         int size = 5;
         Pagination<QnABoard> qnAPostPage = qnABoardService.getPosts(page, size);
         model.addAttribute("qnAPostPage", qnAPostPage);
-        return "board/articles-v1";
+        return "board/qna";
     }
 
     @GetMapping("/write")
@@ -40,22 +40,13 @@ public class QnABoardController {
         return "redirect:/";
     }
 
-    @GetMapping("/detail/{id}")
+    @GetMapping("/{id}")
     public String detail(@PathVariable("id") Long id,
                          @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         QnABoard post = qnABoardService.findById(id).orElseThrow();
         model.addAttribute("post", post);
         model.addAttribute("page", page);
         return "board/detail-v1";
-    }
-
-    @GetMapping("/update/{id}")
-    public String update(@PathVariable("id") Long id,
-                         @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-        QnABoard post = qnABoardService.findById(id).orElseThrow();
-        model.addAttribute("post", post);
-        model.addAttribute("page", page);
-        return "board/update";
     }
 
     @PostMapping("/update")

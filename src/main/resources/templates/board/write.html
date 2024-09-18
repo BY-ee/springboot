@@ -3,16 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>글 작성 페이지</title>
-    <script>
-        function showSuccessAlert() {
-            alert("글이 성공적으로 작성되었습니다.");
-        }
-    </script>
 </head>
 <body>
     <h1>게시글 작성</h1>
     <div class="button-container" style="display:flex; gap:10px;">
-        <form th:action="@{/write}" method="post" onsubmit="showSuccessAlert()">
+        <form id="write-post-form" method="post">
             <div>
                 <label for="title">제목:</label>
                 <input type="text" id="title" name="title" required />
@@ -27,5 +22,23 @@
     <form th:action="@{/home}" method="get">
         <button type="submit">Home</button>
     </form>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+        $(() => {
+            // 현재 URL 경로 확인
+            let path = location.pathname;
+            let form = $('#write-post-form');
+
+            // URL에 따른 action 설정
+            if(path.includes('/qna')) {
+                form.attr('action', '/qna/write');
+            } else if(path.includes('/community')) {
+                form.attr('action', '/community/write');
+            } else {
+                alert('Wrong URL');
+            }
+        })
+    </script>
 </body>
 </html>

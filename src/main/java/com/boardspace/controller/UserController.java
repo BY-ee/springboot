@@ -17,15 +17,15 @@ import java.util.Optional;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/")
+    @GetMapping("/login")
     public String index(HttpServletRequest request,
                         @ModelAttribute User user, Model model) {
         HttpSession session = request.getSession();
         if(session.getAttribute("user") != null) {
-            return "redirect:/board";
+            return "redirect:/";
         } else {
             model.addAttribute("user", user);
-            return "user/index-v1";
+            return "user/login";
         }
     }
 
@@ -39,7 +39,7 @@ public class UserController {
             HttpSession session = request.getSession();
             session.setAttribute("user", authenticatedUser.get());
             redirectAttributes.addFlashAttribute("logInMessage", UserConstant.LOGIN_SUCCESS_MESSAGE);
-            return "redirect:/board";
+            return "redirect:/";
         } else {
             redirectAttributes.addFlashAttribute("logInMessage", UserConstant.LOGIN_FAILURE_MESSAGE);
             return "redirect:/";
@@ -180,11 +180,6 @@ public class UserController {
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.invalidate();
-        return "redirect:/";
-    }
-
-    @GetMapping("/home")
-    public String redirectToHome() {
         return "redirect:/";
     }
 }

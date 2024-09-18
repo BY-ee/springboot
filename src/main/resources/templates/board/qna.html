@@ -9,15 +9,15 @@
 <body class="bg-image-milkyway">
     <h1>글 목록</h1>
 
-    <div th:if="${qnaPostPage.totalElements > 0}">
+    <div th:if="${qnAPostPage.totalElements > 0}">
         <div class="flex-col align-center mt-5vh">
-            <div class="div-width-50p" th:each="post : ${postPage.content}">
-                <form th:action="@{/detail/{id}(id=${post.id})}" method="get">
-                    <input type="hidden" th:value="${postPage.number + 1}" name="page" />
+            <div class="div-width-50p" th:each="qnAPost : ${qnAPostPage.content}">
+                <form th:action="@{/qna/{id}(id=${qnAPost.id})}" method="get">
+                    <input type="hidden" th:value="${qnAPostPage.number + 1}" name="page" />
                     <div class="post-list" onclick="this.closest('form').submit();">
                         <div class="p-5 my-10 font-size-16">
-                            <p th:text="${post.nickname}"></p>
-                            <p th:text="${post.title}"></p>
+                            <p th:text="${qnAPost.nickname}"></p>
+                            <p th:text="${qnAPost.title}"></p>
                         </div>
                     </div>
                     <hr>
@@ -25,24 +25,24 @@
             </div>
 
             <div class="flex mt-10 font-size-16">
-                <div th:each="pageNum : ${#numbers.sequence(1, postPage.totalPages)}">
+                <div th:each="qnAPageNum : ${#numbers.sequence(1, qnAPostPage.totalPages)}">
                     <div class="page-line">
-                        <a class="inactive-page" th:if="${pageNum != postPage.number + 1}" th:text="${pageNum}" th:href="@{/articles(page=${pageNum})}"></a>
-                        <span class="active-page" th:if="${pageNum == postPage.number + 1}" th:text="${pageNum}"></span>
+                        <a class="inactive-page" th:if="${qnAPageNum != qnAPostPage.number + 1}" th:text="${qnAPageNum}" th:href="@{/qna(page=${qnAPageNum})}"></a>
+                        <span class="active-page" th:if="${qnAPageNum == qnAPostPage.number + 1}" th:text="${qnAPageNum}"></span>
                     </div>
                 </div>
             </div>
 
             <div class="button-container">
-                <button class="btn btn-primary" type="button" onclick="window.location.href='/write'">글 작성</button>
+                <button class="btn btn-primary" type="button" onclick="window.location.href='/qna/write'">글 작성</button>
                 <button class="btn btn-primary" type="button" onclick="window.location.href='/'">돌아가기</button>
             </div>
         </div>
     </div>
     
-    <div th:unless="${postPage.totalElements > 0}">
+    <div th:unless="${qnAPostPage.totalElements > 0}">
         <div class="button-container">
-            <button class="btn btn-primary" type="button" onclick="window.location.href='/write'">글 작성</button>
+            <button class="btn btn-primary" type="button" onclick="window.location.href='/qna/write'">글 작성</button>
             <button class="btn btn-primary" type="button" onclick="window.location.href='/'">돌아가기</button>
         </div>
     </div>
