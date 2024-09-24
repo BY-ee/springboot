@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="navbarFragment">
+    <div style="border: 1px solid #FFF;">
+        <img th:src="http://www.thymeleaf.org/images/logo.png" alt="" onclick="location.href = location.origin" />
+        <h1>Navigation bar</h1>
+        
+        <div class="flex-end gap-20" th:if="${user}">
+            <button class="btn btn-primary" type="button" onclick="location.href='/my-page'">내정보</button>
+            <button class="btn btn-secondary" type="button" onclick="location.href='/logout'">로그아웃</button>
+        </div>
+        <div class="flex-end gap-20" th:unless="${user}">
+            <button class="btn btn-primary" type="button" onclick="location.href='/signup'">회원가입</button>
+            <button class="btn btn-primary" type="button" onclick="location.href='/login'">로그인</button>
+        </div>
+    </div>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <!-- config.html의 head 태그를 이 위치에 로드 -->
+    <th:replace="fragments/config :: headConfig"></th:replace>
+</head>
+<body>
+    <!-- header에 navbar.html을 로드 -->
+    <header th:replace="fragments/navbar :: navbarFragment"></header>
+
+    <!-- 페이지 별 코드가 이 위치에 삽입 -->
+    <main layout:fragment="content">
+        <div th:replace="${content}"></div>
+    </main>
+
+    <!-- footer에 footer.html을 로드 -->
+    <footer th:replace="fragments/footer :: footerFragment"></footer>
+
+    <!-- config.html의 body 태그를 이 위치에 로드 -->
+    <th:replace="fragments/config :: bodyConfig"></th:replace>
+</body>
+</html>

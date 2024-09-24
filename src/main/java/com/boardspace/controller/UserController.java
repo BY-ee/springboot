@@ -25,7 +25,7 @@ public class UserController {
             return "redirect:/";
         } else {
             model.addAttribute("user", user);
-            return "user/login";
+            return "pages/user/login";
         }
     }
 
@@ -49,7 +49,7 @@ public class UserController {
     @GetMapping("/signup")
     public String signUp(Model model) {
         model.addAttribute("user", new User());
-        return "user/signup-v1";
+        return "pages/user/signup-v1";
     }
 
     @PostMapping("/signup")
@@ -63,14 +63,14 @@ public class UserController {
 
     @GetMapping("/forgot-id")
     public String forgotId() {
-        return "user/forgot-id";
+        return "pages/user/forgot-id";
     }
 
     @PostMapping("/forgot-id")
     public String forgotId(@RequestParam("email") String email, Model model) {
         String userId = userService.findUserIdByEmail(email).orElse(null);
         model.addAttribute("userid", userId);
-        return "user/return-id";
+        return "pages/user/return-id";
     }
 
     @GetMapping("/forgot-pw")
@@ -86,7 +86,7 @@ public class UserController {
         Long id = userService.findIdByUserIdAndEmail(userId, email).orElse(null);
         session.setAttribute("passwordResetId", id);
         model.addAttribute("id", id);
-        return "user/reset-pw";
+        return "pages/user/reset-pw";
     }
 
     @PostMapping("/reset-pw")
@@ -104,7 +104,7 @@ public class UserController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
-        return "user/my-page-v1";
+        return "pages/user/my-page-v1";
     }
 
     @PostMapping("/user/update")
@@ -129,7 +129,7 @@ public class UserController {
 
     @GetMapping("/user/withdrawal")
     public String moveWithdrawalView() {
-        return "user/withdrawal";
+        return "pages/user/withdrawal";
     }
 
     @PostMapping("/user/withdrawal")
@@ -147,7 +147,7 @@ public class UserController {
         User user = (User) session.getAttribute("user");
         String password = user.getPassword();
         model.addAttribute("password", password);
-        return "/user/verify-password";
+        return "/pages/user/verify-password";
     }
 
     @PostMapping("/user/verify-password")

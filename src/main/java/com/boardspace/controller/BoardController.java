@@ -32,7 +32,7 @@ public class BoardController {
         model.addAttribute("qnAPostPage", qnAPostPage);
         model.addAttribute("commPostPage", commPostPage);
         model.addAttribute("user", user);
-        return "pages/board/index-v1";
+        return "pages/board/index";
     }
 
     @GetMapping("/write")
@@ -89,7 +89,7 @@ public class BoardController {
         Pagination<CommunityBoard> postPage = commBoardService.findPostsByNickName(page, size, user.getNickname());
         model.addAttribute("user", user);
         model.addAttribute("postPage", postPage);
-        return "user/my-post-v1";
+        return "pages/user/my-post-v1";
     }
 
     @GetMapping("/home")
