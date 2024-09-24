@@ -32,12 +32,12 @@ public class BoardController {
         model.addAttribute("qnAPostPage", qnAPostPage);
         model.addAttribute("commPostPage", commPostPage);
         model.addAttribute("user", user);
-        return "board/index-v1";
+        return "pages/board/index-v1";
     }
 
     @GetMapping("/write")
     public String writePost() {
-        return "board/write";
+        return "pages/board/write";
     }
 
     @PostMapping("/write")
@@ -56,7 +56,7 @@ public class BoardController {
         CommunityBoard post = commBoardService.findById(id).orElseThrow();
         model.addAttribute("post", post);
         model.addAttribute("page", page);
-        return "board/post";
+        return "pages/board/post";
     }
 
     @GetMapping("/update/{id}")
@@ -65,7 +65,7 @@ public class BoardController {
         CommunityBoard post = commBoardService.findById(id).orElseThrow();
         model.addAttribute("post", post);
         model.addAttribute("page", page);
-        return "board/update";
+        return "pages/board/update";
     }
 
     @PostMapping("/update")

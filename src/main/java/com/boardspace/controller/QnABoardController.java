@@ -22,12 +22,12 @@ public class QnABoardController {
         int size = 5;
         Pagination<QnABoard> qnAPostPage = qnABoardService.getPosts(page, size);
         model.addAttribute("qnAPostPage", qnAPostPage);
-        return "board/qna";
+        return "pages/board/qna";
     }
 
     @GetMapping("/write")
     public String writePost() {
-        return "board/write";
+        return "pages/board/write";
     }
 
     @PostMapping("/write")
@@ -46,7 +46,7 @@ public class QnABoardController {
         QnABoard post = qnABoardService.findById(id).orElseThrow();
         model.addAttribute("post", post);
         model.addAttribute("page", page);
-        return "board/post";
+        return "pages/board/post";
     }
 
     @PostMapping("/update")

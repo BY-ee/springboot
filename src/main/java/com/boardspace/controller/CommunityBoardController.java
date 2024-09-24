@@ -22,12 +22,12 @@ public class CommunityBoardController {
         int size = 5;
         Pagination<CommunityBoard> commPostPage = commBoardService.getPosts(page, size);
         model.addAttribute("commPostPage", commPostPage);
-        return "board/community";
+        return "pages/board/community";
     }
 
     @GetMapping("/write")
     public String writePost() {
-        return "board/write";
+        return "pages/board/write";
     }
 
     @PostMapping("/write")

@@ -15,7 +15,7 @@
         <h1>회원정보</h1>
         <div class="flex">
             <div class="flex-column">
-                <form th:action="@{/board/my-post}" method="get">
+                <form th:action="@{/templates/pages/board/my-post}" method="get">
                     <button class="btn btn-primary" type="submit">내 글</button>
                 </form>
                 <button class="btn btn-primary" type="button">내 댓글</button>
@@ -25,7 +25,7 @@
             </div>
 
             <div class="m-0-auto">
-                <form th:action="@{/user/update}" th:object="${user}" method="post" onsubmit="showEditUserAlert()">
+                <form th:action="@{/templates/pages/user/update}" th:object="${user}" method="post" onsubmit="showEditUserAlert()">
                     <label for="userId">아이디</label>
                     <input class="no-pointer input-width-400" type="text" id="userId" th:value="${user.userId}" th:field="*{userId}" style="background: #818181;" readonly />
 

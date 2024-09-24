@@ -22,7 +22,7 @@
     <p>메인 화면으로 돌아가시려면 돌아가기 버튼을 눌러주세요.</p>
 
     <div class="button-container" style="display: flex; gap: 10px;">
-        <form th:action="@{/user/withdrawal}" method="post" onsubmit="return confirmWithdrawal()">
+        <form th:action="@{/templates/pages/user/withdrawal}" method="post" onsubmit="return confirmWithdrawal()">
             <button type="submit">회원탈퇴</button>
         </form>
 
