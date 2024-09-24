@@ -7,7 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/styles-v1.css}" href="../../static/css/styles-v1.css">
 </head>
 <body class="bg-image-milkyway">
-    <h1>글 목록</h1>
+    <div th:insert="~{line-template.html}" th:with="text='글목록'"></div>
 
     <div th:if="${qnAPostPage.totalElements > 0}">
         <div class="flex-col align-center mt-5vh">
@@ -34,17 +34,20 @@
             </div>
 
             <div class="button-container">
-                <button class="btn btn-primary" type="button" onclick="window.location.href='/qna/write'">글 작성</button>
-                <button class="btn btn-primary" type="button" onclick="window.location.href='/'">돌아가기</button>
+                <button class="btn btn-primary" id="go-to-write-page-button" type="button">글 작성</button>
+                <button class="btn btn-primary" id="go-to-main-page-button" type="button">돌아가기</button>
             </div>
         </div>
     </div>
     
     <div th:unless="${qnAPostPage.totalElements > 0}">
         <div class="button-container">
-            <button class="btn btn-primary" type="button" onclick="window.location.href='/qna/write'">글 작성</button>
-            <button class="btn btn-primary" type="button" onclick="window.location.href='/'">돌아가기</button>
+            <button class="btn btn-primary" id="go-to-write-page-button" type="button">글 작성</button>
+            <button class="btn btn-primary" id="go-to-main-page-button" type="button">돌아가기</button>
         </div>
     </div>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/js/boards/actionByURL.js"></script>
 </body>
 </html>

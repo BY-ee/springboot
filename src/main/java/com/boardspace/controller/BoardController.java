@@ -56,7 +56,7 @@ public class BoardController {
         CommunityBoard post = commBoardService.findById(id).orElseThrow();
         model.addAttribute("post", post);
         model.addAttribute("page", page);
-        return "board/detail-v1";
+        return "board/post";
     }
 
     @GetMapping("/update/{id}")

@@ -46,7 +46,7 @@ public class QnABoardController {
         QnABoard post = qnABoardService.findById(id).orElseThrow();
         model.addAttribute("post", post);
         model.addAttribute("page", page);
-        return "board/detail-v1";
+        return "board/post";
     }
 
     @PostMapping("/update")

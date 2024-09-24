@@ -14,11 +14,7 @@
     </script>
 </head>
 <body class="bg-image-milkyway">
-    <div class="line-container pt-15vh">
-        <div class="line-left"></div>
-        <span class="line-text">게시글 조회</span>
-        <div class="line-right"></div>
-    </div>
+    <div th:insert="~{line-template.html}" th:with="text='게시글'"></div>
 
     <div class="post-box">
         <p class="post-nickname" th:text="${post.nickname}"></p>
@@ -39,10 +35,10 @@
             <button class="btn btn-secondary" type="submit">삭제</button>
         </form>
 
-        <form th:action="@{/articles}" method="get">
-            <input type="hidden" th:value="${page}" name="page">
-            <button class="btn btn-primary" type="submit">글 목록</button>
-        </form>
+        <button class="btn btn-primary" id="go-to-posts-button" type="button">글목록</button>
     </div>
+    
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/js/boards/actionByURL.js"></script>
 </body>
 </html>
