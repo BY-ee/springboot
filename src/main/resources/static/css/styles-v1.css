@@ -18,10 +18,11 @@ body {
     line-height: 1.6;
     font-size: 14px;
     overflow-y: auto;
+    background-color: #333;
 }
 
 /* Background Image Setting */
-.bg-image-flower {
+/* .bg-image-flower {
     background-image: url(../image/flower.jpg);
     background-size: cover;
     background-position: center;
@@ -33,7 +34,7 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-}
+} */
 
 /* ==========================================
    ID Styles
@@ -99,7 +100,25 @@ p {
 input {
     border: #686868 solid 1px;
     border-radius: 5px;
-    background: #353535;
+    background: #555;
+    padding: 10px;
+    color: #FFF;
+}
+
+/* Select Styles */
+select {
+    border: #777 solid 1px;
+    border-radius: 5px;
+    background: #666;
+    padding: 10px;
+    color: #FFF;
+}
+
+/* Textarea Styles */
+textarea {
+    border: #686868 solid 1px;
+    border-radius: 5px;
+    background: #555;
     padding: 10px;
     color: #FFF;
 }
@@ -1698,8 +1717,28 @@ table input:focus {
     width: 50%;
 }
 
+.div-width-55p {
+    width: 55%;
+}
+
+.div-width-60p {
+    width: 60%;
+}
+
+.div-width-65p {
+    width: 65%;
+}
+
+.div-width-70p {
+    width: 70%;
+}
+
 .div-width-75p {
     width: 75%;
+}
+
+.div-width-80p {
+    width: 80%;
 }
 
 .div-width-100p {
@@ -1724,6 +1763,70 @@ table input:focus {
 
 .div-width-500 {
     width: 500px;
+}
+
+.div-width-15vh {
+    width: 15vh;
+}
+
+.div-width-20vh {
+    width: 20vh;
+}
+
+.div-width-25vh {
+    width: 25vh;
+}
+
+.div-width-30vh {
+    width: 30vh;
+}
+
+.div-width-35vh {
+    width: 35vh;
+}
+
+.div-width-40vh {
+    width: 40vh;
+}
+
+.div-width-45vh {
+    width: 45vh;
+}
+
+.div-width-50vh {
+    width: 50vh;
+}
+
+.div-width-55vh {
+    width: 55vh;
+}
+
+.div-width-60vh {
+    width: 60vh;
+}
+
+.div-width-65vh {
+    width: 65vh;
+}
+
+.div-width-70vh {
+    width: 70vh;
+}
+
+.div-width-75vh {
+    width: 75vh;
+}
+
+.div-width-80vh {
+    width: 80vh;
+}
+
+.div-width-90vh {
+    width: 90vh;
+}
+
+.div-width-100vh {
+    width: 100vh;
 }
 
 .div-height-15p {
@@ -1758,12 +1861,96 @@ table input:focus {
     height: 50%;
 }
 
+.div-height-55p {
+    height: 55%;
+}
+
+.div-height-60p {
+    height: 60%;
+}
+
+.div-height-65p {
+    height: 65%;
+}
+
+.div-height-70p {
+    height: 70%;
+}
+
 .div-height-75p {
     height: 75%;
 }
 
+.div-height-80p {
+    height: 80%;
+}
+
 .div-height-100p {
     height: 100%;
+}
+
+.div-height-15vh {
+    height: 15vh;
+}
+
+.div-height-20vh {
+    height: 20vh;
+}
+
+.div-height-25vh {
+    height: 25vh;
+}
+
+.div-height-30vh {
+    height: 30vh;
+}
+
+.div-height-35vh {
+    height: 35vh;
+}
+
+.div-height-40vh {
+    height: 40vh;
+}
+
+.div-height-45vh {
+    height: 45vh;
+}
+
+.div-height-50vh {
+    height: 50vh;
+}
+
+.div-height-55vh {
+    height: 55vh;
+}
+
+.div-height-60vh {
+    height: 60vh;
+}
+
+.div-height-65vh {
+    height: 65vh;
+}
+
+.div-height-70vh {
+    height: 70vh;
+}
+
+.div-height-75vh {
+    height: 75vh;
+}
+
+.div-height-80vh {
+    height: 80vh;
+}
+
+.div-height-90vh {
+    height: 90vh;
+}
+
+.div-height-100vh {
+    height: 100vh;
 }
 
 .div-height-100 {
@@ -1820,12 +2007,24 @@ table input:focus {
     width: 50%;
 }
 
+.input-width-55p {
+    width: 55%;
+}
+
 .input-width-60p {
     width: 60%;
 }
 
+.input-width-65p {
+    width: 65%;
+}
+
 .input-width-70p {
     width: 70%;
+}
+
+.input-width-75p {
+    width: 75%;
 }
 
 .input-width-80p {
@@ -1838,6 +2037,70 @@ table input:focus {
 
 .input-width-100p {
     width: 100%;
+}
+
+.input-width-15vh {
+    width: 15vh;
+}
+
+.input-width-20vh {
+    width: 20vh;
+}
+
+.input-width-25vh {
+    width: 25vh;
+}
+
+.input-width-30vh {
+    width: 30vh;
+}
+
+.input-width-35vh {
+    width: 35vh;
+}
+
+.input-width-40vh {
+    width: 40vh;
+}
+
+.input-width-45vh {
+    width: 45vh;
+}
+
+.input-width-50vh {
+    width: 50vh;
+}
+
+.input-width-55vh {
+    width: 55vh;
+}
+
+.input-width-60vh {
+    width: 60vh;
+}
+
+.input-width-65vh {
+    width: 65vh;
+}
+
+.input-width-70vh {
+    width: 70vh;
+}
+
+.input-width-75vh {
+    width: 75vh;
+}
+
+.input-width-80vh {
+    width: 80vh;
+}
+
+.input-width-90vh {
+    width: 90vh;
+}
+
+.input-width-100vh {
+    width: 100vh;
 }
 
 .input-width-100 {
@@ -1858,6 +2121,154 @@ table input:focus {
 
 .input-width-500 {
     width: 500px;
+}
+
+.input-height-15p {
+    height: 15%;
+}
+
+.input-height-20p {
+    height: 20%;
+}
+
+.input-height-25p {
+    height: 25%;
+}
+
+.input-height-30p {
+    height: 30%;
+}
+
+.input-height-35p {
+    height: 35%;
+}
+
+.input-height-40p {
+    height: 40%;
+}
+
+.input-height-45p {
+    height: 45%;
+}
+
+.input-height-50p {
+    height: 50%;
+}
+
+.input-height-55p {
+    height: 55%;
+}
+
+.input-height-60p {
+    height: 60%;
+}
+
+.input-height-65p {
+    height: 65%;
+}
+
+.input-height-70p {
+    height: 70%;
+}
+
+.input-height-75p {
+    height: 75%;
+}
+
+.input-height-80p {
+    height: 80%;
+}
+
+.input-height-90p {
+    height: 90%;
+}
+
+.input-height-100p {
+    height: 100%;
+}
+
+.input-height-15vh {
+    height: 15vh;
+}
+
+.input-height-20vh {
+    height: 20vh;
+}
+
+.input-height-25vh {
+    height: 25vh;
+}
+
+.input-height-30vh {
+    height: 30vh;
+}
+
+.input-height-35vh {
+    height: 35vh;
+}
+
+.input-height-40vh {
+    height: 40vh;
+}
+
+.input-height-45vh {
+    height: 45vh;
+}
+
+.input-height-50vh {
+    height: 50vh;
+}
+
+.input-height-55vh {
+    height: 55vh;
+}
+
+.input-height-60vh {
+    height: 60vh;
+}
+
+.input-height-65vh {
+    height: 65vh;
+}
+
+.input-height-70vh {
+    height: 70vh;
+}
+
+.input-height-75vh {
+    height: 75vh;
+}
+
+.input-height-80vh {
+    height: 80vh;
+}
+
+.input-height-90vh {
+    height: 90vh;
+}
+
+.input-height-100vh {
+    height: 100vh;
+}
+
+.input-height-100 {
+    height: 100px;
+}
+
+.input-height-200 {
+    height: 200px;
+}
+
+.input-height-300 {
+    height: 300px;
+}
+
+.input-height-400 {
+    height: 400px;
+}
+
+.input-height-500 {
+    height: 500px;
 }
 
 /* Display Styles */
@@ -1927,14 +2338,19 @@ table input:focus {
     justify-content: end;
 }
 
+.flex-space-around {
+    display: flex;
+    justify-content: space-around;
+}
+
 .flex-space-between {
     display: flex;
     justify-content: space-between;
 }
 
-.flex-space-around {
+.flex-space-evenly{
     display: flex;
-    justify-content: space-around;
+    justify-content:space-evenly
 }
 
 .align-start {
@@ -2080,7 +2496,7 @@ table input:focus {
 
 .btn-primary:hover {
     background: #0058b6;
-    transition: background 0.3s ease;
+    transition: background 0.15s ease;
 }
 
 .btn-primary-disabled {
@@ -2096,13 +2512,23 @@ table input:focus {
 
 .btn-secondary:hover {
     background: #f33;
-    transition: background 0.3s ease;
+    transition: background 0.15s ease;
 }
 
 .btn-secondary-disabled {
     background: #FCC;
     color: #B3B3B3;
     cursor: default;
+}
+
+.btn-dark {
+    background: #777;
+    color: #ffffff;
+}
+
+.btn-dark:hover {
+    background: #999;
+    transition: background 0.15s ease;
 }
 
 .btn-selected {
@@ -2165,7 +2591,7 @@ table input:focus {
 
 .post-list:hover {
     background: #ff00aa27;
-    transition: 0.3s ease;
+    transition: 0.15s ease;
 }
 
 .post-box {
