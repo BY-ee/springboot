@@ -1,0 +1,17 @@
+<header th:fragment="headerFragment">
+    <div class="mb-20" style="border-bottom: 1px solid #FFF;">
+        <div class="flex-space-between align-center" style="width: 80%; margin: 0 10%;">
+            <img src="https://www.thymeleaf.org/images/thymeleaf.png" alt="" style="width: 40px; height: 40px; cursor: pointer;" onclick="location.href = location.origin" />
+            <span>Navigation bar</span>
+            
+            <div class="flex-end gap-20" th:if="${user}">
+                <button class="btn btn-primary" type="button" onclick="location.href='/my-page'">내정보</button>
+                <button class="btn btn-secondary" type="button" onclick="location.href='/logout'">로그아웃</button>
+            </div>
+            <div class="flex-end gap-20" th:unless="${user}">
+                <button class="btn btn-primary" type="button" onclick="location.href='/signup'">회원가입</button>
+                <button class="btn btn-primary" type="button" onclick="location.href='/login'">로그인</button>
+            </div>
+        </div>
+    </div>
+</header>
