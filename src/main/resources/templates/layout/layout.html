@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="fragments/config :: headConfig">
-    <!-- config.html의 head 태그를 이 위치에 로드 -->
+<!-- config.html의 head 태그 안의 내용이 들어감 -->
+<head th:replace="~{fragments/config :: headConfig}">
+    
 </head>
 <body>
-    <!-- header.html을 header에 로드 -->
-    <header th:insert="fragments/header :: headerFragment"></header>
+    <!-- header.html의 header 태그 -->
+    <header th:replace="~{fragments/header :: headerFragment}"></header>
 
-    <!-- 페이지 별 코드가 이 위치에 삽입 -->
+    <!-- main 태그는 페이지마다 다른 내용이 들어감 -->
     <main layout:fragment="content">
-        <div th:replace="${content}"></div>
+
     </main>
 
-    <!-- footer.html을 footer에 로드 -->
-    <footer th:insert="fragments/footer :: footerFragment"></footer>
+    <!-- footer.html의 footer 태그 -->
+    <footer th:replace="~{fragments/footer :: footerFragment}"></footer>
 
-    <!-- config.html의 body 태그를 이 위치에 로드 -->
-    <div th:replace="fragments/config :: bodyConfig"></div>
+    <!-- config.html의 body 태그 안의 로직이 들어감 -->
+    <div th:replace="~{fragments/config :: bodyConfig}"></div>
 </body>
 </html>

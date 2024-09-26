@@ -2,40 +2,12 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout.html}"
-      layout:fragment="content"
->
-<head>
-    <!-- <meta charset="UTF-8"> -->
-    <title>Home</title>
+      layout:decorate="~{layout/layout}">
+      
+    <title layout:fragment="title">Space</title>
 
-    <!-- <link rel="stylesheet" th:href="@{/css/styles-v1.css}" href="../../static/css/styles-v1.css"> -->
-
-    <!-- <style>
-        .flex > div {
-            flex: 1;
-        }
-    </style>
-
-    <script>
-        function confirmLogOutPost() {
-            let confirmFlag = confirm("로그아웃하시겠습니까?");
-            return confirmFlag;
-        }
-    </script> -->
-</head>
-<body class="bg-image-milkyway">
-    <!-- <div class="flex-end gap-20" th:if="${user}">
-        <button class="btn btn-primary" type="button" onclick="location.href='/my-page'">내정보</button>
-        <button class="btn btn-secondary" type="button" onclick="location.href='/logout'">로그아웃</button>
-    </div>
-    <div class="flex-end gap-20" th:unless="${user}">
-        <button class="btn btn-primary" type="button" onclick="location.href='/signup'">회원가입</button>
-        <button class="btn btn-primary" type="button" onclick="location.href='/login'">로그인</button>
-    </div> -->
-
-    <div class="flex mt-10vh" layout:fragment="content">
-        <div>
+    <main class="flex mt-10vh gap-20vh" layout:fragment="content">
+        <div class="flex-1">
             <div class="div-width-75p m-0-auto">
                 <div class="board-title-box div-width-100p mb-40">
                     <p class="board-title-font">Q&A</p>
@@ -60,7 +32,7 @@
             </div>
         </div>
 
-        <div>
+        <div class="flex-1">
             <div class="div-width-75p m-0-auto">
                 <div class="board-title-box div-width-100p mb-40">
                     <p class="board-title-font">커뮤니티</p>
@@ -84,6 +56,5 @@
                 <a class="inline-block m-5 p-5 pointer" th:href="@{/community}">전체 글 보기</a>
             </div>
         </div>
-    </div>
-</body>
+    </main>
 </html>
