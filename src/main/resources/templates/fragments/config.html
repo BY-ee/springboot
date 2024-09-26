@@ -1,0 +1,14 @@
+<head th:fragment="headConfig">
+    <!-- Common Head -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title layout:fragment="title">Config.html</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body th:fragment="bodyConfig">
+    <!-- JS -->
+    <script th:src="@{http://code.jquery.com/jquery-latest.js}"></script>
+    <script th:src="@{/js/boards/actionByURL.js}"></script>
+</body>

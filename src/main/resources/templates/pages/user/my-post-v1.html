@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>내 글 페이지</title>
+
+    <link rel="stylesheet" th:href="@{/css/styles-v1.css}" href="../../static/css/styles-v1.css">
+
+    <style>
+        /* Link Styles */
+        a {
+            color: #bebebe;
+            padding: 15px;
+        }
+
+        a:hover {
+            color: #ffffff;
+        }
+
+        a:focus {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-image-milkyway">
+    <h1>글 목록</h1>
+
+    <div class="flex-col" style="align-items: center;">
+        <div th:each="post : ${postPage.content}" style="width: 800px;">
+            <form th:action="@{/templates/pages/board/detail/{id}(id=${post.id})}" method="get">
+                <input type="hidden" th:value="${postPage.number + 1}" name="page" />
+                <div id="articles" onclick="this.closest('form').submit();">
+                    <div style="cursor: pointer; margin-left: 10px;">
+                        <div style="display: flex; gap: 50px; margin-bottom: 5px;">
+                            <p th:text="${post.nickname}"></p>
+                        </div>
+                        <p th:text="${post.title}"></p>
+                    </div>
+
+                    <hr style="margin: 15px 0;">
+                </div>
+            </form>
+        </div>
+
+        <div style="color: aliceblue; font-size: 16px; display: flex;">
+            <div th:each="pageNum : ${#numbers.sequence(1, postPage.totalPages)}">
+                <a th:if="${pageNum != postPage.number + 1}" th:text="${pageNum}" th:href="@{/templates/pages/board/my-post(page=${pageNum})}"></a>
+                <span th:if="${pageNum == postPage.number + 1}" class="no-pointer" th:text="${pageNum}" style="color: #659bff; padding: 15px;"></span>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <form th:action="@{/templates/pages/board/write}" method="get">
+                <button class="btn btn-primary" type="submit">글 작성</button>
+            </form>
+
+            <button class="btn btn-primary" type="button" onclick="window.location.href='/post'">돌아가기</button>
+        </div>
+    </div>
+</body>
+</html>

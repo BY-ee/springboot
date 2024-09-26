@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>글 작성 페이지</title>
+
+    <link rel="stylesheet" th:href="@{/css/styles-v1.css}" href="../../static/css/styles-v1.css">
+</head>
+<body>
+    <div th:insert="~{line-template.html}" th:with="text='게시글 작성'"></div>
+
+    <div class="post-box">
+        <form th:action="@{write}" method="post">
+            <div>
+                <label for="title">제목</label>
+                <input class="input-width-100p" type="text" id="title" name="title" placeholder="제목을 입력하세요." />
+            </div>
+            <div class="flex-space-between mt-20">
+                <div class="div-width-30p">
+                    <label for="topic">주제</label>
+                    <select class="input-width-100p" id="topic" name="topic">
+                        <option value="">주제 선택</option>
+                        <option value="1">공지</option>
+                        <option value="2">질문</option>
+                        <option value="3">공유</option>
+                    </select>
+                </div>
+                <div class="div-width-65p">
+                    <label for="tag">태그</label>
+                    <input class="input-width-100p" type="text" id="tag" name="tag" />
+                </div>
+            </div>
+            <div class="mt-20">
+                <label for="content">내용</label>
+                <textarea class="input-width-100p input-height-50vh" id="content" name="content" placeholder="내용을 입력하세요."></textarea>
+            </div>
+            <div class="flex-space-between">
+                <button class="btn btn-dark" id="go-to-posts-button" type="button">글목록</button>
+                <div class="button-container">
+                    <button class="btn btn-primary">임시저장</button>
+                    <button class="btn btn-primary" type="submit">작성</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/js/boards/actionByURL.js"></script>
+</body>
+</html>

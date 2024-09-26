@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>글 조회 페이지</title>
+
+    <link rel="stylesheet" th:href="@{/css/styles-v1.css}" href="../../static/css/styles-v1.css">
+
+    <script>
+        function confirmDeletePost() {
+            let confirmFlag = confirm("게시글을 삭제하시겠습니까?");
+            return confirmFlag;
+        }
+    </script>
+</head>
+<body class="bg-image-milkyway">
+    <div th:insert="~{line-template.html}" th:with="text='게시글'"></div>
+
+    <div class="post-box">
+        <p class="post-nickname" th:text="${post.nickname}"></p>
+        <p class="post-sub">15분 전 · 조회수 15</p>
+        <p class="post-title" th:text="${post.title}"></p>
+        <p class="post-content" th:text="${post.content}"></p>
+    </div>
+    
+
+    <div class="button-container flex gap-10 mt-20">
+        <form th:action="@{/update/{id}(id=${post.id})}" method="get">
+            <input type="hidden" th:value="${page}" name="page" />
+            <button class="btn btn-primary" type="submit">수정</button>
+        </form>
+
+        <form th:action="@{/delete}" method="post" onsubmit="return confirmDeletePost()">
+            <input type="hidden" th:value="${post.id}" name="id">
+            <button class="btn btn-secondary" type="submit">삭제</button>
+        </form>
+
+        <button class="btn btn-primary" id="go-to-posts-button" type="button">글목록</button>
+    </div>
+    
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/js/boards/actionByURL.js"></script>
+</body>
+</html>

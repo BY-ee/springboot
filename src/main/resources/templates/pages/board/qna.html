@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-with-header-footer-line}">
+
+    <title layout:fragment="title">Space - QnA</title>
+
+    <span layout:fragment="line"><a href="#">QnA</a></span>
+
+    <main layout:fragment="content">
+        <div th:if="${qnAPostPage.totalElements > 0}">
+            <div class="flex-col align-center mt-5vh">
+                <div class="div-width-50p" th:each="qnAPost : ${qnAPostPage.content}">
+                    <form th:action="@{/qna/{id}(id=${qnAPost.id})}" method="get">
+                        <input type="hidden" th:value="${qnAPostPage.number + 1}" name="page" />
+                        <div class="post-list" onclick="this.closest('form').submit();">
+                            <div class="p-5 my-10 font-size-16">
+                                <p th:text="${qnAPost.nickname}"></p>
+                                <p th:text="${qnAPost.title}"></p>
+                            </div>
+                        </div>
+                        <hr>
+                    </form>
+                </div>
+
+                <div class="flex mt-10 font-size-16">
+                    <div th:each="qnAPageNum : ${#numbers.sequence(1, qnAPostPage.totalPages)}">
+                        <div class="page-line">
+                            <a class="inactive-page" th:if="${qnAPageNum != qnAPostPage.number + 1}" th:text="${qnAPageNum}" th:href="@{/qna(page=${qnAPageNum})}"></a>
+                            <span class="active-page" th:if="${qnAPageNum == qnAPostPage.number + 1}" th:text="${qnAPageNum}"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button class="btn btn-primary" id="go-to-write-page-button" type="button">글 작성</button>
+                    <button class="btn btn-primary" id="go-to-main-page-button" type="button">돌아가기</button>
+                </div>
+            </div>
+        </div>
+        
+        <div th:unless="${qnAPostPage.totalElements > 0}">
+            <div class="button-container">
+                <button class="btn btn-primary" id="go-to-write-page-button" type="button">글 작성</button>
+                <button class="btn btn-primary" id="go-to-main-page-button" type="button">돌아가기</button>
+            </div>
+        </div>
+    </main>
+</html>

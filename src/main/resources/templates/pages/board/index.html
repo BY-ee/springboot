@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-with-header-footer}">
+      
+    <title layout:fragment="title">Space</title>
+
+    <main class="flex mt-10vh gap-20vh" layout:fragment="content">
+        <div class="flex-1">
+            <div class="div-width-75p m-0-auto">
+                <div class="board-title-box div-width-100p mb-40">
+                    <p class="board-title-font">Q&A</p>
+                </div>
+
+                <div th:if="${qnAPostPage.totalElements > 0}">
+                    <div class="div-width-100p" th:each="qnAPost : ${qnAPostPage.content}">
+                        <form th:action="@{/qna/{id}(id=${qnAPost.id})}" method="get">
+                            <input type="hidden" th:value="${qnAPostPage.number + 1}" name="page" />
+                            <div class="post-list" onclick="this.closest('form').submit();">
+                                <div class="p-5 my-10 font-size-16">
+                                    <p th:text="${qnAPost.nickname}"></p>
+                                    <p th:text="${qnAPost.title}"></p>
+                                </div>
+                            </div>
+                            <hr>
+                        </form>
+                    </div>
+                </div>
+
+                <a class="inline-block m-5 p-5 pointer" th:href="@{/qna}">전체 글 보기</a>
+            </div>
+        </div>
+
+        <div class="flex-1">
+            <div class="div-width-75p m-0-auto">
+                <div class="board-title-box div-width-100p mb-40">
+                    <p class="board-title-font">커뮤니티</p>
+                </div>
+
+                <div th:if="${commPostPage.totalElements > 0}">
+                    <div class="div-width-100p" th:each="commPost : ${commPostPage.content}">
+                        <form th:action="@{/community/{id}(id=${commPost.id})}" method="get">
+                            <input type="hidden" th:value="${commPostPage.number + 1}" name="page" />
+                            <div class="post-list" onclick="this.closest('form').submit();">
+                                <div class="p-5 my-10 font-size-16">
+                                    <p th:text="${commPost.nickname}"></p>
+                                    <p th:text="${commPost.title}"></p>
+                                </div>
+                            </div>
+                            <hr>
+                        </form>
+                    </div>
+                </div>
+                    
+                <a class="inline-block m-5 p-5 pointer" th:href="@{/community}">전체 글 보기</a>
+            </div>
+        </div>
+    </main>
+</html>

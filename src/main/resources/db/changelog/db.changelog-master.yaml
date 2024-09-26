@@ -11,7 +11,7 @@ databaseChangeLog:
       author: "mini"
       changes:
         - createTable:
-            tableName: "post"
+            tableName: "board"
             columns:
               - column:
                   name: "id"
