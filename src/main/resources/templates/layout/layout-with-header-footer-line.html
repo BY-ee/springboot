@@ -4,8 +4,14 @@
         <th:block th:replace="~{fragments/config :: headConfig}"></th:block>
     </head>
     <body>
+        <header th:replace="~{fragments/header :: headerFragment}"></header>
+        
+        <th:block th:replace="~{fragments/line-template :: lineFragment}"></th:block>
+
         <main layout:fragment="content">
         </main>
+
+        <footer th:replace="~{fragments/footer :: footerFragment}"></footer>
 
         <th:block th:replace="~{fragments/config :: bodyConfig}"></th:block>
     </body>

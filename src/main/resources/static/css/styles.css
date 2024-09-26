@@ -100,8 +100,9 @@ a {
 }
 
 a:hover {
+    text-decoration: none;
     color: #FFF;
-    text-decoration: underline;
+    cursor: pointer;
 }
 
 /* Paragraph Styles */
