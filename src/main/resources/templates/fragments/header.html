@@ -4,11 +4,11 @@
             <img class="pointer" src="https://www.thymeleaf.org/images/thymeleaf.png" alt="" style="width: 40px; height: 40px;" onclick="location.href = location.origin" />
             <span>Navigation bar</span>
             
-            <div class="flex-end gap-20 my-15" th:if="${user}">
+            <div class="flex-end gap-20 my-15" th:if="${loggedInUser}">
                 <button class="btn btn-primary" type="button" onclick="location.href='/my-page'">내정보</button>
                 <button class="btn btn-secondary" type="button" onclick="location.href='/logout'">로그아웃</button>
             </div>
-            <div class="flex-end gap-20 my-15" th:unless="${user}">
+            <div class="flex-end gap-20 my-15" th:unless="${loggedInUser}">
                 <button class="btn btn-primary" type="button" onclick="location.href='/signup'">회원가입</button>
                 <button class="btn btn-primary" type="button" onclick="location.href='/login'">로그인</button>
             </div>

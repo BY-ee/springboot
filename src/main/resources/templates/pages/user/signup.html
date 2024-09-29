@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-with-header-footer-line}">
+      
+    <title layout:fragment="title">Space</title>
+
+    <span layout:fragment="line">회원가입</span>
+
+
+    <main layout:fragment="content">
+        <form th:action="@{/signup}" id="signup" th:object="${signUpUser}" method="post">
+            <div class="flex-center mt-5vh">
+                <div class="width-50p">
+                    <label for="userid">아이디</label>
+                    <input class="width-100p" type="text" id="userid" th:field="*{userId}" placeholder="아이디 입력 (4~15자 이내)" />
+                    <p class="font-red mt-5" id="userid-message"></p>
+
+                    <label class="mt-10" for="password">비밀번호</label>
+                    <input class="width-100p" type="password" id="password" th:field="*{password}" placeholder="비밀번호 입력 (8~20자 이내)" />
+                    <p class="font-red mt-5" id="password-message"></p>
+
+                    <label class="mt-10" for="same-password">비밀번호 확인</label>
+                    <input class="width-100p" type="password" id="same-password" />
+                    <p class="font-red mt-5" id="same-password-message"></p>
+
+                    <label class="mt-10" for="email">이메일</label>
+                    <input class="width-100p" type="text" id="email" th:field="*{email}" placeholder="이메일 입력" />
+                    <p class="font-red mt-5" id="email-message"></p>
+
+                    <label class="mt-10" for="nickname">닉네임</label>
+                    <input class="width-100p" type="text" id="nickname" th:field="*{nickname}" placeholder="닉네임 입력 (2~12자 이내)" />
+                    <p class="font-red mt-5" id="nickname-message"></p>
+
+                    <span class="button-container mt-30">
+                        <button class="btn btn-primary" id="signup-btn" type="submit">회원가입</button>
+                        <button class="btn btn-primary" id="go-to-main-page-btn" type="button">돌아가기</button>
+                    </span>
+                </div>
+            </div>
+        </form>
+
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <!-- <script type="module" src="js/validations/userIdCheck.js"></script>
+        <script type="module" src="js/validations/passwordCheck.js"></script>
+        <script type="module" src="js/pages/signup.js"></script> -->
+    </main>
+</html>

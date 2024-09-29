@@ -48,8 +48,8 @@ public class UserController {
 
     @GetMapping("/signup")
     public String signUp(Model model) {
-        model.addAttribute("user", new User());
-        return "pages/user/signup-v1";
+        model.addAttribute("signUpUser", new User());
+        return "pages/user/signup";
     }
 
     @PostMapping("/signup")
