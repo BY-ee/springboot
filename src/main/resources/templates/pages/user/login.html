@@ -1,50 +1,39 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>홈 화면</title>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-with-header-footer-line}">
+      
+    <title layout:fragment="title">Space</title>
 
-    <link rel="stylesheet" th:href="@{/css/styles-v1.css}" href="../../static/css/styles-v1.css">
+    <span layout:fragment="line">로그인</span>
+    
 
-    <script type="text/javascript">
-        function showLogInAlert(message) {
-            if(message) {
-                alert(message);
-            }
-        }
-    </script>
-</head>
-<body class="bg-image-flower">
-    <div th:insert="~{line-template.html}" th:with="text='로그인'"></div>
+    <main layout:fragment="content">
+        <div th:insert="~{line-template.html}" th:with="text='로그인'"></div>
 
-    <div th:if="${logInMessage != null}">
-        <script>
-            showLogInAlert("[[${logInMessage}]]");
-        </script>
-    </div>
+        <div class="flex-center">
+            <form th:action="@{/login}" th:object="${user}" method="post">
+                <label class="mt-10vh" for="userid">아이디</label>
+                <input class="input-width-400" type="text" id="userid" th:field="*{userId}" placeholder="아이디 입력" autofocus />
 
-    <div class="flex-center">
-        <form th:action="@{/login}" th:object="${user}" method="post">
-            <label class="mt-10vh" for="userid">아이디</label>
-            <input class="input-width-400" type="text" id="userid" th:field="*{userId}" placeholder="아이디 입력" autofocus />
+                <label class="mt-10" for="password">비밀번호</label>
+                <input class="input-width-400" type="password" id="password" th:field="*{password}" placeholder="비밀번호 입력" />
 
-            <label class="mt-10" for="password">비밀번호</label>
-            <input class="input-width-400" type="password" id="password" th:field="*{password}" placeholder="비밀번호 입력" />
+                <div class="flex-center">
+                    <label class="m-0 align-center" for="remember">아이디 기억</label>
+                    <input class="ml-5 mr-20" type="checkbox" id="remember" name="remember">
 
-            <div class="flex-center">
-                <label class="m-0 align-center" for="remember">아이디 기억</label>
-                <input class="ml-5 mr-20" type="checkbox" id="remember" name="remember">
+                    <button class="btn btn-primary" type="submit">로그인</button>
+                </div>
+            </form>
+        </div>
 
-                <button class="btn btn-primary" type="submit">로그인</button>
-            </div>
-        </form>
-    </div>
-
-    <div class="button-container">
-        <form th:action="@{/signup}" method="get">
-            <button class="btn btn-primary" type="submit">회원가입</button>
-        </form>
-        <button class="btn btn-primary" onclick="window.location.href='/forgot-id'">아이디 / 비밀번호 찾기</button>
-    </div>
-</body>
+        <div class="button-container">
+            <form th:action="@{/signup}" method="get">
+                <button class="btn btn-primary" type="submit">회원가입</button>
+            </form>
+            <button class="btn btn-primary" onclick="window.location.href='/forgot-id'">아이디 / 비밀번호 찾기</button>
+        </div>
+    </main>
 </html>
