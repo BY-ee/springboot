@@ -32,9 +32,9 @@ public class QnABoardController {
 
     @PostMapping("/write")
     public String writePost(HttpServletRequest request,
-                            @ModelAttribute QnABoard post) {
+                            @RequestBody QnABoard post) {   
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("loggedInUser");
         String nickname = user.getNickname();
         qnABoardService.writePost(nickname, post);
         return "redirect:/";

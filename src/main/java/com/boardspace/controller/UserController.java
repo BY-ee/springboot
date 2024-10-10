@@ -21,7 +21,7 @@ public class UserController {
     public String index(HttpServletRequest request,
                         @ModelAttribute User user, Model model) {
         HttpSession session = request.getSession();
-        if(session.getAttribute("user") != null) {
+        if(session.getAttribute("loggedInUser") != null) {
             return "redirect:/";
         } else {
             model.addAttribute("user", user);
@@ -102,7 +102,7 @@ public class UserController {
     @GetMapping("/my-page")
     public String myPage(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("loggedInUser");
         model.addAttribute("user", user);
         return "pages/user/my-page-v1";
     }
@@ -111,14 +111,14 @@ public class UserController {
     public String updateUser(@ModelAttribute User user,
                            HttpServletRequest request) {
         HttpSession session = request.getSession();
-        User loggedInUser = (User) session.getAttribute("user");
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
         Long id = loggedInUser.getId();
         String email = user.getEmail();
         String nickname = user.getNickname();
         userService.updateEmailAndNicknameById(id, email, nickname);
 
         User updatedUser = userService.findByUserId(user.getUserId()).orElse(null);
-        session.setAttribute("user", updatedUser);
+        session.setAttribute("loggedInUser", updatedUser);
         return "redirect:/my-page";
     }
 
@@ -135,16 +135,16 @@ public class UserController {
     @PostMapping("/user/withdrawal")
     public String withdrawal(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("loggedInUser");
         userService.deleteUser(user);
-        session.setAttribute("user", null);
+        session.setAttribute("loggedInUser", null);
         return "redirect:/";
     }
 
     @GetMapping("/user/verify-password")
     public String verifyPassword(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("loggedInUser");
         String password = user.getPassword();
         model.addAttribute("password", password);
         return "/pages/user/verify-password";
@@ -156,7 +156,7 @@ public class UserController {
                                  HttpServletRequest request,
                                  RedirectAttributes redirectAttributes) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("loggedInUser");
         if(password.equals(user.getPassword())) {
             return handleAction(action);
         } else {

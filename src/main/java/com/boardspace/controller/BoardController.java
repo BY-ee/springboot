@@ -22,7 +22,7 @@ public class BoardController {
     @GetMapping
     public String index(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("loggedInUser");
         int page = 1;
         int size = 5;
 
@@ -44,7 +44,7 @@ public class BoardController {
     public String writePost(HttpServletRequest request,
                             @ModelAttribute CommunityBoard post) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("loggedInUser");
         String nickname = user.getNickname();
         commBoardService.writePost(nickname, post);
         return "redirect:/";
@@ -84,7 +84,7 @@ public class BoardController {
     public String myPost(@RequestParam(value = "page", defaultValue = "1") int page,
                          HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("loggedInUser");
         int size = 5;
         Pagination<CommunityBoard> postPage = commBoardService.findPostsByNickName(page, size, user.getNickname());
         model.addAttribute("user", user);

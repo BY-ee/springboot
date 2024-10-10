@@ -34,7 +34,7 @@ public class CommunityBoardController {
     public String writePost(HttpServletRequest request,
                             @ModelAttribute CommunityBoard post) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("loggedInUser");
         String nickname = user.getNickname();
         commBoardService.writePost(nickname, post);
         return "redirect:/";

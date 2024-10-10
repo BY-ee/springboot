@@ -20,8 +20,8 @@ public class QnABoardService {
         post.setId(id++);
         post.setNickname(nickname);
         post.setViewCount(0);
-        post.setCreateTime(Timestamp.valueOf(LocalDateTime.now()));
-        post.setUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
+        post.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
+        post.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
         qnABoardRepository.save(post);
     }
 
