@@ -12,10 +12,11 @@
 /* Body Setting */
 body {
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
     font-size: 14px;
-    overflow-y: auto;
     background-color: #333;
 }
 
@@ -29,13 +30,13 @@ header {
 }
 
 main {
+    flex: 1;
     width: 80%;
     margin: 0 10%;
 }
 
 footer {
     color: #FFF;
-    position: fixed;
     bottom: 0;
     background-color: #333;
     width: 100%;
