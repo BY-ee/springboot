@@ -37,7 +37,7 @@ public class UserController {
 
         if (authenticatedUser.isPresent()) {
             HttpSession session = request.getSession();
-            session.setAttribute("user", authenticatedUser.get());
+            session.setAttribute("loggedInUser", authenticatedUser.get());
             redirectAttributes.addFlashAttribute("logInMessage", UserConstant.LOGIN_SUCCESS_MESSAGE);
             return "redirect:/";
         } else {

@@ -10,26 +10,26 @@
     
 
     <main layout:fragment="content">
-        <div th:insert="~{line-template.html}" th:with="text='로그인'"></div>
-
         <div class="flex-center">
-            <form th:action="@{/login}" th:object="${user}" method="post">
-                <label class="mt-10vh" for="userid">아이디</label>
-                <input class="input-width-400" type="text" id="userid" th:field="*{userId}" placeholder="아이디 입력" autofocus />
+            <div class="width-40p">
+                <form th:action="@{/login}" th:object="${user}" method="post">
+                    <label class="mt-5vh" for="userid">아이디</label>
+                    <input class="width-100p" type="text" id="userid" th:field="*{userId}" placeholder="아이디 입력" autofocus />
 
-                <label class="mt-10" for="password">비밀번호</label>
-                <input class="input-width-400" type="password" id="password" th:field="*{password}" placeholder="비밀번호 입력" />
+                    <label class="mt-10" for="password">비밀번호</label>
+                    <input class="width-100p" type="password" id="password" th:field="*{password}" placeholder="비밀번호 입력" />
 
-                <div class="flex-center">
-                    <label class="m-0 align-center" for="remember">아이디 기억</label>
-                    <input class="ml-5 mr-20" type="checkbox" id="remember" name="remember">
+                    <div class="flex-center mt-20">
+                        <label class="m-0 align-center" for="remember">아이디 기억</label>
+                        <input class="ml-5 mr-20" type="checkbox" id="remember" name="remember">
 
-                    <button class="btn btn-primary" type="submit">로그인</button>
-                </div>
-            </form>
+                        <button class="btn btn-primary" type="submit">로그인</button>
+                    </div>
+                </form>
+            </div>
         </div>
 
-        <div class="button-container">
+        <div class="button-container mt-40">
             <form th:action="@{/signup}" method="get">
                 <button class="btn btn-primary" type="submit">회원가입</button>
             </form>
