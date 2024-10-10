@@ -30,10 +30,8 @@
         </div>
 
         <div class="button-container mt-40">
-            <form th:action="@{/signup}" method="get">
-                <button class="btn btn-primary" type="submit">회원가입</button>
-            </form>
-            <button class="btn btn-primary" onclick="window.location.href='/forgot-id'">아이디 / 비밀번호 찾기</button>
+            <button class="btn btn-primary" onclick="location.href='/submit'">회원가입</button>
+            <button class="btn btn-primary" onclick="location.href='/forgot-id'">아이디 / 비밀번호 찾기</button>
         </div>
     </main>
 </html>
