@@ -61,24 +61,24 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/forgot-id")
-    public String forgotId() {
-        return "pages/user/forgot-id";
+    @GetMapping("/find-id")
+    public String findId() {
+        return "pages/user/find-id";
     }
 
-    @PostMapping("/forgot-id")
-    public String forgotId(@RequestParam("email") String email, Model model) {
+    @PostMapping("/find-id")
+    public String findId(@RequestParam("email") String email, Model model) {
         String userId = userService.findUserIdByEmail(email).orElse(null);
         model.addAttribute("userid", userId);
         return "pages/user/return-id";
     }
 
-    @GetMapping("/forgot-pw")
-    public String forgotPassword() {
-        return "user/forgot-pw";
+    @GetMapping("/find-pw")
+    public String findPassword() {
+        return "pages/user/find-pw";
     }
 
-    @PostMapping("/forgot-pw")
+    @PostMapping("/find-pw")
     public String checkUserPassword(@RequestParam("userid") String userId,
                            @RequestParam("email") String email,
                            HttpServletRequest request, Model model) {

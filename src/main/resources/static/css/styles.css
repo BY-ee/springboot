@@ -2372,14 +2372,12 @@ table input:focus {
     color: #ffffff;
     cursor: default;
     padding: 10px 20px;
-    margin-top: 50px;
 }
 
 .btn-unselected {
     background: #7fbdff;
     color: #ffffff;
     padding: 10px 20px;
-    margin-top: 50px;
 }
 
 .btn-unselected:hover {

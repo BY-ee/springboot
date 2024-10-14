@@ -8,7 +8,6 @@
 
     <span layout:fragment="line">회원가입</span>
 
-
     <main layout:fragment="content">
         <form th:action="@{/signup}" id="signup" th:object="${signUpUser}" method="post">
             <div class="flex-center mt-5vh">
@@ -33,9 +32,9 @@
                     <input class="width-100p" type="text" id="nickname" th:field="*{nickname}" placeholder="닉네임 입력 (2~12자 이내)" />
                     <p class="font-red mt-5" id="nickname-message"></p>
 
-                    <span class="button-container mt-30">
+                    <span class="button-container mt-40">
                         <button class="btn btn-primary" id="signup-btn" type="submit">회원가입</button>
-                        <button class="btn btn-primary" id="go-to-main-page-btn" type="button">돌아가기</button>
+                        <button class="btn btn-primary" id="go-to-login-page-btn" type="button">돌아가기</button>
                     </span>
                 </div>
             </div>
