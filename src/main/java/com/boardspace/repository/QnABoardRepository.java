@@ -1,6 +1,6 @@
 package com.boardspace.repository;
 
-import com.boardspace.model.QnABoard;
+import com.boardspace.model.QnAPost;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -9,16 +9,16 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class QnABoardRepository implements BoardRepository<QnABoard> {
-    private final List<QnABoard> qnAPosts;
+public class QnABoardRepository implements BoardMapper<QnAPost> {
+    private final List<QnAPost> qnAPosts;
 
     // 게시글 작성
-    public void save(QnABoard post) {
+    public void save(QnAPost post) {
         qnAPosts.add(post);
     }
 
     // 게시글 삭제
-    public int delete(QnABoard post) {
+    public int delete(QnAPost post) {
         int size = qnAPosts.size();
         qnAPosts.remove(post);
         return size - qnAPosts.size();
@@ -30,25 +30,25 @@ public class QnABoardRepository implements BoardRepository<QnABoard> {
     }
 
     // 모든 게시글을 조회
-    public List<QnABoard> findPostsByPage(int start, int size) {
+    public List<QnAPost> findPostsByPage(int start, int size) {
         int end = Math.min(start + size, qnAPosts.size());
         return qnAPosts.subList(start, end);
     }
 
     // 고유 id에 해당하는 게시글을 조회
-    public Optional<QnABoard> findById(long id) {
+    public Optional<QnAPost> findById(long id) {
         return qnAPosts.stream().filter(post -> post.getId().equals(id)).findAny();
     }
 
     // 게시글 작성자에 해당하는 모든 게시글을 조회
-    public List<QnABoard> findPostsByPageAndNickname(int start, int size, String nickname) {
-        List<QnABoard> postsByNickname = qnAPosts.stream().filter(post -> post.getNickname().equals(nickname)).toList();
+    public List<QnAPost> findPostsByPageAndNickname(int start, int size, String nickname) {
+        List<QnAPost> postsByNickname = qnAPosts.stream().filter(post -> post.getNickname().equals(nickname)).toList();
         int end = Math.min(start + size, postsByNickname.size());
         return postsByNickname.subList(start, end);
     }
 
     // 고유 id에 해당하는 게시글을 수정
-    public void updateById(long id, QnABoard newPost) {
+    public void updateById(long id, QnAPost newPost) {
         qnAPosts.stream()
                 .filter(post -> post.getId().equals(id))
                 .findFirst()

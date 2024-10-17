@@ -1,6 +1,6 @@
 package com.boardspace.service;
 
-import com.boardspace.model.QnABoard;
+import com.boardspace.model.QnAPost;
 import com.boardspace.repository.QnABoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ public class QnABoardService {
     private final QnABoardRepository qnABoardRepository;
     private long id = 1;
 
-    public void writePost(String nickname, QnABoard post) {
+    public void writePost(String nickname, QnAPost post) {
         post.setId(id++);
         post.setNickname(nickname);
         post.setViewCount(0);
@@ -25,7 +25,7 @@ public class QnABoardService {
         qnABoardRepository.save(post);
     }
 
-    public void updateById(long id, QnABoard post) {
+    public void updateById(long id, QnAPost post) {
         qnABoardRepository.updateById(id, post);
     }
 
@@ -33,23 +33,23 @@ public class QnABoardService {
         qnABoardRepository.deleteById(id);
     }
 
-    public Optional<QnABoard> findById(long id) {
+    public Optional<QnAPost> findById(long id) {
         return qnABoardRepository.findById(id);
     }
 
-    public Pagination<QnABoard> getPosts(int page, int size) {
+    public Pagination<QnAPost> getPosts(int page, int size) {
         // 0-based 인덱스 방식으로 페이지 변환
         int start = (page - 1) * size;
         long totalElements = qnABoardRepository.count();
-        List<QnABoard> posts = qnABoardRepository.findPostsByPage(start, size);
+        List<QnAPost> posts = qnABoardRepository.findPostsByPage(start, size);
         return new Pagination<>(posts, page - 1, size, totalElements);
     }
 
-    public Pagination<QnABoard> findPostsByNickName(int page, int size, String nickname) {
+    public Pagination<QnAPost> findPostsByNickName(int page, int size, String nickname) {
         // 0-based 인덱스 방식으로 페이지 변환
         int start = (page - 1) * size;
         long totalElements = qnABoardRepository.countByNickname(nickname);
-        List<QnABoard> posts = qnABoardRepository.findPostsByPageAndNickname(start, size, nickname);
+        List<QnAPost> posts = qnABoardRepository.findPostsByPageAndNickname(start, size, nickname);
         return new Pagination<>(posts,page - 1, size, totalElements);
     }
 

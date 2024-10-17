@@ -1,6 +1,6 @@
 package com.boardspace.controller;
 
-import com.boardspace.model.CommunityBoard;
+import com.boardspace.model.CommunityPost;
 import com.boardspace.model.User;
 import com.boardspace.service.CommunityBoardService;
 import com.boardspace.service.Pagination;
@@ -20,7 +20,7 @@ public class CommunityBoardController {
     @GetMapping
     public String listCommPosts(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         int size = 5;
-        Pagination<CommunityBoard> commPostPage = commBoardService.getPosts(page, size);
+        Pagination<CommunityPost> commPostPage = commBoardService.getPosts(page, size);
         model.addAttribute("commPostPage", commPostPage);
         return "pages/board/community";
     }
@@ -32,7 +32,7 @@ public class CommunityBoardController {
 
     @PostMapping("/write")
     public String writePost(HttpServletRequest request,
-                            @ModelAttribute CommunityBoard post) {
+                            @ModelAttribute CommunityPost post) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("loggedInUser");
         String nickname = user.getNickname();
@@ -43,14 +43,14 @@ public class CommunityBoardController {
     @GetMapping("/{id}")
     public String detail(@PathVariable("id") Long id,
                          @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-        CommunityBoard post = commBoardService.findById(id).orElseThrow();
+        CommunityPost post = commBoardService.findById(id).orElseThrow();
         model.addAttribute("post", post);
         model.addAttribute("page", page);
         return "post";
     }
 
     @PostMapping("/update")
-    public String updatePostById(@RequestParam("id") Long id, @ModelAttribute CommunityBoard post) {
+    public String updatePostById(@RequestParam("id") Long id, @ModelAttribute CommunityPost post) {
         commBoardService.updateById(id, post);
         return "redirect:/articles?page=1";
     }

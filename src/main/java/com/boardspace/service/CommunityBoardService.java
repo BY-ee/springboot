@@ -1,6 +1,6 @@
 package com.boardspace.service;
 
-import com.boardspace.model.CommunityBoard;
+import com.boardspace.model.CommunityPost;
 import com.boardspace.repository.CommunityBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ public class CommunityBoardService {
     private final CommunityBoardRepository commBoardRepository;
     private long id = 1;
 
-    public void writePost(String nickname, CommunityBoard post) {
+    public void writePost(String nickname, CommunityPost post) {
         post.setId(id++);
         post.setNickname(nickname);
         post.setViewCount(0);
@@ -25,7 +25,7 @@ public class CommunityBoardService {
         commBoardRepository.save(post);
     }
 
-    public void updateById(long id, CommunityBoard post) {
+    public void updateById(long id, CommunityPost post) {
         commBoardRepository.updateById(id, post);
     }
 
@@ -33,23 +33,23 @@ public class CommunityBoardService {
         commBoardRepository.deleteById(id);
     }
 
-    public Optional<CommunityBoard> findById(long id) {
+    public Optional<CommunityPost> findById(long id) {
         return commBoardRepository.findById(id);
     }
 
-    public Pagination<CommunityBoard> getPosts(int page, int size) {
+    public Pagination<CommunityPost> getPosts(int page, int size) {
         // 0-based 인덱스 방식으로 페이지 변환
         int start = (page - 1) * size;
         long totalElements = commBoardRepository.count();
-        List<CommunityBoard> posts = commBoardRepository.findPostsByPage(start, size);
+        List<CommunityPost> posts = commBoardRepository.findPostsByPage(start, size);
         return new Pagination<>(posts, page - 1, size, totalElements);
     }
 
-    public Pagination<CommunityBoard> findPostsByNickName(int page, int size, String nickname) {
+    public Pagination<CommunityPost> findPostsByNickName(int page, int size, String nickname) {
         // 0-based 인덱스 방식으로 페이지 변환
         int start = (page - 1) * size;
         long totalElements = commBoardRepository.countByNickname(nickname);
-        List<CommunityBoard> posts = commBoardRepository.findPostsByPageAndNickname(start, size, nickname);
+        List<CommunityPost> posts = commBoardRepository.findPostsByPageAndNickname(start, size, nickname);
         return new Pagination<>(posts,page - 1, size, totalElements);
     }
 

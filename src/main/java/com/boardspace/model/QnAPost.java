@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 @Getter
 @Setter
-public class QnABoard {
+public class QnAPost {
     private Long id;
     private String nickname;
     private String title;

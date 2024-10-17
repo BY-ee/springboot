@@ -1,6 +1,6 @@
 package com.boardspace.repository;
 
-import com.boardspace.model.CommunityBoard;
+import com.boardspace.model.CommunityPost;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -9,16 +9,16 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class CommunityBoardRepository implements BoardRepository<CommunityBoard> {
-    private final List<CommunityBoard> commPosts;
+public class CommunityBoardRepository implements BoardMapper<CommunityPost> {
+    private final List<CommunityPost> commPosts;
 
     // 게시글 작성
-    public void save(CommunityBoard post) {
+    public void save(CommunityPost post) {
         commPosts.add(post);
     }
 
     // 게시글 삭제
-    public int delete(CommunityBoard post) {
+    public int delete(CommunityPost post) {
         int size = commPosts.size();
         commPosts.remove(post);
         return size - commPosts.size();
@@ -30,25 +30,25 @@ public class CommunityBoardRepository implements BoardRepository<CommunityBoard>
     }
 
     // 모든 게시글을 조회
-    public List<CommunityBoard> findPostsByPage(int start, int size) {
+    public List<CommunityPost> findPostsByPage(int start, int size) {
         int end = Math.min(start + size, commPosts.size());
         return commPosts.subList(start, end);
     }
 
     // 고유 id에 해당하는 게시글을 조회
-    public Optional<CommunityBoard> findById(long id) {
+    public Optional<CommunityPost> findById(long id) {
         return commPosts.stream().filter(post -> post.getId().equals(id)).findAny();
     }
 
     // 게시글 작성자에 해당하는 모든 게시글을 조회
-    public List<CommunityBoard> findPostsByPageAndNickname(int start, int size, String nickname) {
-        List<CommunityBoard> postsByNickname = commPosts.stream().filter(post -> post.getNickname().equals(nickname)).toList();
+    public List<CommunityPost> findPostsByPageAndNickname(int start, int size, String nickname) {
+        List<CommunityPost> postsByNickname = commPosts.stream().filter(post -> post.getNickname().equals(nickname)).toList();
         int end = Math.min(start + size, postsByNickname.size());
         return postsByNickname.subList(start, end);
     }
 
     // 고유 id에 해당하는 게시글을 수정
-    public void updateById(long id, CommunityBoard newPost) {
+    public void updateById(long id, CommunityPost newPost) {
         commPosts.stream()
                 .filter(post -> post.getId().equals(id))
                 .findFirst()
