@@ -1,11 +1,11 @@
-package com.boardspace.repository;
+package com.boardspace.mapper;
 
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+@Mapper
 public interface BoardMapper<T> {
     List<T> findPostsByPage(int start, int size);
 

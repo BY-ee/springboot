@@ -33,7 +33,7 @@ public class UserController {
     public String login(@ModelAttribute User user,
                         HttpServletRequest request,
                         RedirectAttributes redirectAttributes) {
-        Optional<User> authenticatedUser = userService.findByUserIdAndPassword(user.getUserId(), user.getPassword());
+        Optional<User> authenticatedUser = userService.findUserByUserIdAndPassword(user.getUserId(), user.getPassword());
 
         if (authenticatedUser.isPresent()) {
             HttpSession session = request.getSession();
@@ -48,16 +48,16 @@ public class UserController {
 
     @GetMapping("/signup")
     public String signUp(Model model) {
-        model.addAttribute("signUpUser", new User());
+        model.addAttribute("newUser", new User());
         return "pages/user/signup";
     }
 
     @PostMapping("/signup")
-    public String signUp(@ModelAttribute("user") User user) {
+    public String signUp(@ModelAttribute("newUser") User newUser) {
         // 이메일 수신동의와 약관동의는 추후 확인하는 로직 필요
-        user.setEmailOptIn(true);
-        user.setTermsAgreement(true);
-        userService.saveUser(user);
+        newUser.setEmailOptIn(true);
+        newUser.setTermsAgreement(true);
+        userService.insertUser(newUser);
         return "redirect:/";
     }
 
@@ -84,18 +84,18 @@ public class UserController {
                            HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         Long id = userService.findIdByUserIdAndEmail(userId, email).orElse(null);
-        session.setAttribute("passwordResetId", id);
+        session.setAttribute("resetIdForPassword", id);
         model.addAttribute("id", id);
         return "pages/user/reset-pw";
     }
 
     @PostMapping("/reset-pw")
-    public String resetPassword(@RequestParam("password") String password,
+    public String resetPassword(@RequestParam("password") String newPassword,
                           HttpServletRequest request) {
         HttpSession session = request.getSession();
-        Long id = (Long) session.getAttribute("passwordResetId");
-        session.removeAttribute("passwordResetId");
-        userService.updatePasswordById(password, id);
+        Long id = (Long) session.getAttribute("resetIdForPassword");
+        session.removeAttribute("resetIdForPassword");
+        userService.updatePasswordById(id, newPassword);
         return "redirect:/";
     }
 
@@ -117,7 +117,7 @@ public class UserController {
         String nickname = user.getNickname();
         userService.updateEmailAndNicknameById(id, email, nickname);
 
-        User updatedUser = userService.findByUserId(user.getUserId()).orElse(null);
+        User updatedUser = userService.findUserByUserId(user.getUserId()).orElse(null);
         session.setAttribute("loggedInUser", updatedUser);
         return "redirect:/my-page";
     }

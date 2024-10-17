@@ -1,4 +1,4 @@
-package com.boardspace.repository;
+package com.boardspace.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 

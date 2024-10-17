@@ -1,7 +1,6 @@
-package com.boardspace.repository;
+package com.boardspace.mapper;
 
 import com.boardspace.model.CommunityPost;
-import com.boardspace.model.QnAPost;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -10,9 +9,8 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class MemoryBoardRepository implements BoardMapper<CommunityPost> {
+public class CommunityBoardRepository implements BoardMapper<CommunityPost> {
     private final List<CommunityPost> commPosts;
-    private final List<QnAPost> qnAPosts;
 
     // 게시글 작성
     public void save(CommunityPost post) {

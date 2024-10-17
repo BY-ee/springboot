@@ -1,7 +1,7 @@
 package com.boardspace.service;
 
 import com.boardspace.model.QnAPost;
-import com.boardspace.repository.QnABoardRepository;
+import com.boardspace.mapper.QnABoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

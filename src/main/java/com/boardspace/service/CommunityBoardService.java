@@ -1,7 +1,7 @@
 package com.boardspace.service;
 
 import com.boardspace.model.CommunityPost;
-import com.boardspace.repository.CommunityBoardRepository;
+import com.boardspace.mapper.CommunityBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
