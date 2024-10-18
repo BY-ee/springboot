@@ -1,15 +1,13 @@
-package com.boardspace.model;
+package com.boardspace.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.ibatis.type.Alias;
 
-import java.sql.Timestamp;
-
 @Getter
 @Setter
-@Alias("UserModel")
-public class User {
+@Alias("UserDTO")
+public class UserDTO {
     private Long id;
     private String userId;
     private String password;
@@ -17,5 +15,4 @@ public class User {
     private String nickname;
     private boolean emailOptIn;
     private boolean termsAgreement;
-    private Timestamp createdAt;
 }

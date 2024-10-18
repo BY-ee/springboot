@@ -1,10 +1,14 @@
 package com.boardspace.controller;
 
+import com.boardspace.dto.UserCredentials;
+import com.boardspace.dto.UserDTO;
 import com.boardspace.model.User;
 import com.boardspace.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping("/login")
     public String index(HttpServletRequest request,
@@ -33,7 +38,12 @@ public class UserController {
     public String login(@ModelAttribute User user,
                         HttpServletRequest request,
                         RedirectAttributes redirectAttributes) {
-        Optional<User> authenticatedUser = userService.findUserByUserIdAndPassword(user.getUserId(), user.getPassword());
+        UserCredentials userCredentials = new UserCredentials();
+        userCredentials.setUserId(user.getUserId());
+        userCredentials.setPassword(user.getPassword());
+
+        Optional<User> authenticatedUser = userService.findUserByUserIdAndPassword(userCredentials);
+        logger.info("authenticatedUser: {}", authenticatedUser);
 
         if (authenticatedUser.isPresent()) {
             HttpSession session = request.getSession();
@@ -68,8 +78,8 @@ public class UserController {
 
     @PostMapping("/find-id")
     public String findId(@RequestParam("email") String email, Model model) {
-        String userId = userService.findUserIdByEmail(email).orElse(null);
-        model.addAttribute("userid", userId);
+        User user = userService.findUserByEmail(email).orElse(null);
+        model.addAttribute("userid", user.getUserId());
         return "pages/user/return-id";
     }
 
@@ -83,9 +93,13 @@ public class UserController {
                            @RequestParam("email") String email,
                            HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
-        Long id = userService.findIdByUserIdAndEmail(userId, email).orElse(null);
-        session.setAttribute("resetIdForPassword", id);
-        model.addAttribute("id", id);
+        UserCredentials userCredentials = new UserCredentials();
+        userCredentials.setUserId(userId);
+        userCredentials.setEmail(email);
+
+        User user = userService.findUserByUserIdAndEmail(userCredentials).orElse(null);
+        session.setAttribute("resetIdForPassword", user.getId());
+        model.addAttribute("id", user.getId());
         return "pages/user/reset-pw";
     }
 
@@ -94,8 +108,13 @@ public class UserController {
                           HttpServletRequest request) {
         HttpSession session = request.getSession();
         Long id = (Long) session.getAttribute("resetIdForPassword");
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(id);
+        userDTO.setPassword(newPassword);
+        int result = userService.updatePasswordById(userDTO);
+
         session.removeAttribute("resetIdForPassword");
-        userService.updatePasswordById(id, newPassword);
         return "redirect:/";
     }
 
@@ -111,11 +130,15 @@ public class UserController {
     public String updateUser(@ModelAttribute User user,
                            HttpServletRequest request) {
         HttpSession session = request.getSession();
+        UserDTO userDTO = new UserDTO();
+
         User loggedInUser = (User) session.getAttribute("loggedInUser");
-        Long id = loggedInUser.getId();
-        String email = user.getEmail();
-        String nickname = user.getNickname();
-        userService.updateEmailAndNicknameById(id, email, nickname);
+
+        userDTO.setId(loggedInUser.getId());
+        userDTO.setUserId(user.getUserId());
+        userDTO.setNickname(user.getNickname());
+
+        int result = userService.updateEmailAndNicknameById(userDTO);
 
         User updatedUser = userService.findUserByUserId(user.getUserId()).orElse(null);
         session.setAttribute("loggedInUser", updatedUser);
@@ -136,8 +159,9 @@ public class UserController {
     public String withdrawal(HttpServletRequest request) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("loggedInUser");
-        userService.deleteUser(user);
-        session.setAttribute("loggedInUser", null);
+        int result = userService.deleteUser(user);
+
+        session.invalidate();
         return "redirect:/";
     }
 
