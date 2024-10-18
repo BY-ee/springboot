@@ -4,7 +4,7 @@ import com.boardspace.model.CommunityPost;
 import com.boardspace.model.QnAPost;
 import com.boardspace.model.User;
 import com.boardspace.service.CommunityBoardService;
-import com.boardspace.service.Pagination;
+import com.boardspace.dto.Pagination;
 import com.boardspace.service.QnABoardService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -57,15 +57,6 @@ public class BoardController {
         model.addAttribute("post", post);
         model.addAttribute("page", page);
         return "pages/board/post";
-    }
-
-    @GetMapping("/update/{id}")
-    public String update(@PathVariable("id") Long id,
-                         @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-        CommunityPost post = commBoardService.findById(id).orElseThrow();
-        model.addAttribute("post", post);
-        model.addAttribute("page", page);
-        return "pages/board/update";
     }
 
     @PostMapping("/update")

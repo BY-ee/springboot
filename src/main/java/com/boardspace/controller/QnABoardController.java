@@ -2,7 +2,7 @@ package com.boardspace.controller;
 
 import com.boardspace.model.QnAPost;
 import com.boardspace.model.User;
-import com.boardspace.service.Pagination;
+import com.boardspace.dto.Pagination;
 import com.boardspace.service.QnABoardService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -34,29 +34,36 @@ public class QnABoardController {
     public String writePost(HttpServletRequest request,
                             @RequestBody QnAPost post) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("loggedInUser");
-        String nickname = user.getNickname();
-        qnABoardService.writePost(nickname, post);
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        post.setNickname(loggedInUser.getNickname());
+        qnABoardService.writePost(post);
         return "redirect:/";
     }
 
     @GetMapping("/{id}")
-    public String detail(@PathVariable("id") Long id,
-                         @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+    public String detail(@PathVariable("id") long id,
+                         Model model) {
         QnAPost post = qnABoardService.findById(id).orElseThrow();
         model.addAttribute("post", post);
-        model.addAttribute("page", page);
         return "pages/board/post";
     }
 
+    @GetMapping("/update/{id}")
+    public String update(@PathVariable("id") long id,
+                         Model model) {
+        QnAPost post = qnABoardService.findById(id).orElseThrow();
+        model.addAttribute("post", post);
+        return "pages/board/update";
+    }
+
     @PostMapping("/update")
-    public String updatePostById(@RequestParam("id") Long id, @ModelAttribute QnAPost post) {
+    public String updatePostById(@RequestParam("id") long id, @ModelAttribute QnAPost post) {
         qnABoardService.updateById(id, post);
         return "redirect:/articles?page=1";
     }
 
     @PostMapping("/delete")
-    public String deletePostById(@RequestParam("id") Long id) {
+    public String deletePostById(@RequestParam("id") long id) {
         qnABoardService.deleteById(id);
         return "redirect:/articles?page=1";
     }
