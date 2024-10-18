@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class QnABoardRepository implements BoardMapper<QnAPost> {
+public abstract class QnABoardRepository implements BoardMapper<QnAPost> {
     private final List<QnAPost> qnAPosts;
 
     // 게시글 작성
@@ -27,6 +27,11 @@ public class QnABoardRepository implements BoardMapper<QnAPost> {
     // 고유 id에 해당하는 게시글을 삭제
     public void deleteById(long id) {
         qnAPosts.removeIf(post -> post.getId().equals(id));
+    }
+
+    @Override
+    public int insertPost(QnAPost Post) {
+        return 0;
     }
 
     // 모든 게시글을 조회
@@ -64,7 +69,7 @@ public class QnABoardRepository implements BoardMapper<QnAPost> {
     }
 
     // 게시글 작성자가 작성한 총 게시글 개수
-    public long countByNickname(String nickname) {
+    public long countPostsByNickname(String nickname) {
         return qnAPosts.stream()
                 .filter(post -> post.getNickname().equals(nickname))
                 .count();

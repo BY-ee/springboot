@@ -2,7 +2,7 @@ package com.boardspace.controller;
 
 import com.boardspace.model.QnAPost;
 import com.boardspace.model.User;
-import com.boardspace.service.Pagination;
+import com.boardspace.dto.Pagination;
 import com.boardspace.service.QnABoardService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -34,9 +34,9 @@ public class QnABoardController {
     public String writePost(HttpServletRequest request,
                             @RequestBody QnAPost post) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("loggedInUser");
-        String nickname = user.getNickname();
-        qnABoardService.writePost(nickname, post);
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        post.setNickname(loggedInUser.getNickname());
+        qnABoardService.writePost(post);
         return "redirect:/";
     }
 

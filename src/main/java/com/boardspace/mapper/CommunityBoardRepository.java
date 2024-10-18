@@ -29,6 +29,16 @@ public class CommunityBoardRepository implements BoardMapper<CommunityPost> {
         commPosts.removeIf(post -> post.getId().equals(id));
     }
 
+    @Override
+    public long countPosts() {
+        return 0;
+    }
+
+    @Override
+    public int insertPost(CommunityPost Post) {
+        return 0;
+    }
+
     // 모든 게시글을 조회
     public List<CommunityPost> findPostsByPage(int start, int size) {
         int end = Math.min(start + size, commPosts.size());
@@ -64,7 +74,7 @@ public class CommunityBoardRepository implements BoardMapper<CommunityPost> {
     }
 
     // 게시글 작성자가 작성한 총 게시글 개수
-    public long countByNickname(String nickname) {
+    public long countPostsByNickname(String nickname) {
         return commPosts.stream()
                 .filter(post -> post.getNickname().equals(nickname))
                 .count();

@@ -1,4 +1,8 @@
 $(() => {
+    /************************
+     *    Normalize Code    *
+     ************************/
+
     // 각 게시판 별 line 템플릿의 텍스트
     const lineText = {
         qna: 'QnA',
@@ -34,6 +38,18 @@ $(() => {
         $(btnID).on('click', () => {
             location.href = btnIDs[btnID];
         });
+    }
+
+
+    /*******************
+     *    User Code    *
+     *******************/
+
+
+
+    /*******************
+     *    Post Code    *
+     *******************/
 
     // 글 작성 버튼 이벤트 핸들러
     $('#write-post-btn').on('click', () => {
@@ -59,6 +75,20 @@ $(() => {
             },
             error: (e) => {
                 console.error(e);
+            }
+        });
+    });
+
+    // 글 수정 페이지 이동 버튼 이벤트 핸들러
+    $('#go-to-update-post-page-btn').on('click', () => {
+        let id = /*[[${post.id}]]*/
+
+        location.href = update;
+        $.ajax({
+            url: `/${path}/update/${id}`,
+            type: 'GET',
+            success: (post) => {
+
             }
         });
     });

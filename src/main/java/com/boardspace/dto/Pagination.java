@@ -1,4 +1,4 @@
-package com.boardspace.service;
+package com.boardspace.dto;
 
 import lombok.Getter;
 

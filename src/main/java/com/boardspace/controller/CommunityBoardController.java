@@ -3,7 +3,7 @@ package com.boardspace.controller;
 import com.boardspace.model.CommunityPost;
 import com.boardspace.model.User;
 import com.boardspace.service.CommunityBoardService;
-import com.boardspace.service.Pagination;
+import com.boardspace.dto.Pagination;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;

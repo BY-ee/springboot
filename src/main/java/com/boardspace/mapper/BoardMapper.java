@@ -7,6 +7,8 @@ import java.util.Optional;
 
 @Mapper
 public interface BoardMapper<T> {
+    int insertPost(T Post);
+
     List<T> findPostsByPage(int start, int size);
 
     Optional<T> findById(long id);
@@ -17,5 +19,7 @@ public interface BoardMapper<T> {
 
     void deleteById(long id);
 
-    long countByNickname(String nickname);
+    long countPosts();
+
+    long countPostsByNickname(String nickname);
 }

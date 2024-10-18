@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class MemoryBoardRepository implements BoardMapper<CommunityPost> {
+public abstract class MemoryBoardRepository implements BoardMapper<CommunityPost> {
     private final List<CommunityPost> commPosts;
     private final List<QnAPost> qnAPosts;
 
@@ -66,7 +66,7 @@ public class MemoryBoardRepository implements BoardMapper<CommunityPost> {
     }
 
     // 게시글 작성자가 작성한 총 게시글 개수
-    public long countByNickname(String nickname) {
+    public long countPostsByNickname(String nickname) {
         return commPosts.stream()
                 .filter(post -> post.getNickname().equals(nickname))
                 .count();

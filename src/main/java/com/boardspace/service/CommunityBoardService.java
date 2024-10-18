@@ -1,5 +1,6 @@
 package com.boardspace.service;
 
+import com.boardspace.dto.Pagination;
 import com.boardspace.model.CommunityPost;
 import com.boardspace.mapper.CommunityBoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -48,7 +49,7 @@ public class CommunityBoardService {
     public Pagination<CommunityPost> findPostsByNickName(int page, int size, String nickname) {
         // 0-based 인덱스 방식으로 페이지 변환
         int start = (page - 1) * size;
-        long totalElements = commBoardRepository.countByNickname(nickname);
+        long totalElements = commBoardRepository.countPostsByNickname(nickname);
         List<CommunityPost> posts = commBoardRepository.findPostsByPageAndNickname(start, size, nickname);
         return new Pagination<>(posts,page - 1, size, totalElements);
     }
