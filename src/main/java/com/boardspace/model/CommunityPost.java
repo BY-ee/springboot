@@ -2,19 +2,22 @@ package com.boardspace.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.ibatis.type.Alias;
 
 import java.sql.Timestamp;
 
 @Getter
 @Setter
+@Alias("Community")
 public class CommunityPost {
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "post_seq")
-    //@SequenceGenerator(name = "post_seq", sequenceName = "post_seq", allocationSize = 1)
-    private Long id;
-    private String nickname;
+    private long id;
+    private long userId;
+    private String userNickname;
     private String title;
     private String content;
+    private String topic;
+    private String tag;
     private int viewCount;
-    private Timestamp createTime;
-    private Timestamp updateTime;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 }

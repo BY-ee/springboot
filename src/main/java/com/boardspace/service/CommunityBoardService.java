@@ -1,7 +1,10 @@
 package com.boardspace.service;
 
+import com.boardspace.constants.PaginationConstant;
+import com.boardspace.dto.Pagination;
+import com.boardspace.mapper.CommunityBoardMapper;
 import com.boardspace.model.CommunityPost;
-import com.boardspace.mapper.CommunityBoardRepository;
+import com.boardspace.model.QnAPost;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,47 +16,57 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class CommunityBoardService {
-    private final CommunityBoardRepository commBoardRepository;
-    private long id = 1;
+    private final CommunityBoardMapper commBoardMapper;
 
-    public void writePost(String nickname, CommunityPost post) {
-        post.setId(id++);
-        post.setNickname(nickname);
-        post.setViewCount(0);
-        post.setCreateTime(Timestamp.valueOf(LocalDateTime.now()));
-        post.setUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
-        commBoardRepository.save(post);
+    public void writePost(CommunityPost post) {
+        int result = commBoardMapper.insertPost(post);
     }
 
-    public void updateById(long id, CommunityPost post) {
-        commBoardRepository.updateById(id, post);
+    public void updatePostById(CommunityPost post) {
+        commBoardMapper.updatePostById(post);
     }
 
-    public void deleteById(long id) {
-        commBoardRepository.deleteById(id);
+    public void deletePostById(long id) {
+        commBoardMapper.deletePostById(id);
     }
 
-    public Optional<CommunityPost> findById(long id) {
-        return commBoardRepository.findById(id);
+    public Optional<CommunityPost> findPostById(long id) {
+        return commBoardMapper.findPostById(id);
     }
 
-    public Pagination<CommunityPost> getPosts(int page, int size) {
+    public List<CommunityPost> findPosts(int page, Integer limit) {
         // 0-based 인덱스 방식으로 페이지 변환
-        int start = (page - 1) * size;
-        long totalElements = commBoardRepository.count();
-        List<CommunityPost> posts = commBoardRepository.findPostsByPage(start, size);
-        return new Pagination<>(posts, page - 1, size, totalElements);
+        limit = validateLimit(limit);
+        int offset = (page - 1) * limit;
+
+        long countPosts = commBoardMapper.countPosts();
+
+        if(countPosts < limit + offset) {
+            limit = (int) countPosts - offset;
+        }
+
+        return commBoardMapper.findPosts(limit, offset);
     }
 
-    public Pagination<CommunityPost> findPostsByNickName(int page, int size, String nickname) {
+    public List<CommunityPost> findPostsByUserId(int page, Integer limit, long userId) {
         // 0-based 인덱스 방식으로 페이지 변환
-        int start = (page - 1) * size;
-        long totalElements = commBoardRepository.countByNickname(nickname);
-        List<CommunityPost> posts = commBoardRepository.findPostsByPageAndNickname(start, size, nickname);
-        return new Pagination<>(posts,page - 1, size, totalElements);
+        limit = validateLimit(limit);
+        int offset = (page - 1) * limit;
+
+        long countPostsById = commBoardMapper.countPostsById(userId);
+
+        if(countPostsById < limit + offset) {
+            limit = (int) countPostsById - offset;
+        }
+
+        return commBoardMapper.findPostsById(limit, offset, userId);
     }
 
-    //public List<Board> findAllByOrderByIdDesc() {
-    //    return boardRepository.findAllByOrderByIdDesc();
-    //}
+    private int validateLimit(Integer limit) {
+        if(limit == null || limit <= 5 || limit > 50) {
+            limit = PaginationConstant.PAGE_LIMIT;
+        }
+
+        return limit;
+    }
 }

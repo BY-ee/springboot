@@ -1,21 +1,38 @@
 package com.boardspace.mapper;
 
+import com.boardspace.dto.Pagination;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Optional;
 
 @Mapper
 public interface BoardMapper<T> {
-    List<T> findPostsByPage(int start, int size);
+    // 게시글 작성
+    int insertPost(T Post);
 
-    Optional<T> findById(long id);
+    // 게시글 수정
+    void updatePostById(T newPost);
 
-    List<T> findPostsByPageAndNickname(int start, int size, String nickname);
+    // 게시글 삭제
+    void deletePostById(long id);
 
-    void updateById(long id, T newPost);
+    // 게시글 조회
+    Optional<T> findPostById(long id);
 
-    void deleteById(long id);
+    // 페이징 처리된 게시글 조회
+    List<T> findPosts(@Param("limit") int limit,
+                      @Param("offset") int offset);
 
-    long countByNickname(String nickname);
+    // 특정 유저의 게시글을 페이징 처리 후 조회
+    List<T> findPostsById(@Param("limit") int limit,
+                          @Param("offset") int offset,
+                          @Param("id") long id);
+
+    // 게시글 총 개수
+    long countPosts();
+
+    // 특정 유저가 작성한 게시글 총 개수
+    long countPostsById(long id);
 }

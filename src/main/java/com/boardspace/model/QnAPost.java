@@ -8,10 +8,11 @@ import java.sql.Timestamp;
 
 @Getter
 @Setter
-@Alias("qna")
+@Alias("QnA")
 public class QnAPost {
-    private Long id;
-    private String nickname;
+    private long id;
+    private long userId;
+    private String userNickname;
     private String title;
     private String content;
     private String topic;

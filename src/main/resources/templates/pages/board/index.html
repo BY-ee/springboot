@@ -13,16 +13,19 @@
                     <p class="board-title-font">Q&A</p>
                 </div>
 
-                <div th:if="${qnAPostPage.totalElements > 0}">
-                    <div class="width-100p" th:each="qnAPost : ${qnAPostPage.content}">
-                        <div class="post-list">
-                            <div class="p-5 my-5 font-size-16 flex-col">
-                                <a class="al-self-self-start" th:href="@{/user/{nickname}(nickname=${qnAPost.nickname})}" th:text="${qnAPost.nickname}"></a>
-                                <a class="al-self-self-start" th:href="@{/qna/{id}(id=${qnAPost.id})}" th:text="${qnAPost.title}"></a>
-                            </div>
+                <div class="width-100p" th:each="qnAPost : ${qnAPostPage}">
+                    <div class="post-list">
+                        <div class="p-5 my-5 font-size-16 flex-col">
+                            <a class="al-self-self-start"
+                            th:href="@{/user/{nickname}(nickname=${qnAPost.userNickname})}"
+                            th:text="${qnAPost.userNickname}"></a>
+
+                            <a class="al-self-self-start"
+                            th:href="@{/qna/{id}(id=${qnAPost.id})}"
+                            th:text="${qnAPost.title}"></a>
                         </div>
-                        <hr>
                     </div>
+                    <hr>
                 </div>
 
                 <a class="inline-block m-5 p-5 pointer" th:href="@{/qna}">전체 글 보기</a>
@@ -35,16 +38,19 @@
                     <p class="board-title-font">커뮤니티</p>
                 </div>
 
-                <div th:if="${commPostPage.totalElements > 0}">
-                    <div class="width-100p" th:each="commPost : ${commPostPage.content}">
-                        <div class="post-list">
-                            <div class="p-5 my-5 font-size-16 flex-col">
-                                <a class="al-self-self-start" th:href="@{/user/{nickname}(nickname=${commPost.nickname})}" th:text="${commPost.nickname}"></a>
-                                <a class="al-self-self-start" th:href="@{/community/{id}(id=${commPost.id})}" th:text="${commPost.title}"></a>
-                            </div>
+                <div class="width-100p" th:each="commPost : ${commPostPage}">
+                    <div class="post-list">
+                        <div class="p-5 my-5 font-size-16 flex-col">
+                            <a class="al-self-self-start"
+                            th:href="@{/user/{nickname}(nickname=${commPost.userNickname})}"
+                            th:text="${commPost.userNickname}"></a>
+
+                            <a class="al-self-self-start"
+                            th:href="@{/community/{id}(id=${commPost.id})}"
+                            th:text="${commPost.title}"></a>
                         </div>
-                        <hr>
                     </div>
+                    <hr>
                 </div>
                     
                 <a class="inline-block m-5 p-5 pointer" th:href="@{/community}">전체 글 보기</a>
