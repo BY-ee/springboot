@@ -28,10 +28,10 @@ public class BoardController {
         int limit = 5;
 
         // 각 게시글을 size 별로 나눠서 뷰에 전달
-        List<QnAPost> qnAPostPage = qnABoardService.findPosts(page, limit);
-        List<CommunityPost> commPostPage = commBoardService.findPosts(page, limit);
-        model.addAttribute("qnAPostPage", qnAPostPage);
-        model.addAttribute("commPostPage", commPostPage);
+        List<QnAPost> qnAPosts = qnABoardService.findPosts(page, limit);
+        List<CommunityPost> commPosts = commBoardService.findPosts(page, limit);
+        model.addAttribute("qnAPosts", qnAPosts);
+        model.addAttribute("commPosts", commPosts);
         model.addAttribute("user", user);
         return "pages/board/index";
     }

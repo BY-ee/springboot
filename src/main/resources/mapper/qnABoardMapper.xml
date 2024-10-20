@@ -5,8 +5,8 @@
 <mapper namespace="com.boardspace.mapper.QnABoardMapper">
     <!-- 게시글 작성 -->
     <insert id="insertPost" parameterType="QnA" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        INSERT INTO qna_post
-        VALUES user_id=#{userId}, title=#{title}, content=#{content}, topic=#{topic}, tag=#{tag};
+        INSERT INTO qna_post (user_id, user_nickname, title, content, topic, tag)
+        VALUES (#{userId}, #{userNickname}, #{title}, #{content}, #{topic}, #{tag});
     </insert>
 
     <!-- 게시글 수정 -->

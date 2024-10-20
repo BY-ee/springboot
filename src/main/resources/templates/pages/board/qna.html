@@ -9,24 +9,37 @@
     <span layout:fragment="line" id="line-span"><a href="#">QnA</a></span>
 
     <main layout:fragment="content">
-        <div th:if="${qnAPosts.totalElements > 0}">
-            <div class="flex-col al-items-center mt-5vh">
-                <div class="width-50p" th:each="qnAPost : ${qnAPosts.content}">
-                    <div class="post-list">
-                        <div class="p-5 my-10 font-size-16 flex-col">
-                            <a class="al-self-self-start" th:href="@{/user/{nickname}(nickname=${qnAPost.nickname})}" th:text="${qnAPost.nickname}"></a>
-                            <a class="al-self-self-start" th:href="@{/qna/{id}(id=${qnAPost.id})}" th:text="${qnAPost.title}"></a>
-                        </div>
-                    </div>
-                    <hr>
-                </div>
+        <div class="flex-col al-items-center mt-5vh">
+            <div class="width-50p" th:each="qnAPost : ${qnAPosts}">
+                <div class="post-list">
+                    <div class="p-5 my-10 font-size-16 flex-col">
+                        <a class="al-self-self-start"
+                            th:href="@{/user/{userId}(userId=${qnAPost.userId})}"
+                            th:text="${qnAPost.userNickname}">
+                        </a>
 
-                <div class="flex mt-10 font-size-16">
-                    <div th:each="qnAPageNum : ${#numbers.sequence(1, qnAPosts.totalPages)}">
-                        <div class="page-line">
-                            <a class="inactive-page" th:if="${qnAPageNum != qnAPosts.number + 1}" th:text="${qnAPageNum}" th:href="@{/qna(page=${qnAPageNum})}"></a>
-                            <span class="active-page" th:if="${qnAPageNum == qnAPosts.number + 1}" th:text="${qnAPageNum}"></span>
-                        </div>
+                        <a class="al-self-self-start"
+                            th:href="@{/qna/{id}(id=${qnAPost.id})}"
+                            th:text="${qnAPost.title}">
+                        </a>
+                    </div>
+                </div>
+                <hr>
+            </div>
+
+            <div class="flex mt-10 font-size-16">
+                <div th:each="qnAPageNum : ${#numbers.sequence(1, qnAPosts.size())}">
+                    <div class="page-line">
+                        <a class="inactive-page"
+                            th:if="${qnAPageNum != qnAPosts.size() + 1}"
+                            th:text="${qnAPageNum}"
+                            th:href="@{/qna}">
+                        </a>
+
+                        <span class="active-page"
+                            th:if="${qnAPageNum == qnAPosts.size() + 1}"
+                            th:text="${qnAPageNum}">
+                        </span>
                     </div>
                 </div>
             </div>

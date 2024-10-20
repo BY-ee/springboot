@@ -13,11 +13,11 @@
                     <p class="board-title-font">Q&A</p>
                 </div>
 
-                <div class="width-100p" th:each="qnAPost : ${qnAPostPage}">
+                <div class="width-100p" th:each="qnAPost : ${qnAPosts}">
                     <div class="post-list">
                         <div class="p-5 my-5 font-size-16 flex-col">
                             <a class="al-self-self-start"
-                            th:href="@{/user/{nickname}(nickname=${qnAPost.userNickname})}"
+                            th:href="@{/user/{userId}(userId=${qnAPost.userId})}"
                             th:text="${qnAPost.userNickname}"></a>
 
                             <a class="al-self-self-start"
@@ -38,11 +38,11 @@
                     <p class="board-title-font">커뮤니티</p>
                 </div>
 
-                <div class="width-100p" th:each="commPost : ${commPostPage}">
+                <div class="width-100p" th:each="commPost : ${commPosts}">
                     <div class="post-list">
                         <div class="p-5 my-5 font-size-16 flex-col">
                             <a class="al-self-self-start"
-                            th:href="@{/user/{nickname}(nickname=${commPost.userNickname})}"
+                            th:href="@{/user/{userId}(userId=${commPost.userId})}"
                             th:text="${commPost.userNickname}"></a>
 
                             <a class="al-self-self-start"
