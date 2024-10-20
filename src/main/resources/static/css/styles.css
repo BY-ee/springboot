@@ -125,7 +125,7 @@ select {
     border: #777 solid 1px;
     border-radius: 5px;
     background: #666;
-    padding: 10px;
+    padding: 10px 10px 10px 5px;
     color: #FFF;
 }
 
@@ -2323,6 +2323,7 @@ table input:focus {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    min-width: 50px;
 }
 
 .btn-primary {
@@ -2420,12 +2421,14 @@ table input:focus {
 
 .post-list {
     color: #C7C7C7;
-    cursor: pointer;
 }
 
-.post-list:hover {
-    background: #ff00aa27;
-    transition: 0.15s ease;
+.post-list a {
+    display: block;        /* block-level 요소로 설정 */
+    white-space: nowrap;    /* 텍스트를 한 줄로 제한 */
+    overflow: hidden;       /* 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis; /* 넘치는 부분을 "..."으로 표시 */
+    max-width: 100%;
 }
 
 .post-box {
