@@ -1,5 +1,6 @@
 package com.boardspace.controller;
 
+import com.boardspace.dto.Pagination;
 import com.boardspace.model.CommunityPost;
 import com.boardspace.model.QnAPost;
 import com.boardspace.model.User;
@@ -27,49 +28,13 @@ public class BoardController {
         int page = 1;
         int limit = 5;
 
-        // 각 게시글을 size 별로 나눠서 뷰에 전달
-        List<QnAPost> qnAPosts = qnABoardService.findPosts(page, limit);
-        List<CommunityPost> commPosts = commBoardService.findPosts(page, limit);
-        model.addAttribute("qnAPosts", qnAPosts);
-        model.addAttribute("commPosts", commPosts);
+        // 메인 화면에서 각 게시판의 최신 5개 글 미리보기
+        Pagination<QnAPost> qnAPosts = qnABoardService.findPosts(page, limit);
+        Pagination<CommunityPost> commPosts = commBoardService.findPosts(page, limit);
+        model.addAttribute("qnAPagination", qnAPosts);
+        model.addAttribute("commPagination", commPosts);
         model.addAttribute("user", user);
         return "pages/board/index";
-    }
-
-    @GetMapping("/write")
-    public String writePost() {
-        return "pages/board/write";
-    }
-
-    @PostMapping("/write")
-    public String writePost(HttpServletRequest request,
-                            @ModelAttribute CommunityPost post) {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("loggedInUser");
-        String nickname = user.getNickname();
-        commBoardService.writePost(post);
-        return "redirect:/";
-    }
-
-    @GetMapping("/detail/{id}")
-    public String detail(@PathVariable("id") Long id,
-                         @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-        CommunityPost post = commBoardService.findPostById(id).orElseThrow();
-        model.addAttribute("post", post);
-        model.addAttribute("page", page);
-        return "pages/board/post";
-    }
-
-    @PostMapping("/update")
-    public String updatePostById(@RequestParam("id") Long id, @ModelAttribute CommunityPost post) {
-        commBoardService.updatePostById(post);
-        return "redirect:/articles?page=1";
-    }
-
-    @PostMapping("/delete")
-    public String deletePostById(@RequestParam("id") Long id) {
-        commBoardService.deletePostById(id);
-        return "redirect:/articles?page=1";
     }
 
     @GetMapping("/my-post")
@@ -78,14 +43,9 @@ public class BoardController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("loggedInUser");
         int size = 5;
-        List<CommunityPost> postPage = commBoardService.findPostsByUserId(page, size, 1);
+        Pagination<CommunityPost> postPage = commBoardService.findPostsByUserId(page, size, 1);
         model.addAttribute("user", user);
         model.addAttribute("postPage", postPage);
         return "pages/user/my-post-v1";
-    }
-
-    @GetMapping("/home")
-    public String redirectToHome() {
-        return "redirect:/";
     }
 }

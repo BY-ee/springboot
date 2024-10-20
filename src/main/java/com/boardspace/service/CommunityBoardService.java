@@ -8,8 +8,6 @@ import com.boardspace.model.QnAPost;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +20,8 @@ public class CommunityBoardService {
         int result = commBoardMapper.insertPost(post);
     }
 
-    public void updatePostById(CommunityPost post) {
-        commBoardMapper.updatePostById(post);
+    public void updatePostById(CommunityPost newPost) {
+        commBoardMapper.updatePostById(newPost);
     }
 
     public void deletePostById(long id) {
@@ -34,32 +32,29 @@ public class CommunityBoardService {
         return commBoardMapper.findPostById(id);
     }
 
-    public List<CommunityPost> findPosts(int page, Integer limit) {
+    public Pagination<CommunityPost> findPosts(int page, Integer limit) {
         // 0-based 인덱스 방식으로 페이지 변환
         limit = validateLimit(limit);
         int offset = (page - 1) * limit;
 
-        long countPosts = commBoardMapper.countPosts();
+        long totalElements = commBoardMapper.countPosts();
+        limit = Math.min(limit, (int) totalElements - offset);
 
-        if(countPosts < limit + offset) {
-            limit = (int) countPosts - offset;
-        }
-
-        return commBoardMapper.findPosts(limit, offset);
+        List<CommunityPost> posts = commBoardMapper.findPosts(limit, offset);
+        return new Pagination<>(posts, limit, offset, totalElements);
     }
 
-    public List<CommunityPost> findPostsByUserId(int page, Integer limit, long userId) {
+    public Pagination<CommunityPost> findPostsByUserId(int page, Integer limit, long userId) {
         // 0-based 인덱스 방식으로 페이지 변환
         limit = validateLimit(limit);
         int offset = (page - 1) * limit;
 
-        long countPostsById = commBoardMapper.countPostsById(userId);
+        long totalElements = commBoardMapper.countPostsByUserId(userId);
+        limit = Math.min(limit, (int) totalElements - offset);
 
-        if(countPostsById < limit + offset) {
-            limit = (int) countPostsById - offset;
-        }
 
-        return commBoardMapper.findPostsById(limit, offset, userId);
+        List<CommunityPost> posts = commBoardMapper.findPostsByUserId(limit, offset, userId);
+        return new Pagination<>(posts, limit, offset, totalElements);
     }
 
     private int validateLimit(Integer limit) {

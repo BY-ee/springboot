@@ -31,32 +31,29 @@ public class QnABoardService {
         return qnABoardMapper.findPostById(id);
     }
 
-    public List<QnAPost> findPosts(int page, Integer limit) {
+    public Pagination<QnAPost> findPosts(int page, Integer limit) {
         // 0-based 인덱스 방식으로 페이지 변환
         limit = validateLimit(limit);
         int offset = (page - 1) * limit;
 
-        long countPosts = qnABoardMapper.countPosts();
+        long totalElements = qnABoardMapper.countPosts();
+        limit = Math.min(limit, (int) totalElements - offset);
 
-        if(countPosts < limit + offset) {
-            limit = (int) countPosts - offset;
-        }
-
-        return qnABoardMapper.findPosts(limit, offset);
+        List<QnAPost> posts = qnABoardMapper.findPosts(limit, offset);
+        return new Pagination<>(posts, limit, offset, totalElements);
     }
 
-    public List<QnAPost> findPostsByUserId(int page, Integer limit, long userId) {
+    public Pagination<QnAPost> findPostsByUserId(int page, Integer limit, long userId) {
         // 0-based 인덱스 방식으로 페이지 변환
         limit = validateLimit(limit);
         int offset = (page - 1) * limit;
 
-        long countPostsById = qnABoardMapper.countPostsById(userId);
+        long totalElements = qnABoardMapper.countPostsByUserId(userId);
+        limit = Math.min(limit, (int) totalElements - offset);
 
-        if(countPostsById < limit + offset) {
-            limit = (int) countPostsById - offset;
-        }
 
-        return qnABoardMapper.findPostsById(limit, offset, userId);
+        List<QnAPost> posts = qnABoardMapper.findPostsByUserId(limit, offset, userId);
+        return new Pagination<>(posts, limit, offset, totalElements);
     }
 
     private int validateLimit(Integer limit) {

@@ -1,5 +1,6 @@
 package com.boardspace.controller;
 
+import com.boardspace.dto.Pagination;
 import com.boardspace.model.QnAPost;
 import com.boardspace.model.User;
 import com.boardspace.service.QnABoardService;
@@ -22,8 +23,8 @@ public class QnABoardController {
     public String listQnAPosts(@RequestParam(value = "page", defaultValue = "1") int page,
                                @RequestParam(required = false) Integer limit, Model model) {
 
-        List<QnAPost> qnAPosts = qnABoardService.findPosts(page, limit);
-        model.addAttribute("qnAPosts", qnAPosts);
+        Pagination<QnAPost> qnAPosts = qnABoardService.findPosts(page, limit);
+        model.addAttribute("qnAPagination", qnAPosts);
         return "pages/board/qna";
     }
 

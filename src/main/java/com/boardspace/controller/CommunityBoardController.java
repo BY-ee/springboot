@@ -1,6 +1,8 @@
 package com.boardspace.controller;
 
+import com.boardspace.dto.Pagination;
 import com.boardspace.model.CommunityPost;
+import com.boardspace.model.QnAPost;
 import com.boardspace.model.User;
 import com.boardspace.service.CommunityBoardService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,10 +21,11 @@ public class CommunityBoardController {
     private final CommunityBoardService commBoardService;
 
     @GetMapping
-    public String listCommPosts(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-        int size = 5;
-        List<CommunityPost> commPostPage = commBoardService.findPosts(page, size);
-        model.addAttribute("commPostPage", commPostPage);
+    public String listQnAPosts(@RequestParam(value = "page", defaultValue = "1") int page,
+                               @RequestParam(required = false) Integer limit, Model model) {
+
+        Pagination<CommunityPost> commPosts = commBoardService.findPosts(page, limit);
+        model.addAttribute("commPagination", commPosts);
         return "pages/board/community";
     }
 
@@ -33,32 +36,40 @@ public class CommunityBoardController {
 
     @PostMapping("/write")
     public String writePost(HttpServletRequest request,
-                            @ModelAttribute CommunityPost post) {
+                            @RequestBody CommunityPost post) {
         HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("loggedInUser");
+        post.setUserId(loggedInUser.getId());
         post.setUserNickname(loggedInUser.getNickname());
         commBoardService.writePost(post);
         return "redirect:/";
     }
 
     @GetMapping("/{id}")
-    public String detail(@PathVariable("id") Long id,
-                         @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+    public String getPostById(@PathVariable("id") long id,
+                              Model model) {
         CommunityPost post = commBoardService.findPostById(id).orElseThrow();
         model.addAttribute("post", post);
-        model.addAttribute("page", page);
-        return "post";
+        return "pages/board/post";
+    }
+
+    @GetMapping("/update/{id}")
+    public String update(@PathVariable("id") long id,
+                         Model model) {
+        CommunityPost post = commBoardService.findPostById(id).orElseThrow();
+        model.addAttribute("post", post);
+        return "pages/board/update";
     }
 
     @PostMapping("/update")
     public String updatePostById(@ModelAttribute CommunityPost post) {
         commBoardService.updatePostById(post);
-        return "redirect:/articles?page=1";
+        return "redirect:/";
     }
 
     @PostMapping("/delete")
-    public String deletePostById(@RequestParam("id") Long id) {
+    public String deletePostById(@RequestParam("id") long id) {
         commBoardService.deletePostById(id);
-        return "redirect:/articles?page=1";
+        return "redirect:/";
     }
 }

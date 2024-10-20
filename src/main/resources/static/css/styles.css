@@ -2475,13 +2475,13 @@ table input:focus {
     color: #222;
 }
 
-.active-page {
+.non-link-page {
     color: #98B9F7;
     padding: 5px;
     margin: 10px;
 }
 
-.inactive-page {
+.link-page {
     color: aliceblue;
     padding: 5px;
     margin: 10px;

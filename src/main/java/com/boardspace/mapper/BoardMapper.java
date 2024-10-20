@@ -1,6 +1,5 @@
 package com.boardspace.mapper;
 
-import com.boardspace.dto.Pagination;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,13 +25,13 @@ public interface BoardMapper<T> {
                       @Param("offset") int offset);
 
     // 특정 유저의 게시글을 페이징 처리 후 조회
-    List<T> findPostsById(@Param("limit") int limit,
-                          @Param("offset") int offset,
-                          @Param("id") long id);
+    List<T> findPostsByUserId(@Param("limit") int limit,
+                              @Param("offset") int offset,
+                              @Param("userId") long userId);
 
     // 게시글 총 개수
     long countPosts();
 
     // 특정 유저가 작성한 게시글 총 개수
-    long countPostsById(long id);
+    long countPostsByUserId(long userId);
 }

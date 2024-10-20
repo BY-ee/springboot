@@ -6,11 +6,11 @@
 
     <title layout:fragment="title">Space - QnA</title>
 
-    <span layout:fragment="line" id="line-span"><a href="#">QnA</a></span>
+    <span layout:fragment="line" id="line-span"><a href="#"></a></span>
 
     <main layout:fragment="content">
         <div class="flex-col al-items-center mt-5vh">
-            <div class="width-50p" th:each="qnAPost : ${qnAPosts}">
+            <div class="width-50p" th:each="qnAPost : ${qnAPagination.posts}">
                 <div class="post-list">
                     <div class="p-5 my-10 font-size-16 flex-col">
                         <a class="al-self-self-start"
@@ -28,20 +28,30 @@
             </div>
 
             <div class="flex mt-10 font-size-16">
-                <div th:each="qnAPageNum : ${#numbers.sequence(1, qnAPosts.size())}">
+                <th:block th:if="${qnAPagination.totalPages == 1}">
                     <div class="page-line">
-                        <a class="inactive-page"
-                            th:if="${qnAPageNum != qnAPosts.size() + 1}"
-                            th:text="${qnAPageNum}"
-                            th:href="@{/qna}">
-                        </a>
-
-                        <span class="active-page"
-                            th:if="${qnAPageNum == qnAPosts.size() + 1}"
-                            th:text="${qnAPageNum}">
+                        <span class="non-link-page"
+                            th:text="${qnAPagination.totalPages}">
                         </span>
                     </div>
-                </div>
+                </th:block>
+
+                <th:block th:unless="${qnAPagination.totalPages == 1}">
+                    <th:block th:each="qnAPageNum : ${#numbers.sequence(1, qnAPagination.totalPages)}">
+                        <div class="page-line">
+                            <a class="link-page"
+                                th:if="${qnAPageNum != qnAPagination.totalPages}"
+                                th:text="${qnAPageNum}"
+                                th:href="@{/qna}">
+                            </a>
+
+                            <span class="non-link-page"
+                                th:if="${qnAPageNum == qnAPagination.totalPages}"
+                                th:text="${qnAPageNum}">
+                            </span>
+                        </div>
+                    </th:block>
+                </th:block>
             </div>
         </div>
         

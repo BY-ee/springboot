@@ -37,7 +37,7 @@
     <!-- 특정 유저의 게시글을 페이징 처리 후 조회 -->
     <select id="findPostsById" resultType="QnA">
         SELECT * FROM qna_post
-        WHERE id=#{id}
+        WHERE user_id=#{userId}
         ORDER BY id DESC
         LIMIT #{limit} OFFSET #{offset};
     </select>
@@ -48,8 +48,8 @@
     </select>
 
     <!-- 특정 유저가 작성한 게시글 총 개수 -->
-    <select id="countPostsById" resultType="long">
+    <select id="countPostsByUserId" resultType="long">
         SELECT COUNT(*) FROM qna_post
-        WHERE id=#{id};
+        WHERE user_id=#{userId};
     </select>
 </mapper>

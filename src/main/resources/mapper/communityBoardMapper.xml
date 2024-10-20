@@ -3,14 +3,53 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.boardspace.mapper.CommunityBoardMapper">
+    <!-- 게시글 작성 -->
+    <insert id="insertPost" parameterType="Community" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO community_post (user_id, user_nickname, title, content, topic, tag)
+        VALUES (#{userId}, #{userNickname}, #{title}, #{content}, #{topic}, #{tag});
+    </insert>
+
+    <!-- 게시글 수정 -->
+    <update id="updatePostById" parameterType="Community">
+        UPDATE community_post SET title=#{title}, content=#{content}, topic=#{topic}, tag=#{tag}
+        WHERE id=#{id};
+    </update>
+
+    <!-- 게시글 삭제 -->
+    <delete id="deletePostById" parameterType="long">
+        DELETE FROM community_post WHERE id=#{id};
+    </delete>
+
+    <!-- 게시글 조회 -->
+    <select id="findPostById" parameterType="long" resultType="Community">
+        SELECT * FROM community_post
+        WHERE id=#{id}
+        ORDER BY id DESC;
+    </select>
+
     <!-- 페이징 처리된 게시글 조회 -->
     <select id="findPosts" resultType="Community">
         SELECT * FROM community_post
+        ORDER BY id DESC
+        LIMIT #{limit} OFFSET #{offset};
+    </select>
+
+    <!-- 특정 유저의 게시글을 페이징 처리 후 조회 -->
+    <select id="findPostsById" resultType="Community">
+        SELECT * FROM community_post
+        WHERE user_id=#{userId}
+        ORDER BY id DESC
         LIMIT #{limit} OFFSET #{offset};
     </select>
 
     <!-- 게시글 총 개수 -->
     <select id="countPosts" resultType="long">
         SELECT COUNT(*) FROM community_post;
+    </select>
+
+    <!-- 특정 유저가 작성한 게시글 총 개수 -->
+    <select id="countPostsByUserId" resultType="long">
+        SELECT COUNT(*) FROM community_post
+        WHERE user_id=#{userId};
     </select>
 </mapper>
