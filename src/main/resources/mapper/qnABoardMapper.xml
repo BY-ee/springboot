@@ -23,12 +23,14 @@
     <!-- 게시글 조회 -->
     <select id="findPostById" parameterType="long" resultType="QnA">
         SELECT * FROM qna_post
-        WHERE id=#{id};
+        WHERE id=#{id}
+        ORDER BY id DESC;
     </select>
 
     <!-- 페이징 처리된 게시글 조회 -->
     <select id="findPosts" resultType="QnA">
         SELECT * FROM qna_post
+        ORDER BY id DESC
         LIMIT #{limit} OFFSET #{offset};
     </select>
 
@@ -36,6 +38,7 @@
     <select id="findPostsById" resultType="QnA">
         SELECT * FROM qna_post
         WHERE id=#{id}
+        ORDER BY id DESC
         LIMIT #{limit} OFFSET #{offset};
     </select>
 

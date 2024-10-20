@@ -60,7 +60,7 @@ public class QnABoardService {
     }
 
     private int validateLimit(Integer limit) {
-        if(limit == null || limit <= 5 || limit > 50) {
+        if(limit == null || limit < 5 || limit > 50) {
             limit = PaginationConstant.PAGE_LIMIT;
         }
 
