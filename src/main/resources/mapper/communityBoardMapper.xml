@@ -52,4 +52,10 @@
         SELECT COUNT(*) FROM community_post
         WHERE user_id=#{userId};
     </select>
+
+    <!-- 조회수 증가 -->
+    <update id="increaseViewCount">
+        UPDATE comm_post SET view_count = view_count + 1
+        WHERE id=#{id};
+    </update>
 </mapper>

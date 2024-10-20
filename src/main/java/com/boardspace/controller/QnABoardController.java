@@ -1,6 +1,7 @@
 package com.boardspace.controller;
 
 import com.boardspace.dto.Pagination;
+import com.boardspace.dto.PostDTO;
 import com.boardspace.model.QnAPost;
 import com.boardspace.model.User;
 import com.boardspace.service.QnABoardService;
@@ -47,7 +48,8 @@ public class QnABoardController {
     @GetMapping("/{id}")
     public String getPostById(@PathVariable("id") long id,
                               Model model) {
-        QnAPost post = qnABoardService.findPostById(id).orElseThrow();
+        qnABoardService.increaseViewCount(id);
+        PostDTO post = qnABoardService.findPostById(id).orElseThrow();
         model.addAttribute("post", post);
         return "pages/board/post";
     }
@@ -55,7 +57,7 @@ public class QnABoardController {
     @GetMapping("/update/{id}")
     public String update(@PathVariable("id") long id,
                          Model model) {
-        QnAPost post = qnABoardService.findPostById(id).orElseThrow();
+        PostDTO post = qnABoardService.findPostById(id).orElseThrow();
         model.addAttribute("post", post);
         return "pages/board/update";
     }

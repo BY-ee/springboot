@@ -34,4 +34,7 @@ public interface BoardMapper<T> {
 
     // 특정 유저가 작성한 게시글 총 개수
     long countPostsByUserId(long userId);
+
+    // 조회수 증가
+    void increaseViewCount(long id);
 }

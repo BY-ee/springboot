@@ -35,7 +35,7 @@
     </select>
 
     <!-- 특정 유저의 게시글을 페이징 처리 후 조회 -->
-    <select id="findPostsById" resultType="QnA">
+    <select id="findPostsByUserId" resultType="QnA">
         SELECT * FROM qna_post
         WHERE user_id=#{userId}
         ORDER BY id DESC
@@ -52,4 +52,10 @@
         SELECT COUNT(*) FROM qna_post
         WHERE user_id=#{userId};
     </select>
+
+    <!-- 조회수 증가 -->
+    <update id="increaseViewCount" parameterType="long">
+        UPDATE qna_post SET view_count = view_count + 1
+        WHERE id=#{id};
+    </update>
 </mapper>
