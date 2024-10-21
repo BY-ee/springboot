@@ -12,10 +12,10 @@ function formatTimeDifference(timeDifference) {
     const timeUnits = {
         second: 60,
         minute: 3600,
-        hour: 86400,
-        day: 604800,
-        week: 2629743,
-        month: 31556926,
+        hour: 216000,
+        day: 5184000,
+        week: 36288000,
+        month: 1088640000,
         year: Infinity
     };
 
