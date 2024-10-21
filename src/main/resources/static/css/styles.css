@@ -29,6 +29,29 @@ header {
     background-color: #333;
 }
 
+.header-img {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.header-profile {
+    background-color: #FFF;
+    border-radius: 1.5rem;
+    border: 1px solid #CCC;
+}
+
+.header-profile-menu {
+    position: absolute;
+    top: 60px;
+    background-color: #666;
+    border-radius: 5px;
+    border: 1px solid #AAA;
+    z-index: 40;
+    line-height: 2;
+    padding: 10px;
+}
+
 main {
     flex: 1;
     width: 80%;
@@ -41,21 +64,6 @@ footer {
     background-color: #333;
     width: 100%;
 }
-
-/* Background Image Setting */
-/* .bg-image-flower {
-    background-image: url(../image/flower.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.bg-image-milkyway {
-    background-image: url(../image/milkyway.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-} */
 
 /* ==========================================
    ID Styles
