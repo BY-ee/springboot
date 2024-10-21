@@ -63,7 +63,7 @@ public class QnABoardController {
     }
 
     @PostMapping("/update")
-    public String updatePostById(@ModelAttribute QnAPost post) {
+    public String updatePostById(@RequestBody QnAPost post) {
         qnABoardService.updatePostById(post);
         return "redirect:/";
     }

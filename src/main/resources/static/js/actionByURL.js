@@ -1,4 +1,8 @@
 $(() => {
+    /************************
+     *    Normalize Code    *
+     ************************/
+
     // 각 게시판 별 line 템플릿의 텍스트
     const lineText = {
         qna: 'QnA',
@@ -12,12 +16,14 @@ $(() => {
     const lineLink = $('#line-span').find('a');
     for(let prop in lineText) {
         if(path.includes(prop)) {
-            lineLink.attr('href', '/' + path).text(lineText[prop]);
+            lineLink.attr('href', `/${path}`).text(lineText[prop]);
             break;
         }
     }
 
     // 각 버튼별 경로 설정 객체
+    const id = $('.post-box').data('id');
+
     const btnIDs = {
         '#go-to-main-page-btn': location.origin,  // 메인 페이지 이동 (/)
         '#go-to-login-page-btn': `/login`,  // 로그인 페이지 이동
@@ -26,7 +32,8 @@ $(() => {
         '#go-to-find-pw-page-btn': `/find-pw`,  // 비밀번호 찾기 페이지 이동
         
         '#go-to-posts-btn': `/${path}`,  // 게시판 페이지 이동
-        '#go-to-write-page-btn': `/${path}/write`  // 글 작성 페이지 이동
+        '#go-to-write-page-btn': `/${path}/write`,  // 글 작성 페이지 이동
+        '#go-to-update-post-page-btn': `/${path}/update/${id}`  // 글 수정 페이지 이동
     };
 
     // 버튼 클릭시 경로 이동 이벤트 핸들러
@@ -34,6 +41,18 @@ $(() => {
         $(btnID).on('click', () => {
             location.href = btnIDs[btnID];
         });
+    }
+
+
+    /*******************
+     *    User Code    *
+     *******************/
+
+
+
+    /*******************
+     *    Post Code    *
+     *******************/
 
     // 글 작성 버튼 이벤트 핸들러
     $('#write-post-btn').on('click', () => {
@@ -50,7 +69,37 @@ $(() => {
         };
 
         $.ajax({
-            url: '/' + path + '/write',
+            url: `/${path}/write`,
+            type: 'POST',
+            data: JSON.stringify(post),
+            contentType: 'application/json',
+            success: () => {
+                console.log('Success');
+            },
+            error: (e) => {
+                console.error(e);
+            }
+        });
+    });
+
+    // 글 수정 버튼 이벤트 핸들러
+    $('#update-post-btn').on('click', () => {
+        const id = $('.post-box').data('id');
+        const title = $('#title').val();
+        const content = $('#content').val();
+        const topic = $('#topic').val();
+        const tag = $('#tag').val();
+
+        const post = {
+            id: id,
+            title: title,
+            content: content,
+            topic: topic,
+            tag: tag
+        };
+
+        $.ajax({
+            url: `/${path}/update`,
             type: 'POST',
             data: JSON.stringify(post),
             contentType: 'application/json',

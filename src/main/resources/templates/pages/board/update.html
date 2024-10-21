@@ -9,7 +9,7 @@
     <span layout:fragment="line" id="line-span"><a href="#"></a></span>
 
     <main layout:fragment="content">
-        <div class="post-box">
+        <div class="post-box" th:attr="data-id=${post.id}">
             <div class="mt-20">
                 <label for="title">제목</label>
                 <input class="width-100p" type="text" id="title" name="title" th:value="${post.title}" placeholder="제목을 입력하세요." />
@@ -19,9 +19,9 @@
                     <label for="topic">주제</label>
                     <select class="width-100p" id="topic" name="topic">
                         <option value="">주제 선택</option>
-                        <option value="1" th:selected="${post.topic == 1}">공지</option>
-                        <option value="2" th:selected="${post.topic == 2}">질문</option>
-                        <option value="3" th:selected="${post.topic == 3}">공유</option>
+                        <option value="1" th:selected="${post.topic == '1'}">공지</option>
+                        <option value="2" th:selected="${post.topic == '2'}">질문</option>
+                        <option value="3" th:selected="${post.topic == '3'}">공유</option>
                     </select>
                 </div>
                 <div class="width-65p">
@@ -37,7 +37,7 @@
                 <button class="btn btn-dark" id="go-to-posts-btn">글목록</button>
                 <div class="button-container">
                     <button class="btn btn-primary">임시저장</button>
-                    <button class="btn btn-primary" id="write-post-btn">작성</button>
+                    <button class="btn btn-primary" id="update-post-btn">작성</button>
                 </div>
             </div>
         </div>

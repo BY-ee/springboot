@@ -9,7 +9,7 @@
     <span layout:fragment="line" id="line-span"><a href="#">QnA</a></span>
 
     <main layout:fragment="content">
-        <div class="post-box" th:attr="data-created-at=${post.createdAt}">
+        <div class="post-box" th:attr="data-created-at=${post.createdAt}, data-id=${post.id}">
             <div class="mt-40">
                 <p class="post-nickname" th:text="${post.userNickname}"></p>
                 <p class="post-sub"><span id="created-at-text"></span> · 조회수 [[${post.viewCount}]]</p>
