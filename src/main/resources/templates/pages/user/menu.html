@@ -2,17 +2,17 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout-with-header-footer-side}">
+      layout:decorate="~{layout/layout-with-header-footer}">
       
     <title layout:fragment="title">Space</title>
     
 
-    <main layout:fragment="content">
+    <main class="relative flex al-items-stretch" layout:fragment="content">
         <th:block th:replace="~{fragments/sidebar :: sidebarFragment}"></th:block>
 
         <div class="vertical-line"></div>
 
-        <div class="flex">
+        <div class="flex pl-15p">
             <div class="m-0-auto mt-5vh">
                 <div class="width-40vh">
                     <form th:action="@{/user/update}" th:object="${user}" method="post">

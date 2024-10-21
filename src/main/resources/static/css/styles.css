@@ -2202,6 +2202,10 @@ table input:focus {
     align-items: flex-end;
 }
 
+.al-items-stretch {
+    align-items: stretch;
+}
+
 .al-self-f-start {
     align-self: flex-start;
 }
@@ -2532,9 +2536,8 @@ table input:focus {
 
 /* Setting Page Styles */
 .vertical-line {
-    position: absolute;
+    position: relative;
     width: 20vh;
-    height: 68vh;
     z-index: -1;
 }
 
