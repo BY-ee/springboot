@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout-with-header-footer}">
-      
-    <title layout:fragment="title">Space</title>
-    
+// 프로필 페이지 동적 렌더링
+function profilePage() {
+    const $userInfo = $('.user-info');
 
-    <main class="relative flex al-items-stretch" layout:fragment="content">
-        <th:block th:replace="~{fragments/sidebar :: sidebarFragment}"></th:block>
-
-        <div class="vertical-line"></div>
-
+    const pageHTML = `
         <div class="flex pl-15p">
             <div class="m-0-auto mt-5vh">
                 <div class="width-40vh">
@@ -35,5 +26,16 @@
                 </div>
             </div>
         </div>
-    </main>
-</html>
+    `;
+
+    $userInfo.html(pageHTML);
+}
+
+// 계정 설정 페이지 동적 렌더링
+function accountSettingPage() {
+    const pageHTML = ``;
+}
+
+$(() => {
+    profilePage();
+});
