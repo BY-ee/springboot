@@ -98,7 +98,7 @@ $(() => {
         e.preventDefault();
 
         $.ajax({
-            url: '/current-user',
+            url: '/users/session',
             type: 'GET',
             success: (user) => {
                 profilePage(user);
@@ -114,7 +114,7 @@ $(() => {
         e.preventDefault();
 
         $.ajax({
-            url: '/current-user',
+            url: '/users/session',
             type: 'GET',
             success: (user) => {
                 accountSettingPage(user);
@@ -128,8 +128,18 @@ $(() => {
 
     $('#activity-btn').on('click', (e) => {
         e.preventDefault();
-        activityPage();
-        history.replaceState(null, null, '/user/qna');
+
+        $.ajax({
+            url: '/',
+            type: 'GET',
+            success: (user) => {
+                activityPage();
+                history.replaceState(null, null, `/users/${user.id}/qna`);
+            },
+            error: (e) => {
+                console.error(e);
+            }
+        });
     });
 
     $(document).on('click', '#update-user-btn', () => {

@@ -15,6 +15,9 @@ public interface UserMapper {
     // 회원탈퇴
     int deleteUser(User user);
 
+    // id로 사용자 조회
+    Optional<User> findUserById(long id);
+
     // 유저 아이디로 사용자 조회
     Optional<User> findUserByUserId(String userId);
 

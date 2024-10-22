@@ -23,6 +23,10 @@ public class UserService {
         return userMapper.deleteUser(user);
     }
 
+    public Optional<User> findUserById(long id) {
+        return userMapper.findUserById(id);
+    }
+
     public Optional<User> findUserByUserId(String userId) {
         return userMapper.findUserByUserId(userId);
     }

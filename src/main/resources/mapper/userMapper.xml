@@ -16,6 +16,12 @@
         WHERE id=#{id};
     </delete>
 
+    <!-- id로 사용자 조회 -->
+    <select id="findUserById" parameterType="long" resultType="UserModel">
+        SELECT * FROM user
+        WHERE id=#{id};
+    </select>
+
     <!-- 유저 아이디로 사용자 조회 -->
     <select id="findUserByUserId" parameterType="String" resultType="UserModel">
         SELECT * FROM user
