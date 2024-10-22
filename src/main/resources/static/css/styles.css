@@ -35,12 +35,6 @@ header {
     cursor: pointer;
 }
 
-.header-profile {
-    background-color: #FFF;
-    border-radius: 1.5rem;
-    border: 1px solid #CCC;
-}
-
 .header-profile-menu {
     position: absolute;
     top: 60px;
@@ -2130,6 +2124,46 @@ table input:focus {
     flex: 1 1 auto;
 }
 
+.flex-grow-0 {
+    flex-grow: 0;
+}
+
+.flex-shrink-0 {
+    flex-shrink: 0;
+}
+
+.flex-basis-auto {
+    flex-basis: auto;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+.flex-shrink-1 {
+    flex-shrink: 1;
+}
+
+.flex-basis-0 {
+    flex-basis: 0%;
+}
+
+.flex-basis-100 {
+    flex-basis: 100%;
+}
+
+.flex-grow-2 {
+    flex-grow: 2;
+}
+
+.flex-shrink-2 {
+    flex-shrink: 2;
+}
+
+.flex-basis-200 {
+    flex-basis: 200%;
+}
+
 .flex-row {
     display: flex;
     flex-direction: row;
@@ -2338,6 +2372,52 @@ table input:focus {
 
 .font-black {
     color: black;
+}
+
+/* Border Styles */
+
+.border-black {
+    border: 1px solid black;
+}
+
+.border-white {
+    border: 1px solid white;
+}
+
+.border-top-black {
+    border-top: 1px solid black;
+}
+
+.border-top-white {
+    border-top: 1px solid white;
+}
+
+.border-bottom-black {
+    border-bottom: 1px solid black;
+}
+
+.border-bottom-white {
+    border-bottom: 1px solid white;
+}
+
+.border-left-black {
+    border-left: 1px solid black;
+}
+
+.border-left-white {
+    border-left: 1px solid white;
+}
+
+.border-right-black {
+    border-right: 1px solid black;
+}
+
+.border-right-white {
+    border-right: 1px solid white;
+}
+
+.border-rounded {
+    border-radius: 50%;
 }
 
 
@@ -2549,6 +2629,17 @@ table input:focus {
     width: 2px;
     height: 100%;
     background-color: #AAA
+}
+
+.profile-img{
+    background-color: #FFF;
+    border-radius: 50%;
+    border: 1px solid #CCC;
+}
+
+.settings-separator {
+    margin: 15px 0;
+    border-bottom: 2px solid #AAA;
 }
 
 /* Button-container Utility */

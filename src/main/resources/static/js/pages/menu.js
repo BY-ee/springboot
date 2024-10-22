@@ -9,7 +9,7 @@ function HideMenu() {
 }
 
 $(() => {
-    $('.header-profile').on('click', () => {
+    $('.header-img').on('click', () => {
         ToggleMenu();
     });
 
