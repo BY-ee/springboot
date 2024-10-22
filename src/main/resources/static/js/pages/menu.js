@@ -1,21 +1,22 @@
-function ToggleMenu() {
+function toggleMenu() {
     $('.header-profile-menu').toggle();
     console.log('Toggle');
 }
 
-function HideMenu() {
+function hideMenu() {
     $('.header-profile-menu').hide();
     console.log('Hide');
 }
 
 $(() => {
-    $('.header-img').on('click', () => {
-        ToggleMenu();
+    $('.setting-toggle').on('click', (e) => {
+        e.stopPropagation();
+        toggleMenu();
     });
 
-    $(document).click((e) => {
+    $(document).on('click', (e) => {
         if(!$(e.target).closest('.header-profile-menu').length) {
-            // HideMenu();
+            hideMenu();
         }
     });
 });

@@ -5,7 +5,7 @@
             <span>Navigation bar</span>
             
             <div class="flex-end gap-20 my-15" th:if="${session.loggedInUser}">
-                <img class="profile-img header-img" th:src="@{https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/512px-React-icon.svg.png}" />
+                <img class="profile-img header-img setting-toggle" th:src="@{https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/512px-React-icon.svg.png}" />
                 <div class="header-profile-menu hidden" id="profile-header">
                     <a th:href="@{/settings/profile}">프로필</a><br>
                     <a th:href="@{/settings/account}">계정 관리</a><br>
