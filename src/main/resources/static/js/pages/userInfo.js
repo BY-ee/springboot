@@ -47,6 +47,7 @@ function accountSettingPage(user) {
             <div class="ml-10p">
                 <label for="email" class="pt-10">이메일 수정</label>
                 <input class="width-50p mb-20" type="text" id="email" value="${user.email}" placeholder="이메일을 입력해주세요." />
+                <button class="btn btn-dark ml-20" type="button" id="authn-phone">이메일 인증</button>
                 <p>이메일 인증 요청 시 입력하신 이메일로 인증 요청 메일이 발송됩니다.</p>
                 <p>이메일 인증이 정상적으로 완료된 후에 이메일이 수정됩니다.</p>
             </div>
@@ -72,29 +73,43 @@ function activityPage(pagination) {
 
     const posts = pagination.posts;
 
-    let pageHTML = '';
+    let pageHTML = `
+        <div>
+        </div>
+        <div class="flex px-50 mb-30 gap-20 font-size-24">
+            <a>QnA</a>
+            <a>커뮤니티</a>
+        </div>
+    `;
 
     posts.forEach(post => {
         pageHTML += `
-        <div>
-                <p>userNickname: ${post.userNickname}</p>
-                <p><b>title: ${post.title}</b></p>
-                <p>topic: ${post.topic}</p>
-                <p>tag: ${post.tag}</p>
-                <br />
-        </div>
-    `;
-    }); 
+            <div class="px-50 mt-20">
+                <div class="flex-space-between al-items-center">
+                    <div>
+                        <span class="border-white px-10 py-5 text-center font-white" style="border-radius: 0.7rem;">${post.topic}</span>
+                        <a class="ml-5">tag: ${post.tag}</a>
+                    </div>
+                    <span class="font-white">작성일 ${post.createdAt}</span>
+                </div>
+
+                <div class="flex-space-between al-items-center border-bottom-white py-10">
+                    <p class="font-size-18"><b>${post.title}</b></p>
+                    <span class="font-white" style="margin-top: -25px;">최종 수정일 ${post.updatedAt}</span>
+                </div>
+            </div>
+        `;
+    });
 
     $userInfo.html(pageHTML);
 }
 
 // 세션의 유저 데이터 요청
 function fetchSessionUser(successCallback) {
-        $.ajax({
-            url: '/users/session',
-            type: 'GET',
-            success: (user) => {
+    $.ajax({
+        url: '/users/session',
+        type: 'GET',
+        success: (user) => {
             successCallback(user);
         },
         error: (e) => {
@@ -137,10 +152,10 @@ function fetchCommunityPostsByUserId(userId, successCallback) {
         type: 'GET',
         success: (pagination) => {
             successCallback(pagination);
-            },
-            error: (e) => {
-                console.error(e);
-            }
+        },
+        error: (e) => {
+            console.error(e);
+        }
     });
 }
 
@@ -165,7 +180,7 @@ $(() => {
         e.preventDefault();
 
         fetchSessionUser((user) => {
-                accountSettingPage(user);
+            accountSettingPage(user);
             history.replaceState(null, null, '/account');
         });
     });
@@ -192,8 +207,17 @@ $(() => {
             fetchQnAPostsByUserId(userId, (pagination) => {
                 activityPage(pagination);
             })
-            }
-        });
+        }
+    });
+
+    
+    /*             *
+    *    Button    *
+    *              */
+
+    // 돌아가기 버튼
+    $(document).on('click', '#go-to-main-page-btn', () => {
+        location.href = location.origin;
     });
 
     // 유저 정보 수정 이벤트 핸들러
