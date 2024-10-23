@@ -1,5 +1,6 @@
 package com.boardspace.controller;
 
+import com.boardspace.dto.Pagination;
 import com.boardspace.dto.PostDTO;
 import com.boardspace.dto.UserDTO;
 import com.boardspace.model.CommunityPost;
@@ -21,11 +22,21 @@ public class UserRestController {
     private final QnABoardService qnABoardService;
     private final CommunityBoardService commBoardService;
 
-    @GetMapping("/current-user")
-    public User getCurrentUser(HttpSession session) {
-        return (User) session.getAttribute("loggedInUser");
+    // 세션의 유저 데이터 반환
+    @GetMapping("/users/session")
+    public ResponseEntity<User> getSessionUser(HttpSession session) {
+        User user = (User) session.getAttribute("loggedInUser");
+        return ResponseEntity.ok(user);
     }
 
+    // 세션의 유저 id 데이터 반환
+    @GetMapping("/users/session/id")
+    public ResponseEntity<Long> getSessionId(HttpSession session) {
+        User user = (User) session.getAttribute("loggedInUser");
+        return ResponseEntity.ok(user.getId());
+    }
+
+    // 유저의 이메일, 닉네임 수정
     @PostMapping("/user/update")
     public ResponseEntity<Integer> updateUser(@RequestBody User user,
                              HttpServletRequest request) {
@@ -45,21 +56,24 @@ public class UserRestController {
         return ResponseEntity.ok(result);
     }
 
+    // 특정 유저 조회
     @GetMapping("/users/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable long id) {
+    public ResponseEntity<User> findUserById(@PathVariable long id) {
         User user = userService.findUserById(id).orElseThrow(() -> new RuntimeException("User Not Found"));
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping("/qna/{id}")
-    public ResponseEntity<PostDTO> getQnAPostById(@PathVariable long id) {
-        PostDTO postDTO = qnABoardService.findPostById(id).orElseThrow(() -> new RuntimeException("QnAPost Not Found"));
-        return ResponseEntity.ok(postDTO);
+    // 특정 유저의 qna 게시글 조회
+    @GetMapping("/users/{userId}/qna")
+    public ResponseEntity<Pagination<QnAPost>> findQnAPostsByUserId(@PathVariable long userId) {
+        Pagination<QnAPost> qnAPosts = qnABoardService.findPostsByUserId(1, 5, userId);
+        return ResponseEntity.ok(qnAPosts);
     }
 
-    @GetMapping("/community/{id}")
-    public ResponseEntity<CommunityPost> getCommunityPostById(@PathVariable long id) {
-        CommunityPost commPost = commBoardService.findPostById(id).orElseThrow(() -> new RuntimeException("CommunityPost Not Found"));
-        return ResponseEntity.ok(commPost);
+    // 특정 유저의 커뮤니티 게시글 조회
+    @GetMapping("/users/{userId}/community")
+    public ResponseEntity<Pagination<CommunityPost>> findCommunityPostsByUserId(@PathVariable long userId) {
+        Pagination<CommunityPost> commPosts = commBoardService.findPostsByUserId(1, 5, userId);
+        return ResponseEntity.ok(commPosts);
     }
 }
