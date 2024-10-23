@@ -1,59 +1,53 @@
 package com.boardspace.service;
 
+import com.boardspace.dto.UserCredentials;
+import com.boardspace.dto.UserDTO;
+import com.boardspace.mapper.UserMapper;
 import com.boardspace.model.User;
-import com.boardspace.repository.MemoryUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    private final MemoryUserRepository userRepository;
-    private long id;
+    private final UserMapper userMapper;
 
-    public void saveUser(User user) {
-        user.setId(id++);
-        user.setCreateTime(Timestamp.valueOf(LocalDateTime.now()));
-        userRepository.save(user);
+    public User insertUser(User newUser) {
+        userMapper.insertUser(newUser);
+        return newUser;
     }
 
-    public void deleteUser(User user) {
-        userRepository.delete(user);
+    public int deleteUser(User user) {
+        return userMapper.deleteUser(user);
     }
 
-    public Optional<User> findByUserId(String userId) {
-        return userRepository.findByUserId(userId);
+    public Optional<User> findUserById(long id) {
+        return userMapper.findUserById(id);
     }
 
-    public Optional<User> findByPassword(String password) {
-        return userRepository.findByPassword(password);
+    public Optional<User> findUserByUserId(String userId) {
+        return userMapper.findUserByUserId(userId);
     }
 
-    public Optional<User> findByUserIdAndPassword(String userId, String password) {
-        return userRepository.findByUserIdAndPassword(userId, password);
+    public Optional<User> findUserByUserIdAndPassword(UserCredentials userCredentials) {
+        return userMapper.findUserByUserIdAndPassword(userCredentials);
     }
 
-    public Optional<String> findUserIdByEmail(String email) {
-        return userRepository.findUserIdByEmail(email);
+    public Optional<User> findUserByEmail(String email) {
+        return userMapper.findUserByEmail(email);
     }
 
-    public Optional<Long> findIdByUserIdAndEmail(String userId, String email) {
-        return userRepository.findIdByUserIdAndEmail(userId, email);
+    public Optional<User> findUserByUserIdAndEmail(UserCredentials userCredentials) {
+        return userMapper.findUserByUserIdAndEmail(userCredentials);
     }
 
-    public boolean existsById(long id) {
-        return userRepository.existsById(id);
+    public int updateEmailAndNicknameById(UserDTO user) {
+        return userMapper.updateEmailAndNicknameById(user);
     }
 
-    public int updateEmailAndNicknameById(long id, String email, String nickname) {
-        return userRepository.updateEmailAndNicknameById(id, email, nickname);
-    }
-
-    public void updatePasswordById(String password, long id) {
-        userRepository.updatePasswordById(password, id);
+    public int updatePasswordById(UserDTO userDTO) {
+        return userMapper.updatePasswordById(userDTO);
     }
 }

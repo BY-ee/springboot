@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-with-header-footer}">
+      
+    <title layout:fragment="title">Space</title>
+    
+
+    <main class="relative flex al-items-stretch" layout:fragment="content">
+        <th:block th:replace="~{fragments/sidebar :: sidebarFragment}"></th:block>
+
+        <div class="vertical-line"></div>
+
+        <div class="user-info flex-1"></div>
+    </main>
+</html>

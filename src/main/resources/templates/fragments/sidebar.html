@@ -1,0 +1,10 @@
+<body th:fragment="sidebarFragment">
+    <div class="flex-col absolute mt-20" style="font-size: 16px;">
+        <a id="profile-btn" th:href="@{/settings/profile}">프로필</a><br>
+        <a id="account-settings-btn" th:href="@{/settings/account}">계정 설정</a><br>
+        <a id="activity-btn" th:href="@{|/user/${session.loggedInUser.id}/qna|}">활동내역</a><br>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/js/pages/userInfo.js"></script>
+</body>

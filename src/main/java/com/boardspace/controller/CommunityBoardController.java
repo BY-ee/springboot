@@ -1,15 +1,18 @@
 package com.boardspace.controller;
 
-import com.boardspace.model.CommunityBoard;
+import com.boardspace.dto.Pagination;
+import com.boardspace.model.CommunityPost;
+import com.boardspace.model.QnAPost;
 import com.boardspace.model.User;
 import com.boardspace.service.CommunityBoardService;
-import com.boardspace.service.Pagination;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -18,10 +21,11 @@ public class CommunityBoardController {
     private final CommunityBoardService commBoardService;
 
     @GetMapping
-    public String listCommPosts(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-        int size = 5;
-        Pagination<CommunityBoard> commPostPage = commBoardService.getPosts(page, size);
-        model.addAttribute("commPostPage", commPostPage);
+    public String listQnAPosts(@RequestParam(value = "page", defaultValue = "1") int page,
+                               @RequestParam(required = false) Integer limit, Model model) {
+
+        Pagination<CommunityPost> commPosts = commBoardService.findPosts(page, limit);
+        model.addAttribute("commPagination", commPosts);
         return "pages/board/community";
     }
 
@@ -31,33 +35,40 @@ public class CommunityBoardController {
     }
 
     @PostMapping("/write")
-    public String writePost(HttpServletRequest request,
-                            @ModelAttribute CommunityBoard post) {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        String nickname = user.getNickname();
-        commBoardService.writePost(nickname, post);
+    public String writePost(HttpSession session,
+                            @RequestBody CommunityPost post) {
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        post.setUserId(loggedInUser.getId());
+        post.setUserNickname(loggedInUser.getNickname());
+        commBoardService.writePost(post);
         return "redirect:/";
     }
 
     @GetMapping("/{id}")
-    public String detail(@PathVariable("id") Long id,
-                         @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-        CommunityBoard post = commBoardService.findById(id).orElseThrow();
+    public String getPostById(@PathVariable("id") long id,
+                              Model model) {
+        CommunityPost post = commBoardService.findPostById(id).orElseThrow();
         model.addAttribute("post", post);
-        model.addAttribute("page", page);
-        return "post";
+        return "pages/board/post";
+    }
+
+    @GetMapping("/update/{id}")
+    public String update(@PathVariable("id") long id,
+                         Model model) {
+        CommunityPost post = commBoardService.findPostById(id).orElseThrow();
+        model.addAttribute("post", post);
+        return "pages/board/update";
     }
 
     @PostMapping("/update")
-    public String updatePostById(@RequestParam("id") Long id, @ModelAttribute CommunityBoard post) {
-        commBoardService.updateById(id, post);
-        return "redirect:/articles?page=1";
+    public String updatePostById(@ModelAttribute CommunityPost post) {
+        commBoardService.updatePostById(post);
+        return "redirect:/";
     }
 
     @PostMapping("/delete")
-    public String deletePostById(@RequestParam("id") Long id) {
-        commBoardService.deleteById(id);
-        return "redirect:/articles?page=1";
+    public String deletePostById(@RequestParam("id") long id) {
+        commBoardService.deletePostById(id);
+        return "redirect:/";
     }
 }

@@ -1,17 +1,26 @@
 <header th:fragment="headerFragment">
     <div class="mb-20" style="border-bottom: 1px solid #FFF;">
-        <div class="flex-space-between align-center width-80p mx-10p">
-            <img class="pointer" src="https://www.thymeleaf.org/images/thymeleaf.png" alt="" style="width: 40px; height: 40px;" onclick="location.href = location.origin" />
+        <div class="flex-space-between al-items-center width-80p mx-10p">
+            <img class="header-img" src="https://www.thymeleaf.org/images/thymeleaf.png" alt="" onclick="location.href = location.origin" />
             <span>Navigation bar</span>
             
-            <div class="flex-end gap-20 my-15" th:if="${user}">
-                <button class="btn btn-primary" type="button" onclick="location.href='/my-page'">내정보</button>
-                <button class="btn btn-secondary" type="button" onclick="location.href='/logout'">로그아웃</button>
+            <div class="flex-end gap-20 my-15" th:if="${session.loggedInUser}">
+                <img class="profile-img header-img setting-toggle" th:src="@{https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/512px-React-icon.svg.png}" />
+                <div class="header-profile-menu hidden" id="profile-header">
+                    <a th:href="@{/settings/profile}">프로필</a><br>
+                    <a th:href="@{/settings/account}">계정 관리</a><br>
+                    <a th:href="@{|/user/${session.loggedInUser.id}/qna|}">활동내역</a><br>
+                    <a th:href="@{/logout}">로그아웃</a><br>
+                </div>
             </div>
-            <div class="flex-end gap-20 my-15" th:unless="${user}">
+
+            <div class="flex-end gap-20 my-15" th:unless="${session.loggedInUser}">
                 <button class="btn btn-primary" type="button" onclick="location.href='/signup'">회원가입</button>
                 <button class="btn btn-primary" type="button" onclick="location.href='/login'">로그인</button>
             </div>
         </div>
     </div>
+
+    <script th:src="@{http://code.jquery.com/jquery-latest.js}"></script>
+    <script th:src="@{/js/pages/menu.js}"></script>
 </header>

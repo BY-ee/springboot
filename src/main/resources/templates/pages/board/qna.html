@@ -6,45 +6,58 @@
 
     <title layout:fragment="title">Space - QnA</title>
 
-    <span layout:fragment="line"><a href="#">QnA</a></span>
+    <span layout:fragment="line" id="line-span"><a href="#"></a></span>
 
     <main layout:fragment="content">
-        <div th:if="${qnAPostPage.totalElements > 0}">
-            <div class="flex-col align-center mt-5vh">
-                <div class="div-width-50p" th:each="qnAPost : ${qnAPostPage.content}">
-                    <form th:action="@{/qna/{id}(id=${qnAPost.id})}" method="get">
-                        <input type="hidden" th:value="${qnAPostPage.number + 1}" name="page" />
-                        <div class="post-list" onclick="this.closest('form').submit();">
-                            <div class="p-5 my-10 font-size-16">
-                                <p th:text="${qnAPost.nickname}"></p>
-                                <p th:text="${qnAPost.title}"></p>
-                            </div>
-                        </div>
-                        <hr>
-                    </form>
-                </div>
+        <div class="flex-col al-items-center mt-5vh">
+            <div class="width-50p" th:each="qnAPost : ${qnAPagination.posts}">
+                <div class="post-list">
+                    <div class="p-5 my-10 font-size-16 flex-col">
+                        <a class="al-self-self-start"
+                            th:href="@{/user/{userId}(userId=${qnAPost.userId})}"
+                            th:text="${qnAPost.userNickname}">
+                        </a>
 
-                <div class="flex mt-10 font-size-16">
-                    <div th:each="qnAPageNum : ${#numbers.sequence(1, qnAPostPage.totalPages)}">
-                        <div class="page-line">
-                            <a class="inactive-page" th:if="${qnAPageNum != qnAPostPage.number + 1}" th:text="${qnAPageNum}" th:href="@{/qna(page=${qnAPageNum})}"></a>
-                            <span class="active-page" th:if="${qnAPageNum == qnAPostPage.number + 1}" th:text="${qnAPageNum}"></span>
-                        </div>
+                        <a class="al-self-self-start"
+                            th:href="@{/qna/{id}(id=${qnAPost.id})}"
+                            th:text="${qnAPost.title}">
+                        </a>
                     </div>
                 </div>
+                <hr>
+            </div>
 
-                <div class="button-container">
-                    <button class="btn btn-primary" id="go-to-write-page-button" type="button">글 작성</button>
-                    <button class="btn btn-primary" id="go-to-main-page-button" type="button">돌아가기</button>
-                </div>
+            <div class="flex mt-10 font-size-16">
+                <th:block th:if="${qnAPagination.totalPages == 1}">
+                    <div class="page-line">
+                        <span class="non-link-page"
+                            th:text="${qnAPagination.totalPages}">
+                        </span>
+                    </div>
+                </th:block>
+
+                <th:block th:unless="${qnAPagination.totalPages == 1}">
+                    <th:block th:each="qnAPageNum : ${#numbers.sequence(1, qnAPagination.totalPages)}">
+                        <div class="page-line">
+                            <a class="link-page"
+                                th:if="${qnAPageNum != qnAPagination.totalPages}"
+                                th:text="${qnAPageNum}"
+                                th:href="@{/qna}">
+                            </a>
+
+                            <span class="non-link-page"
+                                th:if="${qnAPageNum == qnAPagination.totalPages}"
+                                th:text="${qnAPageNum}">
+                            </span>
+                        </div>
+                    </th:block>
+                </th:block>
             </div>
         </div>
         
-        <div th:unless="${qnAPostPage.totalElements > 0}">
-            <div class="button-container">
-                <button class="btn btn-primary" id="go-to-write-page-button" type="button">글 작성</button>
-                <button class="btn btn-primary" id="go-to-main-page-button" type="button">돌아가기</button>
-            </div>
+        <div class="button-container mt-20">
+            <button class="btn btn-primary" id="go-to-write-page-btn" type="button">글 작성</button>
+            <button class="btn btn-primary" id="go-to-main-page-btn" type="button">돌아가기</button>
         </div>
     </main>
 </html>

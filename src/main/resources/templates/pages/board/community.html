@@ -1,50 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>글 목록 페이지</title>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-with-header-footer-line}">
 
-    <link rel="stylesheet" th:href="@{/css/styles-v1.css}" href="../../static/css/styles-v1.css">
-</head>
-<body class="bg-image-milkyway">
-    <h1>글 목록</h1>
+    <title layout:fragment="title">Space - Community</title>
 
-    <div th:if="${postPage.totalElements > 0}">
-        <div class="flex-col align-center mt-5vh">
-            <div class="div-width-50p" th:each="post : ${postPage.content}">
-                <form th:action="@{/detail/{id}(id=${comm-post.id})}" method="get">
-                    <input type="hidden" th:value="${postPage.number + 1}" name="page" />
-                    <div class="post-list" onclick="this.closest('form').submit();">
-                        <div class="p-5 my-10 font-size-16">
-                            <p th:text="${post.nickname}"></p>
-                            <p th:text="${post.title}"></p>
-                        </div>
+    <span layout:fragment="line" id="line-span"><a href="#"></a></span>
+
+    <main layout:fragment="content">
+        <div class="flex-col al-items-center mt-5vh">
+            <div class="width-50p" th:each="commPost : ${commPagination.posts}">
+                <div class="post-list">
+                    <div class="p-5 my-10 font-size-16 flex-col">
+                        <a class="al-self-self-start"
+                            th:href="@{/user/{userId}(userId=${commPost.userId})}"
+                            th:text="${commPost.userNickname}">
+                        </a>
+
+                        <a class="al-self-self-start"
+                            th:href="@{/community/{id}(id=${commPost.id})}"
+                            th:text="${commPost.title}">
+                        </a>
                     </div>
-                    <hr>
-                </form>
+                </div>
+                <hr>
             </div>
 
             <div class="flex mt-10 font-size-16">
-                <div th:each="pageNum : ${#numbers.sequence(1, postPage.totalPages)}">
+                <th:block th:if="${commPagination.totalPages == 1}">
                     <div class="page-line">
-                        <a class="inactive-page" th:if="${pageNum != postPage.number + 1}" th:text="${pageNum}" th:href="@{/articles(page=${pageNum})}"></a>
-                        <span class="active-page" th:if="${pageNum == postPage.number + 1}" th:text="${pageNum}"></span>
+                        <span class="non-link-page"
+                            th:text="${commPagination.totalPages}">
+                        </span>
                     </div>
-                </div>
-            </div>
+                </th:block>
 
-            <div class="button-container">
-                <button class="btn btn-primary" type="button" onclick="window.location.href='/write'">글 작성</button>
-                <button class="btn btn-primary" type="button" onclick="window.location.href='/'">돌아가기</button>
+                <th:block th:unless="${commPagination.totalPages == 1}">
+                    <th:block th:each="commPageNum : ${#numbers.sequence(1, commPagination.totalPages)}">
+                        <div class="page-line">
+                            <a class="link-page"
+                                th:if="${commPageNum != commPagination.totalPages}"
+                                th:text="${commPageNum}"
+                                th:href="@{/community}">
+                            </a>
+
+                            <span class="non-link-page"
+                                th:if="${commPageNum == commPagination.totalPages}"
+                                th:text="${commPageNum}">
+                            </span>
+                        </div>
+                    </th:block>
+                </th:block>
             </div>
         </div>
-    </div>
-    
-    <div th:unless="${postPage.totalElements > 0}">
-        <div class="button-container">
-            <button class="btn btn-primary" type="button" onclick="window.location.href='/write'">글 작성</button>
-            <button class="btn btn-primary" type="button" onclick="window.location.href='/'">돌아가기</button>
+        
+        <div class="button-container mt-20">
+            <button class="btn btn-primary" id="go-to-write-page-btn" type="button">글 작성</button>
+            <button class="btn btn-primary" id="go-to-main-page-btn" type="button">돌아가기</button>
         </div>
-    </div>
-</body>
+    </main>
 </html>

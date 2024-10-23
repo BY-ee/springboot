@@ -43,6 +43,7 @@ node_modules/
 # 환경 파일
 .env
 local.properties
+application.properties
 
 # 로그 파일
 *.log

@@ -1,32 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>글 수정 페이지</title>
-    <script>
-        function showUpdateAlert() {
-            alert("글이 성공적으로 수정되었습니다.");
-        }
-    </script>
-</head>
-<body>
-    <h1>글 수정</h1>
-    <div class="button-container" style="display:flex; gap:10px">
-        <form th:action="@{/update}" method="post" onsubmit="showUpdateAlert()">
-            <div>
-                <label for="title">제목:</label>
-                <input type="text" id="title" th:value="${post.title}" name="title" required />
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-with-header-footer-line}">
+
+    <title layout:fragment="title">Space - QnA</title>
+
+    <span layout:fragment="line" id="line-span"><a href="#"></a></span>
+
+    <main layout:fragment="content">
+        <div class="post-box" th:attr="data-id=${post.id}">
+            <div class="mt-20">
+                <label for="title">제목</label>
+                <input class="width-100p" type="text" id="title" name="title" th:value="${post.title}" placeholder="제목을 입력하세요." />
             </div>
-            <div>
-                <label for="content">내용:</label>
-                <textarea id="content" th:text="${post.content}" name="content" required></textarea>
+            <div class="flex-space-between mt-20">
+                <div class="width-30p">
+                    <label for="topic">주제</label>
+                    <select class="width-100p" id="topic" name="topic">
+                        <option value="">주제 선택</option>
+                        <option value="1" th:selected="${post.topic == '1'}">공지</option>
+                        <option value="2" th:selected="${post.topic == '2'}">질문</option>
+                        <option value="3" th:selected="${post.topic == '3'}">공유</option>
+                    </select>
+                </div>
+                <div class="width-65p">
+                    <label for="tag">태그</label>
+                    <input class="width-100p" type="text" id="tag" name="tag" th:value="${post.tag}" />
+                </div>
             </div>
-                <input type="hidden" th:value="${post.id}" name="id">
-                <button type="submit">수정</button>
-        </form>
-        <form th:action="@{/articles(page=${page})}" method="get">
-            <button type="submit">글 목록</button>
-        </form>
-    </div>
-</body>
+            <div class="mt-20">
+                <label for="content">내용</label>
+                <textarea class="width-100p height-50vh" id="content" name="content" th:text="${post.content}" placeholder="내용을 입력하세요."></textarea>
+            </div>
+            <div class="flex-space-between my-20">
+                <button class="btn btn-dark" id="go-to-posts-btn">글목록</button>
+                <div class="button-container">
+                    <button class="btn btn-primary">임시저장</button>
+                    <button class="btn btn-primary" id="update-post-btn">작성</button>
+                </div>
+            </div>
+        </div>
+    </main>
 </html>

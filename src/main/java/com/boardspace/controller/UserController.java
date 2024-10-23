@@ -1,10 +1,14 @@
 package com.boardspace.controller;
 
+import com.boardspace.dto.UserCredentials;
+import com.boardspace.dto.UserDTO;
 import com.boardspace.model.User;
 import com.boardspace.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +20,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    Logger logger = LoggerFactory.getLogger(UserController.class);
 
+    // 로그인
     @GetMapping("/login")
-    public String index(HttpServletRequest request,
+    public String index(HttpSession session,
                         @ModelAttribute User user, Model model) {
-        HttpSession session = request.getSession();
-        if(session.getAttribute("user") != null) {
+        if(session.getAttribute("loggedInUser") != null) {
             return "redirect:/";
         } else {
             model.addAttribute("user", user);
@@ -31,95 +36,92 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute User user,
-                        HttpServletRequest request,
-                        RedirectAttributes redirectAttributes) {
-        Optional<User> authenticatedUser = userService.findByUserIdAndPassword(user.getUserId(), user.getPassword());
+                        HttpSession session) {
+        UserCredentials userCredentials = new UserCredentials();
+        userCredentials.setUserId(user.getUserId());
+        userCredentials.setPassword(user.getPassword());
+
+        Optional<User> authenticatedUser = userService.findUserByUserIdAndPassword(userCredentials);
+        logger.info("authenticatedUser: {}", authenticatedUser);
 
         if (authenticatedUser.isPresent()) {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", authenticatedUser.get());
-            redirectAttributes.addFlashAttribute("logInMessage", UserConstant.LOGIN_SUCCESS_MESSAGE);
+            session.setAttribute("loggedInUser", authenticatedUser.get());
             return "redirect:/";
         } else {
-            redirectAttributes.addFlashAttribute("logInMessage", UserConstant.LOGIN_FAILURE_MESSAGE);
             return "redirect:/";
         }
     }
 
+    // 회원가입
     @GetMapping("/signup")
     public String signUp(Model model) {
-        model.addAttribute("user", new User());
-        return "pages/user/signup-v1";
+        model.addAttribute("newUser", new User());
+        return "pages/user/signup";
     }
 
     @PostMapping("/signup")
-    public String signUp(@ModelAttribute("user") User user) {
+    public String signUp(@ModelAttribute("newUser") User newUser) {
         // 이메일 수신동의와 약관동의는 추후 확인하는 로직 필요
-        user.setEmailOptIn(true);
-        user.setTermsAgreement(true);
-        userService.saveUser(user);
+        newUser.setEmailOptIn(true);
+        newUser.setTermsAgreement(true);
+        userService.insertUser(newUser);
         return "redirect:/";
     }
 
-    @GetMapping("/forgot-id")
-    public String forgotId() {
-        return "pages/user/forgot-id";
+    // 아이디 찾기
+    @GetMapping("/find-id")
+    public String findId() {
+        return "pages/user/find-id";
     }
 
-    @PostMapping("/forgot-id")
-    public String forgotId(@RequestParam("email") String email, Model model) {
-        String userId = userService.findUserIdByEmail(email).orElse(null);
-        model.addAttribute("userid", userId);
+    @PostMapping("/find-id")
+    public String findId(@RequestParam("email") String email, Model model) {
+        User user = userService.findUserByEmail(email).orElse(null);
+        model.addAttribute("userid", user.getUserId());
         return "pages/user/return-id";
     }
 
-    @GetMapping("/forgot-pw")
-    public String forgotPassword() {
-        return "user/forgot-pw";
+    // 비밀번호 찾기
+    @GetMapping("/find-pw")
+    public String findPassword() {
+        return "pages/user/find-pw";
     }
 
-    @PostMapping("/forgot-pw")
+    @PostMapping("/find-pw")
     public String checkUserPassword(@RequestParam("userid") String userId,
                            @RequestParam("email") String email,
-                           HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        Long id = userService.findIdByUserIdAndEmail(userId, email).orElse(null);
-        session.setAttribute("passwordResetId", id);
-        model.addAttribute("id", id);
+                           HttpSession session, Model model) {
+        UserCredentials userCredentials = new UserCredentials();
+        userCredentials.setUserId(userId);
+        userCredentials.setEmail(email);
+
+        User user = userService.findUserByUserIdAndEmail(userCredentials).orElse(null);
+        session.setAttribute("resetIdForPassword", user.getId());
+        model.addAttribute("id", user.getId());
         return "pages/user/reset-pw";
     }
 
+    // 비밀번호 초기화
     @PostMapping("/reset-pw")
-    public String resetPassword(@RequestParam("password") String password,
-                          HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        Long id = (Long) session.getAttribute("passwordResetId");
-        session.removeAttribute("passwordResetId");
-        userService.updatePasswordById(password, id);
+    public String resetPassword(@RequestParam("password") String newPassword,
+                          HttpSession session) {
+        Long id = (Long) session.getAttribute("resetIdForPassword");
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(id);
+        userDTO.setPassword(newPassword);
+        int result = userService.updatePasswordById(userDTO);
+
+        session.removeAttribute("resetIdForPassword");
         return "redirect:/";
     }
 
-    @GetMapping("/my-page")
-    public String myPage(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+    // 유저 프로필
+    @GetMapping("/settings/profile")
+    public String myPage(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("loggedInUser");
         model.addAttribute("user", user);
-        return "pages/user/my-page-v1";
-    }
-
-    @PostMapping("/user/update")
-    public String updateUser(@ModelAttribute User user,
-                           HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        User loggedInUser = (User) session.getAttribute("user");
-        Long id = loggedInUser.getId();
-        String email = user.getEmail();
-        String nickname = user.getNickname();
-        userService.updateEmailAndNicknameById(id, email, nickname);
-
-        User updatedUser = userService.findByUserId(user.getUserId()).orElse(null);
-        session.setAttribute("user", updatedUser);
-        return "redirect:/my-page";
+        return "pages/user/user-info";
     }
 
     @GetMapping("/withdrawal")
@@ -133,18 +135,17 @@ public class UserController {
     }
 
     @PostMapping("/user/withdrawal")
-    public String withdrawal(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        userService.deleteUser(user);
-        session.setAttribute("user", null);
+    public String withdrawal(HttpSession session) {
+        User user = (User) session.getAttribute("loggedInUser");
+        int result = userService.deleteUser(user);
+
+        session.invalidate();
         return "redirect:/";
     }
 
     @GetMapping("/user/verify-password")
-    public String verifyPassword(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+    public String verifyPassword(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("loggedInUser");
         String password = user.getPassword();
         model.addAttribute("password", password);
         return "/pages/user/verify-password";
@@ -153,10 +154,9 @@ public class UserController {
     @PostMapping("/user/verify-password")
     public String verifyPassword(@RequestParam("password") String password,
                                  @RequestParam("action") String action,
-                                 HttpServletRequest request,
+                                 HttpSession session,
                                  RedirectAttributes redirectAttributes) {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("loggedInUser");
         if(password.equals(user.getPassword())) {
             return handleAction(action);
         } else {
@@ -177,8 +177,7 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request) {
-        HttpSession session = request.getSession();
+    public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/";
     }
