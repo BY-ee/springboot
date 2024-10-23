@@ -35,9 +35,8 @@ public class QnABoardController {
     }
 
     @PostMapping("/write")
-    public String writePost(HttpServletRequest request,
+    public String writePost(HttpSession session,
                             @RequestBody QnAPost post) {
-        HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("loggedInUser");
         post.setUserId(loggedInUser.getId());
         post.setUserNickname(loggedInUser.getNickname());

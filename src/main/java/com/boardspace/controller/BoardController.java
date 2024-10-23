@@ -22,8 +22,7 @@ public class BoardController {
     private final QnABoardService qnABoardService;
 
     @GetMapping
-    public String index(Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession();
+    public String index(Model model, HttpSession session) {
         User user = (User) session.getAttribute("loggedInUser");
         int page = 1;
         int limit = 5;
@@ -39,8 +38,7 @@ public class BoardController {
 
     @GetMapping("/my-post")
     public String myPost(@RequestParam(value = "page", defaultValue = "1") int page,
-                         HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
+                         HttpSession session, Model model) {
         User user = (User) session.getAttribute("loggedInUser");
         int size = 5;
         Pagination<CommunityPost> postPage = commBoardService.findPostsByUserId(page, size, 1);

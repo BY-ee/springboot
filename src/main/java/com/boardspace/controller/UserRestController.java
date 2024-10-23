@@ -39,8 +39,7 @@ public class UserRestController {
     // 유저의 이메일, 닉네임 수정
     @PostMapping("/user/update")
     public ResponseEntity<Integer> updateUser(@RequestBody User user,
-                             HttpServletRequest request) {
-        HttpSession session = request.getSession();
+                             HttpSession session) {
         UserDTO userDTO = new UserDTO();
 
         User loggedInUser = (User) session.getAttribute("loggedInUser");

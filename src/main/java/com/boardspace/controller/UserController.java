@@ -22,10 +22,10 @@ public class UserController {
     private final UserService userService;
     Logger logger = LoggerFactory.getLogger(UserController.class);
 
+    // 로그인
     @GetMapping("/login")
-    public String index(HttpServletRequest request,
+    public String index(HttpSession session,
                         @ModelAttribute User user, Model model) {
-        HttpSession session = request.getSession();
         if(session.getAttribute("loggedInUser") != null) {
             return "redirect:/";
         } else {
@@ -36,8 +36,7 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute User user,
-                        HttpServletRequest request,
-                        RedirectAttributes redirectAttributes) {
+                        HttpSession session) {
         UserCredentials userCredentials = new UserCredentials();
         userCredentials.setUserId(user.getUserId());
         userCredentials.setPassword(user.getPassword());
@@ -46,16 +45,14 @@ public class UserController {
         logger.info("authenticatedUser: {}", authenticatedUser);
 
         if (authenticatedUser.isPresent()) {
-            HttpSession session = request.getSession();
             session.setAttribute("loggedInUser", authenticatedUser.get());
-            redirectAttributes.addFlashAttribute("logInMessage", UserConstant.LOGIN_SUCCESS_MESSAGE);
             return "redirect:/";
         } else {
-            redirectAttributes.addFlashAttribute("logInMessage", UserConstant.LOGIN_FAILURE_MESSAGE);
             return "redirect:/";
         }
     }
 
+    // 회원가입
     @GetMapping("/signup")
     public String signUp(Model model) {
         model.addAttribute("newUser", new User());
@@ -71,6 +68,7 @@ public class UserController {
         return "redirect:/";
     }
 
+    // 아이디 찾기
     @GetMapping("/find-id")
     public String findId() {
         return "pages/user/find-id";
@@ -83,6 +81,7 @@ public class UserController {
         return "pages/user/return-id";
     }
 
+    // 비밀번호 찾기
     @GetMapping("/find-pw")
     public String findPassword() {
         return "pages/user/find-pw";
@@ -91,8 +90,7 @@ public class UserController {
     @PostMapping("/find-pw")
     public String checkUserPassword(@RequestParam("userid") String userId,
                            @RequestParam("email") String email,
-                           HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
+                           HttpSession session, Model model) {
         UserCredentials userCredentials = new UserCredentials();
         userCredentials.setUserId(userId);
         userCredentials.setEmail(email);
@@ -103,10 +101,10 @@ public class UserController {
         return "pages/user/reset-pw";
     }
 
+    // 비밀번호 초기화
     @PostMapping("/reset-pw")
     public String resetPassword(@RequestParam("password") String newPassword,
-                          HttpServletRequest request) {
-        HttpSession session = request.getSession();
+                          HttpSession session) {
         Long id = (Long) session.getAttribute("resetIdForPassword");
 
         UserDTO userDTO = new UserDTO();
@@ -118,31 +116,12 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/my-page")
-    public String myPage(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
+    // 유저 프로필
+    @GetMapping("/settings/profile")
+    public String myPage(HttpSession session, Model model) {
         User user = (User) session.getAttribute("loggedInUser");
         model.addAttribute("user", user);
-        return "pages/user/my-page-v1";
-    }
-
-    @PostMapping("/user/update")
-    public String updateUser(@ModelAttribute User user,
-                           HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        UserDTO userDTO = new UserDTO();
-
-        User loggedInUser = (User) session.getAttribute("loggedInUser");
-
-        userDTO.setId(loggedInUser.getId());
-        userDTO.setUserId(user.getUserId());
-        userDTO.setNickname(user.getNickname());
-
-        int result = userService.updateEmailAndNicknameById(userDTO);
-
-        User updatedUser = userService.findUserByUserId(user.getUserId()).orElse(null);
-        session.setAttribute("loggedInUser", updatedUser);
-        return "redirect:/my-page";
+        return "pages/user/user-info";
     }
 
     @GetMapping("/withdrawal")
@@ -156,8 +135,7 @@ public class UserController {
     }
 
     @PostMapping("/user/withdrawal")
-    public String withdrawal(HttpServletRequest request) {
-        HttpSession session = request.getSession();
+    public String withdrawal(HttpSession session) {
         User user = (User) session.getAttribute("loggedInUser");
         int result = userService.deleteUser(user);
 
@@ -166,8 +144,7 @@ public class UserController {
     }
 
     @GetMapping("/user/verify-password")
-    public String verifyPassword(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
+    public String verifyPassword(HttpSession session, Model model) {
         User user = (User) session.getAttribute("loggedInUser");
         String password = user.getPassword();
         model.addAttribute("password", password);
@@ -177,9 +154,8 @@ public class UserController {
     @PostMapping("/user/verify-password")
     public String verifyPassword(@RequestParam("password") String password,
                                  @RequestParam("action") String action,
-                                 HttpServletRequest request,
+                                 HttpSession session,
                                  RedirectAttributes redirectAttributes) {
-        HttpSession session = request.getSession();
         User user = (User) session.getAttribute("loggedInUser");
         if(password.equals(user.getPassword())) {
             return handleAction(action);
@@ -201,8 +177,7 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request) {
-        HttpSession session = request.getSession();
+    public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/";
     }

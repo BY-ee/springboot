@@ -35,9 +35,8 @@ public class CommunityBoardController {
     }
 
     @PostMapping("/write")
-    public String writePost(HttpServletRequest request,
+    public String writePost(HttpSession session,
                             @RequestBody CommunityPost post) {
-        HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("loggedInUser");
         post.setUserId(loggedInUser.getId());
         post.setUserNickname(loggedInUser.getNickname());
