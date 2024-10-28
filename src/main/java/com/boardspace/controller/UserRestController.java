@@ -62,12 +62,12 @@ public class UserRestController {
         return ResponseEntity.ok(user);
     }
 
-    // 특정 유저의 qna 게시글 조회
-    @GetMapping("/users/{userId}/qna")
-    public ResponseEntity<Pagination<QnAPost>> findQnAPostsByUserId(@PathVariable long userId) {
-        Pagination<QnAPost> qnAPosts = qnABoardService.findPostsByUserId(1, 5, userId);
-        return ResponseEntity.ok(qnAPosts);
-    }
+    //// 특정 유저의 qna 게시글 조회
+    //@GetMapping("/users/{userId}/qna")
+    //public ResponseEntity<Pagination<QnAPost>> findQnAPostsByUserId(@PathVariable long userId) {
+    //    Pagination<QnAPost> qnAPosts = qnABoardService.findPostsByUserId(1, 5, userId);
+    //    return ResponseEntity.ok(qnAPosts);
+    //}
 
     // 특정 유저의 커뮤니티 게시글 조회
     @GetMapping("/users/{userId}/community")

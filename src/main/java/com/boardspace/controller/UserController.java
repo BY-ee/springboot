@@ -1,10 +1,12 @@
 package com.boardspace.controller;
 
+import com.boardspace.dto.Pagination;
 import com.boardspace.dto.UserCredentials;
 import com.boardspace.dto.UserDTO;
+import com.boardspace.model.QnAPost;
 import com.boardspace.model.User;
+import com.boardspace.service.QnABoardService;
 import com.boardspace.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -14,12 +16,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final QnABoardService qnABoardService;
     Logger logger = LoggerFactory.getLogger(UserController.class);
 
     // 로그인
@@ -122,6 +126,16 @@ public class UserController {
         User user = (User) session.getAttribute("loggedInUser");
         model.addAttribute("user", user);
         return "pages/user/user-info";
+    }
+
+    // 특정 유저의 qna 게시글 조회
+    @GetMapping("/users/{userId}/qna")
+    public String findQnAPostsByUserId(@PathVariable long userId,
+                                       Model model) {
+        Pagination<QnAPost> pagination = qnABoardService.findPostsByUserId(1, 5, userId);
+        List<QnAPost> qnAPosts = pagination.getPosts();
+        model.addAttribute("qnAPosts", qnAPosts);
+        return "pages/user/user-activity";
     }
 
     @GetMapping("/withdrawal")

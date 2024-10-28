@@ -9,7 +9,7 @@
                 <div class="header-profile-menu hidden" id="profile-header">
                     <a th:href="@{/settings/profile}">프로필</a><br>
                     <a th:href="@{/settings/account}">계정 관리</a><br>
-                    <a th:href="@{|/user/${session.loggedInUser.id}/qna|}">활동내역</a><br>
+                    <a th:href="@{|/users/${session.loggedInUser.id}/qna|}">활동내역</a><br>
                     <a th:href="@{/logout}">로그아웃</a><br>
                 </div>
             </div>

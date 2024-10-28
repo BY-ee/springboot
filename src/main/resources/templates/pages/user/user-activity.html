@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-with-header-footer}">
+      
+    <title layout:fragment="title">Space</title>
+    
+
+    <main class="relative flex al-items-stretch" layout:fragment="content">
+        <th:block th:replace="~{fragments/sidebar :: sidebarFragment}"></th:block>
+
+        <div class="vertical-line"></div>
+
+        <div class="user-info flex-1">
+            <div>
+                사용자 정보가 들어갈 위치
+            </div>
+            <div class="flex px-50 mb-30 gap-20 font-size-24">
+                <a>QnA</a>
+                <a>커뮤니티</a>
+            </div>
+        </div>
+
+        
+    
+        <th:block th:each="qnAPost : ${qnAPosts}">
+            <div class="px-50 mt-20">
+                <div class="flex-space-between al-items-center">
+                    <div>
+                        <span class="border-white px-10 py-5 text-center font-white" style="border-radius: 0.7rem;" th:text="${qnAPost.topic}"></span>
+                        <a class="ml-5" th:href="@{/tags/{tag}(tag=${qnAPost.tag})}" th:text="${qnAPost.tag}"></a>
+                    </div>
+                    <span class="font-white" th:text="'작성일 ' + ${qnAPost.createdAt}"></span>
+                </div>
+        
+                <div class="flex-space-between al-items-center border-bottom-white py-10">
+                    <p class="font-size-18 font-bold" th:text="${qnAPost.title}"></p>
+                    <span class="font-white" style="margin-top: -25px;" th:text="'최종 수정일 ' + ${qnAPost.updatedAt}"></span>
+                </div>
+            </div>
+        </th:block>
+    </main>
+</html>
