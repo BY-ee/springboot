@@ -19,13 +19,13 @@
                         <div class="width-40vh flex-grow-1">
                             <div>
                                 <span class="font-white" style="margin-left: 3px;">아이디</span><br/>
-                                <span class="width-100p ml-5 font-white" type="text" id="user-id">${user.userId}</span>
+                                <span class="width-100p ml-5 font-white" type="text" id="user-id" th:text="${user.userId}"></span>
 
-                                <label for="email" class="pt-10">이메일</label>
-                                <input class="width-100p mb-10" type="text" id="email" value="${user.email}" placeholder="이메일을 입력해주세요." />
+                                <label for="email" class="pt-20">이메일</label>
+                                <input class="width-100p mb-10" type="text" id="email" th:value="${user.email}" placeholder="이메일을 입력해주세요." />
                             
                                 <label for="nickname">닉네임</label>
-                                <input class="width-100p" type="text" id="nickname" value="${user.nickname}" placeholder="닉네임을 입력해주세요." />
+                                <input class="width-100p" type="text" id="nickname" th:value="${user.nickname}" placeholder="닉네임을 입력해주세요." />
                             
                                 <div class="button-container mt-40">
                                     <button class="btn btn-primary" type="button" id="update-user-btn">저장</button>

@@ -165,50 +165,50 @@ $(() => {
     *    Function    *
     *                */
 
-    // 프로필 버튼 클릭 이벤트 핸들러
-    $('#profile-btn').on('click', (e) => {
-        e.preventDefault();
+    // // 프로필 버튼 클릭 이벤트 핸들러
+    // $('#profile-btn').on('click', (e) => {
+    //     e.preventDefault();
 
-        fetchSessionUser((user) => {
-            profilePage(user);
-            history.replaceState(null, null, '/profile');
-        });
-    });  
+    //     fetchSessionUser((user) => {
+    //         profilePage(user);
+    //         history.replaceState(null, null, '/profile');
+    //     });
+    // });  
 
-    // 계정 설정 버튼 클릭 이벤트 핸들러
-    $('#account-settings-btn').on('click', (e) => {
-        e.preventDefault();
+    // // 계정 설정 버튼 클릭 이벤트 핸들러
+    // $('#account-settings-btn').on('click', (e) => {
+    //     e.preventDefault();
 
-        fetchSessionUser((user) => {
-            accountSettingPage(user);
-            history.replaceState(null, null, '/account');
-        });
-    });
+    //     fetchSessionUser((user) => {
+    //         accountSettingPage(user);
+    //         history.replaceState(null, null, '/account');
+    //     });
+    // });
 
-    // 활동내역 버튼 클릭 이벤트 핸들러
-    $('#activity-btn').on('click', (e) => {
-        e.preventDefault();
+    // // 활동내역 버튼 클릭 이벤트 핸들러
+    // $('#activity-btn').on('click', (e) => {
+    //     e.preventDefault();
 
-        const pattern = /\/users\/\d+\/\w+/;
+    //     const pattern = /\/users\/\d+\/\w+/;
 
-        // uri가 정규표현식 형식에 맞지 않을 시 실행
-        if(!pattern.test(location.pathname)) {
-            fetchSessionId((id) => {
-                history.replaceState(null, null, `/users/${id}/qna`);
+    //     // uri가 정규표현식 형식에 맞지 않을 시 실행
+    //     if(!pattern.test(location.pathname)) {
+    //         fetchSessionId((id) => {
+    //             history.replaceState(null, null, `/users/${id}/qna`);
 
-                fetchQnAPostsByUserId(id, (pagination) => {
-                    activityPage(pagination);
-                })
-            })
-        // uri가 정규표현식 형식에 맞을 경우 실행
-        } else {
-            const userId = location.pathname.split('/')[2];
+    //             fetchQnAPostsByUserId(id, (pagination) => {
+    //                 activityPage(pagination);
+    //             })
+    //         })
+    //     // uri가 정규표현식 형식에 맞을 경우 실행
+    //     } else {
+    //         const userId = location.pathname.split('/')[2];
     
-            fetchQnAPostsByUserId(userId, (pagination) => {
-                activityPage(pagination);
-            })
-        }
-    });
+    //         fetchQnAPostsByUserId(userId, (pagination) => {
+    //             activityPage(pagination);
+    //         })
+    //     }
+    // });
 
     
     /*             *

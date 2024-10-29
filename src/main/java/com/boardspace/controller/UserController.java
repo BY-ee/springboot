@@ -125,7 +125,15 @@ public class UserController {
     public String myPage(HttpSession session, Model model) {
         User user = (User) session.getAttribute("loggedInUser");
         model.addAttribute("user", user);
-        return "pages/user/user-info";
+        return "pages/user/user-profile";
+    }
+
+    // 계정 설정
+    @GetMapping("/settings/account")
+    public String accountSetting(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("loggedInUser");
+        model.addAttribute("user", user);
+        return "pages/user/user-account";
     }
 
     // 특정 유저의 qna 게시글 조회
